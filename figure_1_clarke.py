@@ -63,6 +63,8 @@ def window_ar(x,length):
         conf[i+length] = ret[1][1]
     return ar,conf
 
+
+
 def window_spec(x,eta,length,dt,method="ratio"):
     assert x.shape == eta.shape
     assert length < x.size
@@ -88,11 +90,13 @@ def window_spec(x,eta,length,dt,method="ratio"):
             ls[i+length] = popt[0]
             ls_err[i+length] = pcov[0][0]
         else:
-            def f2m(L):                                                                     #why?
+            def f2m(L):                                                                     #why? difference?
                 return Sff[1:] * (1/dt)**2/((2*np.pi*f[1:])**2  + L**2) - Sxx[1:]
             opt = scipy.optimize.least_squares(f2m,1.0,bounds=(0.0,np.inf))
             ls[i+length] = opt.x.item()
     return ls,ls_err
+
+
 
 mus = np.linspace(-1,1,1000)
 upper,lower,unstable = find_equilibria(mus)                                 #why is find_equilibria without /epsilon
@@ -148,7 +152,8 @@ var_of_series_red = window_var(xs_red,win)
 ar,conf = window_ar(xs,win)
 ar_red,conf_red = window_ar(xs_red,win)
 
-lambda_ac = np.log(ar)/dt*epsilon                           #why epsilon
+
+lambda_ac = np.log(ar)/dt*epsilon                           #why epsilon, why dt?
 lambda_ac_red = np.log(ar_red)/dt*epsilon
 
 ls_white,ls_err_white = window_spec(xs,W,win,dt/epsilon)
