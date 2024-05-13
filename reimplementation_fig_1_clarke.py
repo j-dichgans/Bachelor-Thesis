@@ -194,6 +194,10 @@ axs[3].plot(ts[:tip_red],-ls_series_red[:tip_red],color="red")
 # axs[3].plot(mus,-true_lambda,color="black")
 axs[3].set_ylabel(r"$\lambda$")
 
+ax_0 = axs[0].twiny()
+ax_0.set_xlim(-1,1)
+ax_0.set_xlabel("mu")
+
 plt.show()
 
 # axs[1].plot()
