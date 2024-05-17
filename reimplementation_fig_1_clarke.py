@@ -9,6 +9,7 @@ import statsmodels.api as sm
 import statsmodels.tsa.seasonal
 import string
 
+#in this version we compute var and ar on the small time step data for each unit time
 
 
 #define time interval, T should be integer

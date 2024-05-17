@@ -10,6 +10,7 @@ import statsmodels.tsa.seasonal
 import string
 
 
+#in this version we compute var and ar on the filtered time series (to catch more dynamic in f)
 
 #define time interval, T should be integer
 T = 5000
