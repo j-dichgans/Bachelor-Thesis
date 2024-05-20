@@ -18,7 +18,7 @@ T = 1000
 def mu(t):
     return 2/T * t - 1
 
-epsilon = 1
+epsilon = 0.01
 
 def f(x,t): 
     return (x - x**3 /3.0 - mu(t))/epsilon
@@ -49,7 +49,7 @@ def get_equilibria_paths(n):
 
 #numerical simulation of SDEs:
 
-steps_per_unit_time = 1000                                              #must be high enough!
+steps_per_unit_time = 1000                                                  #must be high enough!
 ts = np.linspace(0,T,T*steps_per_unit_time + 1)
 dt = 1/steps_per_unit_time
 
