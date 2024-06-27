@@ -4,7 +4,7 @@ import tqdm
 import scipy.integrate
 
 Q_0 = 342
-eps = 0.6
+eps = 0.62
 delt = 5.67 * 1e-8
 
 def alpha(T):
