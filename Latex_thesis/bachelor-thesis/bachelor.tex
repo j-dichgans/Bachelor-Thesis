@@ -622,7 +622,7 @@ c.t PSD $S(\omega)$ & $\kappa^2/((\theta^2 + \omega^2)(\lambda^2 + \omega^2))$\\
 \label{tab:red_noise_stat_char}
 \end{table}
 
-We derive these properties. \cite{gardiner:2009}(page 110) As we have seen already the OU process is a gaussian process. since the Riemann sum of normal random variables converges again to a normal random variable it follows that also $X_{t}$ is a gaussian process. We write \eqref{eq: 3.2a, eq: 3.2b} more compact as a linear system of SDEs: 
+We derive these properties. \cite{gardiner:2009}(page 110) As we have seen already the OU process is a gaussian process. since the Riemann sum of normal random variables converges again to a normal random variable it follows that also $X_{t}$ is a gaussian process. We write \eqref{eq: 3.2a}\eqref{eq: 3.2b} more compact as a linear system of SDEs: 
 \[
 dY_{t} = AY_{t}dt + BdW_{t}
 \]
@@ -665,98 +665,8 @@ and the PSD by an application of the Wiener-Khinchin theorem:
 S(\omega) = \mathcal{F}[R_{X}(\tau)](\omega) = \frac{\kappa^{2}}{(\theta^{2} + \omega^{2})(\lambda^{2} + \omega^{2})}
 \]
 
-
-
-\\
-
-Morr,:
-First we will derive their stationary characteristics. Than we can prove the increase property of the traditonal EWS. The assumption is that we approximate our system of interest (in our case some tipping element of the earth system) by reducing it to a one dimensional model with a deterministic term plus a noise term. With the determinstic part we want to capture the equilibrium dynamics and with the noise term the omitted dimensions of the high dimensional complex model. Close to a fold bifurcation driven by white noise we would have:
-
-\begin{equation}
-        dX_{t}^{(\omega)} = -\lambda X_{t}^{(\omega)}dt + \sigma dW_{t}, X_{0}^{(\omega)} = 0 
-\end{equation}
-
-$W_{t}$ is a Wiener process. $\lambda$ will go to zero when approaching the TP. Natural perturbations (in the climate context eg: weather) are modelled by the white noise term $dW$. Since the perturbations of $dW$ are temporarily independent, we assume the same for the unresolved dynamics of the system. This assumption is often violated in nature, because of memory effects in many systems. We can preserve memory in the system by using the following model using red noise \cite{Hanggi:1994,Morr:2022}:
-
-\begin{subequations}
-    \begin{align}
-        dX_{t} &= -\lambda X_{t}dt + \kappa U_{t}dt, X_{0} = 0 \\
-        dU_{t} &= -\theta U_{t}dt + dW_{t}, U_{0} = 0 
-    \end{align}
-\end{subequations}
-
-where $U_{t}$ is an Ornstein-Uhlenbeck process. There also exist other positive correlated continuous models, but the frequency properties (?) of red noise are the best suited for many applications in Physics as for example the climate system \cite{Hasselmann:1976, Hanggi:1993, Liao:2022}. We will see that the red noise case includes the white noise case since the latter is a parameter limit of the former.
-Solutions for $X_{t}^{(\omega)}$ and $X_{t}$ are given by:
-
-\begin{equation}
-    X_{t} = \kappa \int_{0}^{t} exp(-\lambda(t-s))U_{s}ds
-\end{equation}
-
-\begin{equation} 
-    X_{t}^{(\omega)} = \sigma\int_{0}^{t}exp(-\lambda(t-s))dW_{s}
-\end{equation}
-
-Our assumption is that $\mu$ changes on a slower time scale. Hence we can assume $\lambda$ to be constant for one step of simulation. We can have $Z_{0} = 0$ or also $Z_{0} \sim \mathcal{N}(0,\frac{\sigma^2}{2\lambda})$.\\
-
-We can derive the solutions for this. 
-
-
-
-
-Now we want to discuss some properties of the $X_{t}^{\omega}$ process.
-
-
-Properties of $X_{t}^{(\omega)}$:
- \begin{align*}
-    E(X_{t}^{(\omega)}) &= 0   && \forall t \geq 0 \\
-    \text{Cov}(X_{t}^{(\omega)},X_{s}^{(\omega)}) &= \frac{\sigma ^2}{2\lambda}(e^{-\lambda\lvert t-s \rvert}-e^{-\lambda(t+s)}) && \forall t, s \geq 0 \\
-    \text{Var}(X_{t}^{(\omega)}) &= \frac{\sigma^2}{2\lambda}(1-\exp(-2\lambda t)) && \forall t \geq 0 
-\end{align*}
-
-$\text{Var}(X_{t}^{(\omega)})\rightarrow\frac{\sigma^2}{2\lambda}$ for $t\rightarrow \infty$
-
-$\text{Cov}(\tau):=\text{Cov}(X_{t}^{(\omega)},X_{t+\tau}^{(\omega)}) = \frac{\sigma^2}{2\lambda}(e^{-\lambda\lvert \tau \rvert} - e^{-\lambda(2t + \tau)}) \rightarrow \frac{\sigma ^2}{2\lambda}\exp(-\lambda\lvert \tau \rvert)$ for $t\rightarrow \infty$
-
-We take the limit values for Var and Cov as a good approximation also for finite t
-
-White noise case:
-
-
-\begin{table}[t]
-\centering
-\begin{tabular}{|c|c|}
-\hline
-& stationary characteristics\\
-\hline
-Variance & $\sigma^2$ / $(2\lambda)$\\
-AC($\tau$) & $\exp(-\lambda |\tau|)$\\
-c.t PSD $S(\omega)$ & $\sigma^2$/($\lambda^2 + \omega^2$)\\
-\hline
-\end{tabular}
-\caption{stationary characteristics $X_{t}^{(\omega)}$}
-\label{tab:simple_table}
-\end{table}
-
-red noise case
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|}
-\hline
-& stationary characteristics\\
-\hline
-Variance & $\kappa^2$ / $(2\lambda\theta(\lambda + \theta))$\\
-AC($\tau$) & $(\lambda\exp(-\theta\lvert\tau\rvert)-\theta\exp(-\lambda\lvert\tau\rvert))/(\lambda - \theta)$\\
-c.t PSD $S(\omega)$ & $\kappa^2/((\theta^2 + \omega^2)(\lambda^2 + \omega^2))$\\
-\hline
-\end{tabular}
-\caption{stationary characteristics $X_{t}$}
-\label{tab:simple_table}
-\end{table}
-
-The characteristics of $X_{t}^{(\omega)}$ are the limit of the characteristics of $X_{t}$ for $\kappa \rightarrow \infty, \theta \rightarrow \infty, \frac{\kappa}{\theta} \rightarrow \sigma$
-
-The danger of false signals
+Letting $\kappa \rightarrow \infty, \theta \rightarrow \infty, \frac{\kappa}{\theta} \rightarrow \sigma$ we observe that the characteristics of $X_{t}^{(\omega)}$ are a parameter limit of the characteristics of $X_{t}$. (More general model convergences are discussed in \cite{horsthemke:1984}). When describing the risk of false signals and benchmarking the new method against the traditional ones, we will consider only $X_{t}$, since $X_{t}^{(\omega)}$ can be seen as a limit case of the former.
+Another important observation is the symmetry of the stationary characteristics of $X_{t}$ with respect to a swap of $\lambda$ and $\theta$. Hence we have to be carefull, when we want to infer e.g. information about $\lambda$.
 
 \begin{table}[h!]
 \centering
@@ -769,74 +679,105 @@ $\theta \rightarrow 0$  & $\nearrow \infty$ & $\nearrow 1$ & $\nearrow \infty$\\
 $\kappa \rightarrow \infty$ & $\nearrow \infty$ & - & $\nearrow \infty$\\    
 \hline
 \end{tabular}
-\caption{stationary characteristics $X_{t}$}
-\label{tab:simple_table}
+\caption{danger of false signals: in each row we let one parameter go to a limit value, while holding the other two parameters fixed, and consider how this effects the variance and AC(1). As it has been intuitively motivated already, we see that we expect the variance to go to infinity and the $AC(1)$ to unity for CSD, although we would observe the same for $\theta \rightarrow 0$ due to the symmetry of the characteristics w.r.t $\lambda$ and $\theta$. The independence of $AC(1)$ on $\kappa$ is indicated by $-$. This would reveil $\kappa \rightarrow \infty$ as a false positive. For all three limits we would expect an increase of the PSD for low frequencies $\omega$, what we call spectral reddening.}
+\label{tab:danger_of_false_signals}
 \end{table}
 
+The equations \ref{eq: 3.2a} and \ref{eq: 3.2b} describe a setting of linearized dynamics around a fixed equilibrium point. Since we want to study early warning signal methods for tipping points we are interested in bifurcation systems, where the equilibrium point $x*$ depends on $\mu(t)$ the bifurcation parameter that changes over time. With this also the linear restoring rate $\lambda(\mu(t))$ depends on time. Since $\mu$ changes on a very slow time scale, for not too large time windows the process $X_{t}$ can still be regarded as stationary with the respective underlying rate $\label(\mu)$ treated as being constant for that time span. We will discuss this more in detail in the next chapter "Simulation of SDEs".
+
+In table \ref{tab:danger_of_false_signals} we show the influence of the parameters $\lambda, \kappa$ and $\theta$ on the quantities variance, $AC(1)$ and the behaviour of the PSD for low frequencies $\omega$. The risk of false positives is obviuous, when considering the second row, where $\theta \rightarrow 0$. However false negatives are also possible. This could happen, when the true trend of $\lambda \rightarrow 0$ is masked by simultaneous evolutions of the parameters that keep the observed indicators constant.
 
 
 
-        
+
+
 
 \chapter{Simulation of SDEs}
 
-For simulation we want an $AR(1)$ model of the OU process:
-    \[
-    dU_{t} = -\theta U_{t}dt + dW_{t}, U_{0} = 0 
-    \]
-    \[
-     U_{t+\tau} = \phi U_{t} + \gamma \epsilon_{t} 
-    \]
-    with 
-    \[
-    \epsilon_{t} \sim \mathcal{N}(0,1)
-    \]
+In the last chapter we introduced two SDE settings. We argued that it is often more appropriate to use continuous time models to represent dynamics in nature. In the continuous realm it was also relatively easy to derive the stationary characteristics of both processes. We needed to this to understand what we expect our indicators to do in the case of CSD while we also noticed the risk of false signals. 
+In application or testing contexts we would have a discrete time series available on which we want to apply our EWS methods. For simulations of such time series we have to understand how to find discrete models for the continuous time processes $X_{t}^{(\omega)}$ and $X_{t}$. We start with deriving a discrete version of the Ornstein-Uhlenbeck process $U_{t}^{(c)}$.
+\[
+dU_{t}^{c} = -\theta U_{t}dt + \sigma dW_{t} 
+\]
 
-We use the stationary characteristics of $U_{t}$ to deduce $\phi$ and $\gamma$
+Our goal is to reproduce the stationary characteristics of $U_{t}^{(c)}$  via the $AR(1)$ process:
+\[
+     U_{t+\tau}^{(d)} = \phi U_{t} ^{(d)}+ \gamma \epsilon_{t} 
+\]
+with 
+\[
+\epsilon_{t} \sim \mathcal{N}(0,1)
+\]
+independent of $U_{t}^{(d)}$.
+Hence we want to find $\phi$ and $\gamma$ such that for $t \rightarrow \infty$:
+\[
+Var[U_{t}^{(d)}] = \frac{\sigma^{2}}{2\theta}
+\]
+and 
+\[
+R_{U^{(d)}}(\tau) = \frac{\sigma ^2}{2\theta}\exp(-\theta\lvert \tau \rvert)
+\]
 
-We want: 
-    \begin{equation*}
-        \frac{\sigma^2}{2\lambda} = \text{Var}[Z_{t+\tau}] = \phi ^2 \text{Var}[Z_{t}] + \gamma ^2 \text{Var}[\epsilon_{t}] = \phi ^2 \text{Var}[Z_{t}] + \gamma ^2
-    \end{equation*}
+It should hold:
 
+\begin{equation*}
+    \frac{\sigma^2}{2\theta} = \text{Var}[Z_{t+\tau}] = \phi ^2 \text{Var}[Z_{t}] + \gamma ^2 \text{Var}[\epsilon_{t}] = \phi ^2 \text{Var}[Z_{t}] + \gamma ^2
+\end{equation*}
 
-In addition, we want: 
+In addition, we demand: 
   \begin{align*} 
-      \frac{\sigma ^2}{2\lambda}\exp(-\lambda\lvert \tau \rvert) &= \text{Cov}[Z_{t+\tau},Z_{t}] = \text{Cov}[\phi Z_{t} + \gamma \epsilon_{t}, Z_{t}] = \\
-      \phi\text{Cov}[Z_{t},Z_{t}] &= \phi \text{Var}[Z_{t}] = \phi \frac{\sigma^2}{2\lambda}
+      \frac{\sigma ^2}{2\theta}\exp(-\theta\lvert \tau \rvert) &= \text{Cov}[Z_{t+\tau},Z_{t}] = \text{Cov}[\phi Z_{t} + \gamma \epsilon_{t}, Z_{t}] = \\
+      \phi\text{Cov}[Z_{t},Z_{t}] &= \phi \text{Var}[Z_{t}] = \phi \frac{\sigma^2}{2\theta}
   \end{align*}
+
+
 
 
 We deduce: 
     \[
-        \phi = exp(-\theta\delta t)
+        \phi = exp(-\theta \lvert \tau \rvert)
     \]
     \[
-        \gamma = \sqrt{\frac{1}{2\theta}(1-\exp(-2\theta\delta t)}
+        \gamma = \sqrt{\frac{\sigma^{2}}{2\theta}(1-\exp(-2\theta \lvert \tau \rvert)}
     \]
 
+If we now want to simulate a sample path of a red noise driven system
 
-Hence we can solve the red noise system:
-        \[ 
-             dX_{t} = f(X_{t},\mu(t))dt + \kappa U_{t}dt 
-        \]
-        \[
-             dU_{t} = -\theta U_{t}dt + dW_{t}, U_{0} = 0
-        \]
-        using the $AR(1)$ modell for $U_{t}$ and the Euler Method:
-        \[
-            X_{t+\delta t} = X_{t} + f(X_{t},\mu(t))\delta t + \kappa U_{t}\delta t
-        \]
+\[ 
+     dX_{t} = f(X_{t},\mu(t))dt + \kappa U_{t}dt, X_{0} = x_{0}
+\]
+\[
+     dU_{t} = -\theta U_{t}dt + dW_{t}, U_{0} = 0
+\]
+on a time span $[0,T], T > 0$, we do the following: 
+\begin{itemize}
+    \item use a solution stepsize of $\delta t = 1/N$ for some $N \in \mathbb{N}$
+    \item use the AR(1) process:
+    \[
+    U_{t+\delta t} = \exp(-\theta \delta t)U_{t} + \sqrt{\frac{1}{2\theta}(1-\exp(-2\theta \delta t))}\epsilon_{t}
+    \]
+    with $\epsilon \sim N(0,1)$ to simulate a sample path of $U_{t}$
+    \item use the usual Euler method:
+    \[
+        X_{t+\delta t} = X_{t} + f(X_{t},\mu(t))\delta t + \kappa U_{t}\delta t
+    \]
+    to simulate a sample path $(X_{t})_{t\in\{\delta t n, n \in \{0,...,TN\}\}}$ of $X_{t}$
+    \item sample a time series $(\Tilde{X}_t) := (X_t)_{t\in\{0,...,T\}}$
+\end{itemize}
 
 
-A white noise SDE of the form: 
-        \[
-        dX_{t} = f(X_{t},\mu(t))dt + \sigma dW_{t}
-        \]
-        we can solve with the Euler-Mayurama Method: 
-        \[
-        X_{t+\delta t} = X_{t} + f(X_{t},\mu(t))\delta t + \sigma\mathcal{N}(0,\delta t)
-        \]
+If the system of interest is driven by white noise: 
+\[
+    dX_{t}^{(\omega)} = f(X_{t},\mu(t))dt + \sigma dW_{t}, X_{0} = x_{0}, W_{0} = 0
+\]
+we can use the Euler-Mayurama Method:
+\[
+X_{t+\delta t} = X_{t} + f(X_{t},\mu(t))\delta t + \sigma\Tilde{\epsilon}_t
+\]
+
+with $\Tilde{\epsilon}_t \sim N(0,\delta t)$ to simulate a sample path of $X_{t}^{(\omega)}$. Here we used the fact that $W_{\delta t} \sim N(0,\delta t)$. Afterwards we again filter this sample path at every unit step $\Delta t = 1$ to get our time series.
+
+
 
 \chapter{Consistent estimators for traditional EWS}
 
