@@ -792,8 +792,8 @@ Suppose now we are given a time series that we either simulated as described in 
 
 \begin{subequations}
         \begin{align*}
-            \text{Var}_{N} &:= \frac{1}{N-1}\sum_{k=0}^{N}X_{k}^{2} \xrightarrow{P} \frac{\kappa^{2}}{2\lambda\theta(\lambda + \theta)} \\
-            \text{AC(1)}_{N} &:= \frac{N}{N-\tau}\frac{\sum_{k=0}^{N-2}X_{k}X_{k+1}}{\sum_{k=0}^{N-1}X_{k}^{2}} \xrightarrow{P} \frac{\lambda\exp(-\theta\lvert\tau\rvert) - \theta\exp(-\lambda\lvert\tau\rvert)}{\lambda - \tau}
+            \text{Var}_{N} &:= \frac{1}{N}\sum_{k=0}^{N-1}X_{k}^{2} \xrightarrow{P} \frac{\kappa^{2}}{2\lambda\theta(\lambda + \theta)} \\
+            \text{AC(1)}_{N} &:= \frac{N}{N-1}\frac{\sum_{k=0}^{N-2}X_{k}X_{k+1}}{\sum_{k=0}^{N-1}X_{k}^{2}} \xrightarrow{P} \frac{\lambda\exp(-\theta\lvert\tau\rvert) - \theta\exp(-\lambda\lvert\tau\rvert)}{\lambda - \tau}
         \end{align*}
 \end{subequations}
 
@@ -959,42 +959,37 @@ and the red noise case
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.55\textwidth]{figures/21_6_fig1_ls_without_conv.png}
+    \includegraphics[width=0.55\textwidth]{bachelor-thesis/figures/13_8_clarke_fig_1_reimp.png}
     \caption{modified from \cite{Clarke:2023} Figure 1; AC: ---, Var: - - -}
     \label{success_of_trad_ews_and_rosa}
 \end{figure}
 
-We want to simulate a time series on a time span of [0,T] that starts at the equilibrium point corresponding to $\mu(0) = -1$. Then we slowly change the underlying deterministic part of the system by increasing $\mu(t)$ and thereby eventually drive the system over the edge of a tipping point. A more explicit explanation of the implementation of the code underlying figure \ref{success_of_trad_ews_and_rosa} follows now. To get the bifurcation plot in Panel A we first compute the paths of equilibria $x^{*}(t)$. There is an upper and lower stable branch plus an unstable middle branch for $\mu \in [-2/3,2/3]$. The evolution of the true linear restoring rate following the upper branch is computed by: $\lambda(t) = f'(x^{*}(t),\mu(t))$. We then simulate the time series for both scenarios as explained in the chapter "Simulation of SDEs". In this case we use an observation time of T = 10000, a sample step of $\Delta t = 1$ and a simulation step of $dt = 1/10$. We use a linear ramp for $\mu:  [-1,1] \rightarrow \mathbb{R}$:
+We want to simulate a time series on a time span of [0,T] that starts at the equilibrium point corresponding to $\mu(0) = -1$. Then we slowly change the underlying deterministic part of the system by increasing $\mu(t)$ and thereby eventually drive the system over the edge of a tipping point. A more explicit explanation of the implementation of the code underlying figure \ref{success_of_trad_ews_and_rosa} follows now. To get the bifurcation plot in Panel A we first compute the paths of equilibria $x^{*}(t)$. There is an upper and lower stable branch plus an unstable middle branch for $\mu \in [-2/3,2/3]$. The evolution of the true linear restoring rate following the upper branch is computed by: $\lambda(t) = -f'(x^{*}(t),\mu(t))$. We then simulate the time series for both scenarios as explained in the chapter "Simulation of SDEs". In this case we use an observation time of T = 10000, a sample step of $\Delta t = 1$ and a simulation step of $dt = 1/10$. We use a linear ramp for $\mu:  [-1,1] \rightarrow \mathbb{R}$:
 \[
 \mu(t) := \frac{2}{T}t-1
 \]
 
-When trying to get a reasonable time series it is important to understand the influence of the different parameters.
-
-
-Steps in building this plot:
-    \begin{itemize}
-        \item Simulate the time series for both scenarios with the Euler / Euler-Mayurama method. T = 10000, sample time $\Delta t = 1$, simulation steps $dt = 1/10$. We use a linear ramp for $\mu(t)$ on [0,T] from -1 to 1.
-    
-        \item Use a window length of 200 to compute Var, AC(1) and lambda estimate after detrending with a second order polynomial on filtered time series
-        
-        \item Compute equilibria-paths and $\lambda (t) = f'(x^{*}(t),\mu(t))$
-    \end{itemize}
-
-We see that in this case for constant $\kappa$ and $\theta$ all three indicators show a true EWS
+For simulating both time series we used $(\sigma,\kappa,\theta) = (0.01,0.05,1)$. Than we compute the three indicator series on windows of length 200. In each window we first detrend the filtered time series with a second order polynomial to take away the trend induced by the equilibrium path. For the computation of the variance python uses the biased estimator as introduced in chapter Consistent estimators for traditional EWS. The lag-1 autocorrelation is computed as $r_{1}$ hence without the fraction $\frac{N}{N-1}$. ?Since this fraction converges to zero $r_{k}$ is still a consistent estimator.
 
 
 Our estimators suppose a constant linearised model but $\lambda$ changes in each window. However the change is on a slow enough time scale for our methods to still work.
 
+In the plot We see that in this case for constant $\kappa$ and $\theta$ all three indicators show a true EWS.
+
+
 \begin{figure}
     \centering
-    \includegraphics[width=0.66\textwidth]{figures/observed_psd_vs_contin_ratio.png}
+    \includegraphics[width=0.66\textwidth]{bachelor-thesis/figures/13_8_observed_vs_continuous_PSD.png}
 \end{figure}
 
 In the ROSA method 
 we approximate $\lambda$ by fitting $\frac{\lvert G_{T}^{T}[X]_{\omega} \rvert ^2}{\lvert G_{T}^{T}[U]_{\omega} \rvert ^2}$ to $\frac{1}{\lambda ^2 + \omega ^2}$ (blue curve) on the frequency domain $F:=\{2\pi l/N | N = 1,...,N/2 - 1\}$ if N is even and $F := \{2\pi l/N | N = 1,...,(N-1)/2 \}$ if N is odd (Here N = 1000). Why on this domain? Periodicty, nyquist frequency. Use log for fitting why? "In order to weight the entire frequency range more evenly, taking the logarithm of the observed and expected PSD is advantageous". Why times 0.2?
 
-Compare to implementation in Clarke: mu = time. sliding windows
+Compare to implementation in Clarke: mu = time. sliding windows. nutzt scipy.signal.welch method wir nicht.
+filtered noise red vs white:why?
+
+Clarke:
+
 
 
 \chapter{Failure of traditional EWS: spurious and masking under changing parameters}
