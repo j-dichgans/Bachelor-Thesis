@@ -926,7 +926,7 @@ Letting $T \rightarrow \infty$ and dividing by $\lvert\sigma G[U]_{\omega}\rvert
     \frac{\lvert G[X]_{\omega} \rvert^2}{\lvert\sigma G[U]_{\omega}\rvert^2} = \frac{1}{\lambda^2 + \omega^2}
 \]
 
-However it is important to keep in mind that in practice we are not able to achieve these exact limits. For estimating the PSD of a process $X_{t}$ we will always rely on the discrete fourier integral ans since we sample at unit step $\Delta t = 1$ we will use $G_{T}^{T}[X]_{f}$. We can only choose T as large as possible to get closer to the continuous target. In practice we will than approximate $\lambda$ by fitting $\frac{\lvert G_{T}^{T}[X]_{\omega} \rvert ^2}{\lvert G_{T}^{T}[U]_{\omega} \rvert ^2}$ to the right hand side $\frac{1}{\lambda^2 + \omega^2}$. The next chapter will also provide an example of a fit of observed PSD versus theoretical PSD.
+However it is important to keep in mind that in practice we are not able to achieve these exact limits. For estimating the PSD of a process $X_{t}$ we will always rely on the discrete fourier integral ans since we sample at unit step $\Delta t = 1$ we will use $G_{T}^{T}[X]_{f}$. We can only choose T as large as possible to get closer to the continuous target. In practice we will than approximate $\lambda$ by fitting $\frac{\lvert G_{T}^{T}[X]_{\omega} \rvert ^2}{\lvert \kappa G_{T}^{T}[U]_{\omega} \rvert ^2}$ to the right hand side $\frac{1}{\lambda^2 + \omega^2}$. The next chapter will also provide an example of a fit of observed PSD versus theoretical PSD.
 
 
 We could also fit against the exact target of equation (?). But having the noise PSD on the left hand side, enables us to also use the method when we only have information about the PSD and not the exact noise realization itself (?).
@@ -969,7 +969,29 @@ We want to simulate a time series on a time span of [0,T] that starts at the equ
 \mu(t) := \frac{2}{T}t-1
 \]
 
-For simulating both time series we used $(\sigma,\kappa,\theta) = (0.01,0.05,1)$. Than we compute the three indicator series on windows of length 200. In each window we first detrend the filtered time series with a second order polynomial to take away the trend induced by the equilibrium path. For the computation of the variance python uses the biased estimator as introduced in chapter Consistent estimators for traditional EWS. The lag-1 autocorrelation is computed as $r_{1}$ hence without the fraction $\frac{N}{N-1}$. ?Since this fraction converges to zero $r_{k}$ is still a consistent estimator.
+For simulating both time series we used $(\sigma,\kappa,\theta) = (0.01,0.05,1)$. 
+Than we compute the three indicator series on windows of length 200. In each window we first detrend the filtered time series with a second order polynomial to take away the trend induced by the equilibrium path. For the computation of the variance python uses the biased estimator as introduced in chapter Consistent estimators for traditional EWS. The lag-1 autocorrelation is computed as $r_{1}$ hence without the fraction $\frac{N}{N-1}$. ?Since this fraction converges to zero $r_{1}$ is still a consistent estimator. For the computation of the ROSA method we need both the filtered time series $X_{t}$ as well as the filtered noise series $\hat{\xi}_{t}$ (We denote the respective filtered noise series with a hat). For the white noise case $\xi_{t} = dW_{t}$ we sum up the increments for each unit time interval:
+\[
+\hat{xi}_{i} = \sum_{j = 0}^{9}\xi_{10i+j}, i \in \{0,...,T-1\}
+\]
+For the red noise case we choose:
+\[
+\hat{xi}_{i} = \xi_{10i}, i \in \{0,...,T\}
+\]
+
+As explained in the previous chapter we then take:
+\[
+S_{f}^{X} = G_{T}^{T}[X]_{f} = \lvert \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\exp(i\omega k)X_{k} \rvert ^2
+\]
+as an approximation of the PSD of both the time series $X_{t}$ and the noise series $\hat{\xi}_{t}$, where T = N = window length = (200). We then compute via a least square fit an approximation of $\lambda(t)$:
+\[
+\hat{\lambda}(t) = argmin_{\lambda > 0} \sum_{f \in F} log((\frac{\lvert G_{T}^{T}[X_{t}]_{f}\rvert^2}{\lvert \kappa G_{T}^{T}[\hat{\xi}_{t}]_{f} \rvert^2}) - log(\frac{1}{\lambda^2 + f^2}))^2, t \in \{0,...,T/window length = 50\}
+\]
+
+As a frequency domain we use $F_{N}:=\{2\pi l/N | l = 1,...,N/2 - 1\}$ if N is even and $F_{N} := \{2\pi l/N | l = 1,...,(N-1)/2 \}$ if N is odd. We take the logarithm inside the least square fitting problem to weight the frequencies more evenly (?). We only probe the discrete time PSD on positive frequencies since the negative don't add new information (?).
+
+In \ref{observed_vs_continuous_PSD} we want to give an example of the goodness of fit of the observed PSD ratio versus the theoretical fraction $\frac{1}{\lambda^2 + f^2}$. To create this plot we first computed a mean restoring rate $\Bar{\lambda} = \frac{1}{500}sum_{t=0}^{999}\lambda(t) = \frac{1}{500}sum_{t=0}^{999}-f(x^{*}(t),\mu(t)) = \frac{1}{500}sum_{t=0}^{999}(1-x^{*}(t)^2)$ on the window [0,1000] as an approximation for the assumed underlying stationary model. We then loglog-plot the ratio $\frac{1}{\Bar{\lambda}^2 + f^2}$ and the observed PSD ratio on the frequency domain $F_{1000}$, where we use the white noise time series. We see that the observed PSD ratio fluctuates around the true trend, although we used finite T = N = 1000.
+In the chapter Benchmark of traditional EWS and ROSA we will see, that the method works even better for longer windows.
 
 
 Our estimators suppose a constant linearised model but $\lambda$ changes in each window. However the change is on a slow enough time scale for our methods to still work.
@@ -980,6 +1002,7 @@ In the plot We see that in this case for constant $\kappa$ and $\theta$ all thre
 \begin{figure}
     \centering
     \includegraphics[width=0.66\textwidth]{bachelor-thesis/figures/13_8_observed_vs_continuous_PSD.png}
+    \label{observed_vs_continuous_PSD}
 \end{figure}
 
 In the ROSA method 
