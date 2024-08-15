@@ -988,7 +988,7 @@ as an approximation of the PSD of both the time series $X_{t}$ and the noise ser
 \hat{\lambda}(t) = argmin_{\lambda > 0} \sum_{f \in F} log((\frac{\lvert G_{T}^{T}[X_{t}]_{f}\rvert^2}{\lvert \kappa G_{T}^{T}[\hat{\xi}_{t}]_{f} \rvert^2}) - log(\frac{1}{\lambda^2 + f^2}))^2, t \in \{0,...,T/window length = 50\}
 \]
 
-As a frequency domain we use $F_{N}:=\{2\pi l/N | l = 1,...,N/2 - 1\}$ if N is even and $F_{N} := \{2\pi l/N | l = 1,...,(N-1)/2 \}$ if N is odd. We take the logarithm inside the least square fitting problem to weight the frequencies more evenly (?). We only probe the discrete time PSD on positive frequencies since the negative don't add new information (?).
+As a frequency domain we use $F_{N}:=\{2\pi l/N | l = 1,...,N/2 - 1\}$ if N is even and $F_{N} := \{2\pi l/N | l = 1,...,(N-1)/2 \}$ if N is odd. We take the logarithm inside the least square fitting problem to weight the frequencies more evenly (?). We only probe the discrete time PSD on positive frequencies since the negative don't add new information (?). Further the discrete time PSD esimate is $2\pi$ periodic.
 
 In \ref{observed_vs_continuous_PSD} we want to give an example of the goodness of fit of the observed PSD ratio versus the theoretical fraction $\frac{1}{\lambda^2 + f^2}$. To create this plot we first computed a mean restoring rate $\Bar{\lambda} = \frac{1}{500}sum_{t=0}^{999}\lambda(t) = \frac{1}{500}sum_{t=0}^{999}-f(x^{*}(t),\mu(t)) = \frac{1}{500}sum_{t=0}^{999}(1-x^{*}(t)^2)$ on the window [0,1000] as an approximation for the assumed underlying stationary model. We then loglog-plot the ratio $\frac{1}{\Bar{\lambda}^2 + f^2}$ and the observed PSD ratio on the frequency domain $F_{1000}$, where we use the white noise time series. We see that the observed PSD ratio fluctuates around the true trend, although we used finite T = N = 1000.
 In the chapter Benchmark of traditional EWS and ROSA we will see, that the method works even better for longer windows.
@@ -1005,22 +1005,24 @@ In the plot We see that in this case for constant $\kappa$ and $\theta$ all thre
     \label{observed_vs_continuous_PSD}
 \end{figure}
 
-In the ROSA method 
-we approximate $\lambda$ by fitting $\frac{\lvert G_{T}^{T}[X]_{\omega} \rvert ^2}{\lvert G_{T}^{T}[U]_{\omega} \rvert ^2}$ to $\frac{1}{\lambda ^2 + \omega ^2}$ (blue curve) on the frequency domain $F:=\{2\pi l/N | N = 1,...,N/2 - 1\}$ if N is even and $F := \{2\pi l/N | N = 1,...,(N-1)/2 \}$ if N is odd (Here N = 1000). Why on this domain? Periodicty, nyquist frequency. Use log for fitting why? "In order to weight the entire frequency range more evenly, taking the logarithm of the observed and expected PSD is advantageous". Why times 0.2?
 
-Compare to implementation in Clarke: mu = time. sliding windows. nutzt scipy.signal.welch method wir nicht.
-filtered noise red vs white:why?
-
-Clarke:
+We want to shortly discuss differences in our implementation to the one of Clarke in \cite{Clarke:2023} Figure 1. This figure has the same structure as \ref{success_of_trad_ews_and_rosa}. Clarke argues that the presence of autocorrelated noise can mask the changes in AC. Indeed the AC shown in the red noise case (Panel C) doesn't give an early warning signal. However as we have derived theoretically via the evolution of the stationary characterisitcs the increase in variance and AC(1) would be expected in both the white and red noise case. Our example in the plot confirms this. 
+In Clarke's implementation there is no differentiation between the bifurcation parameter $\mu$ and $t$. This has several disadvantages: Firstly due to $\mu = t$, t looses its interpretation as time. Additionally now the bifurcation process is on the same time scale as the progression of time. Hence the assumption that the process is approximately stationary in each window is not true anymore. clarke tries to fix the issue of equal time scales by introducing a factor $\epsilon = 0.01$
+\[
+\epsilon\frac{dx}{dt} = x - \frac{1}{3}x^3-\mu(t) + \eta(t)
+\]
+thus making the process faster and ensuring that x reverts back to equilibrium quickly. However the us of $\Delta t = \delta t$ instead of 1 as a sampling rate and the introduction of the extra parameter $\epsilon$ makes the rest of the calculations more complicated and prone to errors. Further Clarke doesn't use distinct time windows but a sliding window approach. The PSD is calculated with the scipy.signal.welch method, which divides the time series into overlapping sections, computes a modified periodogram for each section and then averages these periodograms. This introduces another layer of complication in the computation. 
+We argue that our approach with a linear ramp for $\mu(t)$, a seperation of simulation step $\delta t = 1/10$ and sample step $\Delta t = 1$ as well as our straightforward estimator of the PSD make the implementation more understandable and rigorous.
 
 
 
 \chapter{Failure of traditional EWS: spurious and masking under changing parameters}
 
-Illustrate the risk of false positive / negative signals when using Var and AC1
-White noise case as a special case of the red noise case: focus on red noise case
+In the last chapter we saw an example of a successful application of the three indicators on a simple bifurcation model. While $\lambda(t)$ changed in time due to the bifurcation process, the parameters $\sigma$ and $\kappa$ were fixed. 
 
-Now we allow for $\kappa$ and $\theta$ to change in time:
+We want to illustrate the risk of false positive and false negative signals when using the variance and AC(1) as EWS with examples in an abstract fold bifurcation setting. As discussed previously we can focus on the red noise case.
+
+Compared to before we now allow also for $\kappa$ and $\theta$ to change in time:
     \begin{subequations}
     \begin{align*}
         dX_{t} &= -\lambda(t) X_{t}dt + \kappa(t) U_{t}dt, X_{0} = 0 \\
@@ -1035,7 +1037,7 @@ We assume a decline of $\lambda$ that is typical for a fold bifurcation:
     \lambda(t) := \lambda_{0}\sqrt{1-t/T}
     \]
 
-Recall: 
+Recall the stationary characteristics of the red noise driven linearized system with constant paramteters $X_{t}$: 
 
 \begin{table}[h!]
 \centering
@@ -1061,19 +1063,20 @@ We further define linear ramps for the parameters $\kappa$ and $\theta$:
     \end{align*}
 \end{subequations}
 
-where $\kappa_{0},\kappa_{T},\theta_{0},\theta_{T} \in \mathbb{R}$.
+where $\kappa_{0},\kappa_{T},\theta_{0},\theta_{T} \in \mathbb{R}$. 
 
-\begin{itemize}
-    \item Linear increase of $\kappa$: 1.2 $\nearrow$ 3.3 
-    \item Linear decrease of $\theta$: 3 $\searrow$ 1
-    \item We expect: 
-    \begin{itemize}
-        \item For decreasing $\lambda$: Var $\nearrow$, AC(1) $\nearrow$
-        \item For $\lambda \equiv \lambda_{0}$: Var $\nearrow$, AC(1) $\nearrow$
-    \end{itemize}
-\end{itemize}
+In the following we describe the setup of the examples for a false positive and a false negative signal. For both cases we will simulate two time series each on a time span of [0,14000], a solution step $dt = 1/10$ and with a window length of 700 for the computation of the indicator series. In both cases one time series undergoes a true CSD, while the other time series uses a fixed $\lambda(t) \equiv \lambda_{0}$. We again use the Euler-Mayurama method for integration only now also respecting the time dependence of $\kappa$ and $\theta$.
 
-false postive example:
+We first give an example of false positive Signals by the traditional EWS. To do so we choose: $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (1.2,3.3,3,1)$. Hence a linear increase in $\kappa$ and a linear decrease in $\theta$. Assuming instantaneous alignment of the stationary characteristics with the changing parameters we get for both decreasing and fixed $\lambda$: 
+\[
+Variance(t) = \frac{\kappa(t)^2}{2\lambda(t)\theta(t)(\lambda(t) + \theta(t))} \nearrow, \ t \rightarrow T
+\]
+\[
+AC(1) = \frac{(\lambda(t)\exp(-\theta(t))-\theta(t)\exp(-\lambda(t)))}{(\lambda(t)-\theta(t))} \nearrow, \ t \rightarrow T
+\]
+
+We expect the traditional indicators to follow the same trend. This is indeed the case as we see in \ref{false positive}. In the third row of the plot we see that the ROSA method follows the true evolution of $\lambda(t)$ quite closely in the left column and shows a roughly constant trend in the right column thus avoiding a false positive.
+
 
 \begin{minipage}{0.49\textwidth}
         \centering
@@ -1086,22 +1089,12 @@ false postive example:
     \end{minipage}
     \begin{minipage}{\textwidth}
     \centering
+    \label{false positive}
     modified from \cite{Morr:2024} figure 1, AC: ---, Var: - - -
 \end{minipage}
 
+Now we turn to a false negative example. For the simulation of both time series we choose: $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (3.2,2.3,1,3.7)$. In this case we have for decreasing $\lambda$ a decline in the variance beside the increase close to T and an increase in AC(1). Hence the variance gives a false negative signal. For fix $\lambda(t) \equiv \lambda_{0}$ both indicators a decreasing. This is again matched by the results from the simulation as seen in \ref{false negative}. The ROSA method again matches $\lambda(t)$ well and doesn't show false signals.
 
-\begin{itemize}
-    \item Linear decrease of $\kappa$: 3.2 $\searrow$ 2.3 
-    \item Linear increase of $\theta$: 1 $\nearrow$ 3.7
-    \item We expect: 
-    \begin{itemize}
-        \item For decreasing $\lambda$: Var $\searrow$, AC(1) $\nearrow$
-        \item For $\lambda \equiv \lambda_{0}$: Var $\searrow$, AC(1) $\searrow$
-    \end{itemize}
-\end{itemize}
-
-
-false negative example:
 
 \begin{minipage}{0.49\textwidth}
         \centering
@@ -1114,8 +1107,11 @@ false negative example:
     \end{minipage}
     \begin{minipage}{\textwidth}
     \centering
+    \label{false negative}
     modified from \cite{Morr:2024} figure 3, AC: ---, Var: - - -
 \end{minipage}
+
+These were however only two examples. We want to provide more evidence for the robustness of the ROSA method, by comparing it to the old indicators on a wider ranch of parameter settings. This will be done in the next chapter.
     
 
 
