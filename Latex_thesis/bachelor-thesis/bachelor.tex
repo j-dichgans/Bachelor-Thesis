@@ -79,19 +79,19 @@ A brief abstract of this thesis in English.
 \chapter{Introduction}
 
 \section{General Motivation for EWS}%
-\label{sec:first-sect-intr}
+\label{sec:General Motivation for EWS}
 
 
 
 We take the motivation for the ROSA method from \cite{Clarke:2023} and \cite{Scheffer:2009}.\\
-Paleoclimate records suggest that critical thresholds of major components of the Earth system were crossed in the past \cite{Brovkin:2021}, where major parts of the Earth's system abruptly shifted from one state to another (Example?). Relatively small changes in the external forcing, such as a change in the greenhouse gas concentrations or incoming solar radiation can cause these rapid shifts. Since the raise of global temperatures, primarily due to burned fossil fuels, there is a growing concern \cite{Lenton:2019,Steffen:2018,Ritchie:2021} that key Earth System components (called "Tipping Elements") will cross Tipping points (TP) in the future or already have been crossed (Greenland ice sheet ?) and undergo fast irreversible transitions \cite{Lenton:2008}. 
-The crossing of a tipping point and transition to a qualitatively different state can be mathematically understood as a bifurcation. The critical thresholds are often crossed due to a small change in a parameter describing the forcing of the system. Although different types of bifurcation exist \cite{Ashwin:2012}, we will focus on B-tipping and especially fold bifurcations Clarke focuses in his analysis on B-tipping, though other types of tipping exist. Today different elements of the Earth system like the Atlantic Meridional Overturning Circulation (AMOC) \cite{Stommel:1961}, the Amazon Rain forest \cite{Cox:2000}, the permafrost \cite{Steffen:2018} or the Greenland ice sheet \cite{Feldmann:2015} are considered to be potential tipping elements. Several abprupt shifts were observed in the Coupled Model Intercomparison Project - Phase 5 \cite{Taylor:2012} and other earth system models (ESMs) \cite{Drijfhout:2015}, providing evidence that tipping points might occur. The crossing of tipping points would have a severe impacts and including tipping points in integrated assessment models (IAMs) would significantly increase the Social Cost of Carbon \cite{Dietz:2021}. Many people would face significant problems as studies of specific tipping point impacts have shown: an AMOC collaps would threat to halt large parts of arable farming in the UK \cite{Ritchie:2020} and there would be a higher risk of fires for communities in high altitudes due to the self-heating of soils \cite{Clarke:2021}.    \\
-Knowing the exact thresholds for TP's would be useful but is out of reach \cite{Steffen:2018,Drijfhout:2015}. Nevertheless there are common characteristics for systems approaching a B-tipping, due to the theory of Normal Forms \cite{Strogatz:2015,Guckenheimer:1983}. The most important one is \emph{critical slowing down} (CSD). After a small pertubation systems return to equilibrium in general. As the system approaches a tipping point this return-time increases \cite{Scheffer:2012}, the variance will increase and its autocorrelation tends to unity \cite{Scheffer:2009,Held:2004}. The latter two statistical indicators are considered traditional 'Early Warning Signals' (EWS). (Care with EWS ?). We will discuss B-tipping, theory of Normal Forms, CSD and EWS more in detail in the following chapters. \\
-The traditional early warning signals were applied to paleoclimate data and detected TP's \cite{Boers:2018}. They were applied to a 5-year resolution time series obtained from the raw North Greenland Ice Core Project (NGRIP) record to indicate the arrival of the Dansgaard–Oeschger (DO) events. These EWS also suggest the approach of TP's in the Greenland Ice Sheet \cite{Boers:2021} and in the AMOC  \cite{Boers:2021b} following the rise of global temperatures. Despite the succesful applications of the tradtitional EWS they also have a flaw. They depend on a stationarity assumption of the process, something which is often violated in nature, yielding the risk of false positiv or false negative signals. We will give examples for this later. \cite{Clarke:2023} makes the case that the traditional EWS depends also on the assumption of white noise and fail under red noise. As we will see this is not true in general. 
+Paleoclimate records suggest that critical thresholds of major components of the Earth system were crossed in the past \cite{Brovkin:2021}, where major parts of the Earth's system abruptly shifted from one state to another. Relatively small changes in the external forcing, such as a change in the greenhouse gas concentrations or incoming solar radiation can cause these rapid shifts. Since the raise of global temperatures, primarily due to burned fossil fuels, there is a growing concern \cite{Lenton:2019,Steffen:2018,Ritchie:2021} that key Earth System components (called "Tipping Elements") will cross Tipping points (TP) in the future and will undergo fast irreversible transitions \cite{Lenton:2008}. In some cases like the Greenland ice sheet there is concern, that a TP might already been crossed.
+The crossing of a tipping point and transition to a qualitatively different state can be mathematically understood as a bifurcation. The critical thresholds are often crossed due to a small change in a parameter describing the forcing of the system. Although different types of bifurcation exist \cite{Ashwin:2012}, we will focus on bifurcation induced tipping (B-tipping) and especially fold bifurcations. Today different elements of the Earth system like the Atlantic Meridional Overturning Circulation (AMOC) \cite{Stommel:1961}, the Amazon Rain forest \cite{Cox:2000}, the permafrost \cite{Steffen:2018} or the Greenland ice sheet \cite{Feldmann:2015} are considered to be potential tipping elements. Several abprupt shifts were observed in the Coupled Model Intercomparison Project - Phase 5 \cite{Taylor:2012} and other earth system models (ESMs) \cite{Drijfhout:2015}, providing evidence that tipping points might occur. The crossing of tipping points would have  severe impacts and including tipping points in integrated assessment models (IAMs) would significantly increase the Social Cost of Carbon \cite{Dietz:2021}. Many people would face significant problems as studies of specific tipping point impacts have shown: an AMOC collaps would threat to halt large parts of arable farming in the UK \cite{Ritchie:2020} and there would be a higher risk of fires for communities in high altitudes due to the self-heating of soils \cite{Clarke:2021}.    \\
+Knowing the exact thresholds for TP's would be useful but is out of reach \cite{Steffen:2018,Drijfhout:2015}. Nevertheless there are common characteristics for systems approaching a B-tipping, due to the theory of Normal Forms \cite{Strogatz:2015,Guckenheimer:1983}. The most important one is \emph{critical slowing down} (CSD). In genereal systems return back to equilibrium after a small perturbation. As the system approaches a tipping point this return-time increases \cite{Scheffer:2012}, the variance will increase and its autocorrelation tends to unity \cite{Scheffer:2009,Held:2004}. The latter two statistical indicators are considered traditional 'Early Warning Signals' (EWS). (Care with EWS ?). We will discuss CSD and the theory behind these EWS more in detail in the following chapters. \\
+The traditional early warning signals were applied to paleoclimate data and detected TP's \cite{Boers:2018}. They were applied to a 5-year resolution time series obtained from the raw North Greenland Ice Core Project (NGRIP) record to indicate the arrival of the Dansgaard–Oeschger (DO) events. These EWS also suggest the approach of TP's in the Greenland Ice Sheet \cite{Boers:2021} and in the AMOC  \cite{Boers:2021b} following the rise of global temperatures. Despite the succesful applications of the tradtitional EWS they also have a flaw. They depend on a stationarity assumption of the process, something which is often violated in nature, yielding the risk of false positiv or false negative signals. We will give examples for this later. 
 
 Although we are interested here mainly in climate science as an application, the theory of EWS for TP's can be applied in many other contexts of complex dynamical systems as well. Systemic failures like asthma attacks \cite{Venegas:2005} or epileptic seizures in medicine \cite{Litt:2001, McSharry:2003}, market crashes in finance \cite{Kambhu:2007,May:2008} or catastrophic shifts in wildlife or fish populations for ecosystem services \cite{Scheffer:2001, MillenniumEcosystemAssessment:2005}. 
 
-In figure \ref{fig:1.1} we show different ways of how the equilibrium state of a system can react to changes in the condition of the system. In the four panels we plot the equilibria states as a function of a bifurcation parameter representing the condition of the system. The solid black lines illustrate stable states and the dashed black lines in panels c and d illustrate unstable ones. Additional grey arrows indicate the direction of movement of the system if it is outside of equilibrium. If the system is close to a tipping point like F2 a small change in the conditions (Panel c) or a small perturbation (Panel d) can lead to a sudden large shift in the system state. Panel b gives an example for a scenario where in the absence of a real bifurcation a small change in a critical area of the conditions can still lead to a large shift of the state. In Panel a the large change in the system state is caused by a large external forcing. We will focus on the fold bifurcation scenarios of c and d for testing purposes of the EWS and give an example of a simple climate model in the end where such a bifurcation also arises.
+In figure \ref{fig:1.1} we show different ways of how the equilibrium state of a system can react to changes in the conditions of the system. In the four panels we plot the equilibria states as a function of a bifurcation parameter representing the conditions of the system. The solid black lines illustrate stable states and the dashed black lines in panels c and d illustrate unstable ones. Additional grey arrows indicate the direction of movement of the system if it is outside of equilibrium. If the system is close to a tipping point like F2 a small change in the conditions (Panel c) or a small perturbation (Panel d) can lead to a sudden large shift in the system state. Panel b gives an example for a scenario where in the absence of a real bifurcation a small change in a critical area of the conditions can still lead to a large shift of the state. In Panel a the large change in the system state is caused by a large external forcing. We will focus on the fold bifurcation scenarios of c and d for testing purposes of the EWS and give an example of a simple climate model in the end where such a bifurcation also arises.
 
 
 % In the Earth system the noise corresponds to external drivers of the system, which are not included in the model. Often this key assumption is violated, eg. due to oscillatory variability in the Earth System (C:28). An example is the El-Nino Southern Oscillations which has a large impact on the Amazon Rainforest - a potential tipping element (C:29). (Incompatability with long memory process (30,31) ?). Relaxing the assumptions on the noise can change the characteristics of the traditional EWS or can make them disappear (C:31). Hence EWS without an assumption on the noise would be of use. 
@@ -106,12 +106,16 @@ In figure \ref{fig:1.1} we show different ways of how the equilibrium state of a
 
 
 \section{Motivation for the traditional EWS: Variance and $AC(1)$}
+\label{sec: Motivation for the traditional EWS: Variance and $AC(1)$}
 
 We take this section mainly from \cite{Scheffer:2009}.\\
-The goal of early warning signals is to indicate the approachinging of a tipping point in our system. Most indicators make use of the CSD phenomenon, which we want to illustrate with a simple example. The main idea behind CSD is the following: Assume we have a stochastically forced dynamical system of the form \[
-\frac{dx}{dt} = f(x(t),\mu(t)) + \xi (t) 
-\]
-(?must exhibite fold bifurcation?) where $\mu(t)$ is a bifurcation parameter and $\xi(t)$ is a noise term. A bifurcation occurs at $\mu_{c}$. 
+The goal of early warning signals is to indicate the approaching of a tipping point in our system. Most indicators make use of the CSD phenomenon, which we want to illustrate with a simple example. The main idea behind CSD is the following: Assume we have a stochastically forced dynamical system of the form 
+\begin{equation}
+    \frac{dx}{dt} = f(x(t),\mu(t)) + \xi (t) 
+    \label{stochastically forced system}
+\end{equation}
+
+where $\mu(t)$ is a bifurcation parameter and $\xi(t)$ is a noise term following some probability distribution for every $t \geq 0$. The system has a fold bifurcation point at $\mu_{c}$. 
 We can linearize around an equilibrium $x^{*}$:
         \[
         f(x;\mu) \approx f(x^{*}(\mu),\mu) + \partial_{x}f(x^{*}(\mu);\mu)(x(t)-x^{*}) = \partial_{x}f(x^{*}(\mu);\mu)(x(t)-x^{*}) =: -\lambda(\mu)(x(t) - x^{*})
@@ -125,70 +129,103 @@ with $a,b,\gamma \in \mathbb{R}$, $a < b$ and $\gamma > 0$. The two stationary s
 We have: 
 \[\lambda (a) = -\frac{df}{dx}|_{a} = \gamma(b-a)\] 
 
-We will now study how the system evolves if we add a small perturbation to the stable state a:
+We will now study how the system evolves if we add a small perturbation to the stable state a. Let $\epsilon(t) := x(t) - a$. We have:
 
 \[
 \frac{d\epsilon(t)}{dt} = \frac{d(a + \epsilon(t))}{dt} = f(a + \epsilon(t)) \approx 
  -\lambda(a)\epsilon(t)
 \]
 The solution is $\epsilon(t) = \epsilon_{0}exp(-\lambda(a)t) = \epsilon_{0}exp(-t/T_{R}(a))$, where $T_{R}(a) := 1/ \lambda(a)$ is the characteristic return time \cite{Wissel:1984}.
-We see that for $a \rightarrow b$ it holds that $\lambda(a) \searrow 0$ and $T_{R}(a)\nearrow \infty$. The restoring rate $\lambda(a)$ is is linearly dependent on the size of the basin of attraction.
+We see that for $a \nearrow b$ it holds that $\lambda(a) \searrow 0$ and $T_{R}(a)\nearrow \infty$. In this case the restoring rate $\lambda(a)$ is linearly dependent on the size of the basin of attraction.
 
-From CSD we know that the recovery rate after a small disturbance of a system is an indicator for proximity to a bifurcation point \cite{VanNes:2007}. In natural systems it is mostly not possible to test recovery rates directly. Still, since most systems are under constant natural perturbation we can use statistics to deduce information. An increase in the autocorrelation of the time series is one important predictor for slowing down \cite{Ives:1995}. This is easy to understand intuitively: Due to the decrease in recovery rate of the system the states get more and more similar to each other. The lag-1 autocorrelation measures how closely the current state is correlated to the past state. Hence we expect an increase in this measure. This interpretation is made more rigorous by the following result (Morr SM2): 
-\begin{lemma}
-    Let X be a centered gaussian process. "then the increments of X divided by the contemporary state are Cauchy-distributed (how?) and ":
-    \[
-    E[\frac{X_{k+1}-X_{k}}{X_{k}}1_{\{\lvert X_{k} \rvert > \epsilon\}}] = AC(1) - 1
-    \]
-\end{lemma}
+From CSD we know that the recovery rate after a small disturbance of a system is an indicator for proximity to a bifurcation point \cite{VanNes:2007}. In natural systems it is mostly not possible to test recovery rates directly. Still, since most systems are under constant natural perturbation we can use statistics and try to deduce information about the linear restoring rate. An increase in the autocorrelation of a time series generated by equation \ref{stochastically forced system} is one important predictor for slowing down \cite{Ives:1995}. This is easy to understand intuitively: Due to the decrease in recovery rate of the system the states get more and more similar to each other. The lag-1 autocorrelation measures how closely the current state is correlated to the past state. Hence we expect an increase in this measure.
 
 Another indicator for an approaching TP is an increase in the variance of the fluctuations of a stochastically forced system. The intuitive explanation is again simple: When the linear restoring rate goes to zero, the reverting back to the equilibrium gets very slow and the perturbations can accumulate leading to the increase in the variance. 
-We will prove these properties of the traditional EWS later more formally. To do this we introduce some concepts before in the following chapter Prerequisites. In Figure 1 we give more intuition for the EWS using a stochastically forced system. \\
-
-Explain potential (Bewegungsgleichung)
+We will prove these properties of the traditional EWS later more formally. To do so we first introduce some concepts in the following chapter Prerequisites. In Figure \ref{fig:scheffer_fig_1_reimp} we give more intuition for the traditional EWS methods. \\
 
 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{bachelor-thesis/figures/scheffer_fig1_reimp_v1.jpg}
-    \caption{modified from scheffer figure 1: some characteristic changes in non-equilibrium dynamics as a system approaches a catastrophic bifurcation (such as F1 or F2 \ref{fig:SchBox1}). Data is simulated by the SDE: $dX_{t}=X(1-X/K)-c(X^2/(X^2+1))dt + dW_{t}$ modelling a harvested population with carrying capacity $K = 10$ and maximum harvest rate c (0.5 for high resilience and 2.3 for low resilience). In Panels a,b,c the system is farther away from the TP: the restoring rate is higher and the basin of attraction is smaller. This leads to a smaller variance in the fluctuations around the equilibrium and a smaller autocorrelation. Panels d,e,f show the system being closer to the TP: the restoring rate is lower and the basin of attraction is larger. There is a larger variance and autocorrelation.}
-    \label{fig:enter-label}
+    \includegraphics[width=0.8\textwidth]{reimp_scheff_fig_1.jpg}
+    \caption{Modified from \cite{Scheffer:2009}, Figure 1:
+    Two time series are simulated by the SDE: $dX_{t}=X(1-X/K)-c(X^2/(X^2+1))dt + dW_{t}$ modelling a harvested population with carrying capacity $K = 10$ and maximum harvest rate c (0.5 for high resilience and 2.3 for low resilience). In Panels a,b,c the system is farther away from the TP: the restoring rate is higher and the basin of attraction is smaller. This leads to a smaller variance in the fluctuations around the equilibrium and a smaller autocorrelation. Panels d,e,f show the system being closer to the TP: the restoring rate is lower and the basin of attraction is larger. There is a larger variance and autocorrelation.}
+    \label{fig:scheffer_fig_1_reimp}
 \end{figure}
 
 
 
 \chapter{Prerequisites}
-normal form: B-tipping, nyquist freq
 
 
 \section{Probability theory \& Statistics}
 
-\begin{definition}[Autocorrelation function]
-Be $X(t)$ a random process. We define the autocovariance function: 
+We start with some definitions, which we will need later.
+
+\begin{definition}[Stochastic process (PT script definition 5.1)]
+Let I $\subseteq \mathbb{R}$. Let $X_{t}:\Omega \rightarrow \mathbb{R}, t \in I$ be a random variable on the same probability space $(\Omega,\mathcal{F},P)$. Then, $X = (X_{t})_{t \in I} $ is called a real-valued stochastic/random process. If $I = \mathbb{N}_{0}$ it is a discrete time process, if  $I = \mathbb{R}_{+}$ it is a continuous process.
+\end{definition}
+
+
+\begin{definition}[Gaussian process]
+    A stochastic process $(X_{t})_{t\geq 0}$ is a Gaussian process if for all $t_{1} < t_{2} < ... < t_{n}$, the vector $(X_{t_{1}},...,X_{t_{n}})$ is a Gaussian process.
+\end{definition}
+
+
+\begin{definition}[Autocovariance function]
+Be $(X_{t})_{t \in I \subseteq \mathbb{R}}$ a random process. We define the autocovariance function: 
 \[
 R_{X}(t_{1},t_{2}) := Cov(X_{t_{1}},X_{t_{2}})
 \]    
 \end{definition}
 
-It is called "auto"corellation function, because the covariance is taken w.r. to the same process $X_{t}$
+It is called 'auto'-covariance function, because the covariance is taken with respect to the same process $X_{t}$
+
+
+%stanf_stat_proc
+\begin{definition}[weak sense stationarity]
+A stochastic process $(X_{t})_{t\geq 0})$ is weak-sense stationary (WSS), if:
+
+\begin{subequations}
+    \begin{align}
+        E[X(t)] &= \mu \ \ \forall t \geq 0 \\
+        R_{X}(t_{1},t_{1} + \tau) &= R_{X}(t_{2},t_{2} + \tau) \ \ \forall t_{1},t_{2},\tau \in \mathbb{R}_{+} \\
+        E[X(t)^2]&<\infty
+    \end{align}
+\end{subequations}   
+\end{definition}
+
+Since $R_{X}(t_{1},t_{2}) = R_{X}(t_{2},t_{1})$, $R_{X}$ is a function of $\lvert t_{2} - t_{1} \rvert$ for a WSS stochastic process and can be written as:
+\[
+R_{X}(\tau) := R_{X}(t,t + \tau), \ \tau \geq 0
+\]
+
+As the name suggests there is also a stronger concept of stationarity called \textit{Strong Sense Stationarity} (SSS). The latter always implies WSS, while the reverse direction isn't true in general. However it holds for gaussian processes (?). We will only need WSS.
+
+Now we can also define the autocorrelation function for WSS-processes:
+
+\[
+\text{AC}(\tau) := \frac{R_{X}(\tau)}{(\text{Var}(X_{t})\text{Var}(X_{t+\tau}))^{\frac{1}{2}}}, \ \tau \geq 0
+\]
 
 
 \begin{definition}[AC]
-Let $X_{t}$ be a time series with mean $\Bar{X}$. The AC(1) or lag-1-Autocorrelation is defined by: 
+Let $(X_{t}) = (X_{0},...,X_{n}) \in \mathbb{R}^{n+1}$ be a time series with mean $\Bar{X}$. The $\widehat{AC(1)}$ or lag-1-Autocorrelation is defined by: 
 \[
-r_{k} = \frac{\sum_{t=1}^{n-1}(X_{t}-\Bar{X})(X_{t+1}-\Bar{X})}{\sum_{t=1}^{n}(X_{t}-\Bar{X})^2}
+\widehat{AC(1)} = \frac{\sum_{t=0}^{n-1}(X_{t}-\Bar{X})(X_{t+1}-\Bar{X})}{\sum_{t=0}^{n}(X_{t}-\Bar{X})^2}
 \]
 \end{definition}
-It is called lag-1-autocorrelation, because it measures association within the same time series with lag one. A positive autocorrelation indicates that the value of the time series at time $t + 1$ is similar to the value of the series at time $t$. 
 
+The following Lemma gives a connection between the AC(1) and the linearized restoring rate (\cite{Morr:2024} SM2): 
 
-Another result we want to use later (in a discrete version) is the following shifting property:
-\[
-f(t-t_{0}) \xleftrightarrow{\mathcal{F}} e^{-i2\pi t_{0}\xi}\Tilde{f}(\xi)
-\]
+\begin{lemma}
+    Let $(X_{t})_{t\geq 0}$ be a centered gaussian process. Then it holds for all $\epsilon > 0$:
+    \[
+    E[\frac{X_{k+1}-X_{k}}{X_{k}}1_{\{\lvert X_{k} \rvert > \epsilon\}}] = AC(1) - 1
+    \]
+\end{lemma} 
 
-Later we want to compare our indicators. Then we need to quantify how monotone increasing a series of values is. For this we will use the kendall tau coefficient. 
+Later we want to compare our EWS indicators. Then we need to quantify how monotone increasing a series of values is. For this we will use the kendall tau coefficient. 
 
 \begin{definition}[Kendall's $\tau$ coefficient]
 \label{def:Kendall tau}
@@ -197,61 +234,18 @@ Let $(x_{1},y_{1}),(x_{2},y_{2}),...,(x_{n},y_{n})\in \mathbb{R}^{2}$. A pair of
 ((x_{i} > x_{j}) \wedge (y_{i} > y_{j})) \vee
 ((x_{i} < x_{j}) \wedge (y_{i} < y_{j}))
 \]
-Otherwise it is discordant. The Kendall $\tau$ coefficient:
+Otherwise it is discordant. The Kendall $\tau$ coefficient is defined as:
 \[
 \tau := \frac{\#concordant\ pairs - \#number\ of\ discordant\ pairs}{\#pairs} = \frac{2}{n(n-1)}\sum_{i<j}sgn(x_{i}-x_{j})sgn(y_{i}-y_{j})
 \]
 where sgn is the signum function    
 \end{definition}
 
-the dominated convergance theorem
 
 \section{Stochastic analysis}
 
-PT script definition 5.1
-\begin{definition}[Stochastic process]
-Let I $\subseteq \mathbb{R}$. Let $X_{t}:\Omega \rightarrow \mathbb{R}, t \in I$ be a random variable on the same probability space $(\Omega,\mathcal{F},P)$. Then, $X = (X_{t})_{t} \in I$ is called a real-valued stochastic/random process. If $I = \mathbb{N}_{0}$ it is a discrete time process, if  $I = \mathbb{R}_{+}$ it is a continuous process.
-\end{definition}
-
-\begin{definition}[stationarity]
-    
-\end{definition}
-
-
-%stanf_stat_proc
-\begin{definition}[weak sense stationarity]
-A stochastic process is weak-sense stationary (WSS), if:
-
-\begin{subequations}
-    \begin{align}
-        E[X(t)] &= \mu \ \ \forall t \\
-        R_{X}(t_{1},t_{1} + \tau) &= R_{X}(t_{2},t_{2} + \tau) \ \ \forall t_{1},t_{2},\tau \in \mathbb{R}_{+} \\
-        E[X(t)^2]&<\infty
-    \end{align}
-\end{subequations}   
-\end{definition}
-
-Since $R_{X}(t_{1},t_{2}) = R_{X}(t_{2},t_{1})$, for a WSS stochastic process, $R_{X}(t_{1},t_{2})$ is a function of $\lvert t_{2} - t_{1} \rvert$ and can be written as:
-\[
-R_{X}(\tau) := R_{X}(t,t + \tau)
-\]
-
-As the name suggests there is also a stronger concept of stationarity called \textit{Strong Sense Stationarity} (SSS). The latter always implies WSS, while the reverse direction isn't true in general. However it holds for gaussian processes (?). We will only need WSS.
-
-Now we can also define the autocorrelation function:
-
-
-\[
-\text{AC}(\tau) := \frac{R_{X}(\tau)}{(\text{Var}(X_{t})\text{Var}(X_{t+\tau}))^{\frac{1}{2}}}
-\]
-
-SSS implies WSS
-
-Properties of $R_{X}(\tau)$ and Interpretation: stanf lect page 12
-
-Stoa lecture script 1.6
-\begin{definition}[Wiener process]
-A Wiener process is a stochastic process $(W_{t})_{t\geq 0}$ on some probability space $(\Omega,\mathcal{A},P)$ with the following properties: 
+\begin{definition}[Wiener process (SA script Def. 1.6)]
+A Wiener process is a stochastic process $(W_{t})_{t\geq 0}$ on some probability space $(\Omega,\mathcal{F},P)$ with the following properties: 
 \begin{itemize}
     \item $W_{0} = 0$ P-a.s
     \item For $0 = t_{0} < t_{1} < ... < t_{n}$, the increments $W_{t_{i}} - W_{t_{i-1}}, 1 \leq i \leq n$, are independent with law $N(0,t_{i}-t_{i-1})$
@@ -262,24 +256,24 @@ A Wiener process is a stochastic process $(W_{t})_{t\geq 0}$ on some probability
 Interpretation: 
 
 \begin{itemize}
-    \item $t \mapsto W_{t}(\omega)$ is a stochastic evolution in time
-    \item $(W_{t}) t \geq 0: \Omega \mapsto C[0,1]$ is a random variable that takes an $\omega$ as input and outputs one realization of a path
+    \item $t \mapsto W_{t}(\omega)$ is one random evolution in time
+    \item $(W_{t})_{t \geq 0} : \Omega \mapsto C[0,1]$ is a random variable that takes an $\omega$ as input and outputs one realization of a path
 \end{itemize}
 
-We define the $\textbf{Cameron-Martin-Space}$ as:
+We define the \textit{Cameron-Martin-Space} as:
 \[
 H_{t} := \{ h \in C[0,t]: \exists f \in L^{2}[0,t] \ s.t \  h(s) = \int_{0}^{s} f(\tau) d\tau, 0 \leq s \leq t \}
 \]
 
-For $h \ in H_{t}, f \in L^{2}[0,2]$ is uniquely determined and we write: 
+For $h \in H_{t},\ f \in L^{2}[0,t]$ is uniquely determined and we write: 
 \[
 h' = f
 \]
-(In genereal $h$ does not have to be differentiable for every $s in [0,t]$)
+(In genereal $h$ does not have to be differentiable for every $s \in [0,t]$)
 
-Now we can define stochastic integrals for a class of functions:
+Now we can define stochastic integrals for a certain class of functions:
 
-\begin{definition}[The Paley-Wiener stochastic integral] 
+\begin{lemma}[The Paley-Wiener stochastic integral (SA script Lemma 3.4)] 
 Let $(W_{s})_{s\geq 0}$ be a Wiener process and $h \in H_{t}, t \geq 0$. Then:
 \[
 \xi_{n}^{t} := 2^{n}\sum_{j=1}^{2^{n}}(h(\frac{tj}{2^{n}})-h(\frac{t(j-1)}{2^{n}}))(W_{\frac{tj}{2^{n}}}-W_{\frac{t(j-1)}{2^{n}}}) 
@@ -289,138 +283,120 @@ converges P-a.s and in $L^{2}$. We denote the limit by
 \[
 \int_{0}^{t}h'(s)dW_{s} = \int_{0}^{t}h'dW
 \]
-\end{definition}
+\end{lemma}
 
 At this point we want to highlight the importance in the definition of the Wiener process that the variance of $W_{t}$ is proportionate to time. Per definition it holds $W_{t} \sim N(0,t)$. Suppose another power $t^{\alpha}, \alpha > 0$ was chosen. 
 
-It holds: $\int_{0}^{t} 1 dW_{s} = W_{t}$ and $Var[W_{t}] = t^{\alpha}$. But: 
-$Var[\xi_{n}^{t}] = Var\left[\sum_{j=1}^{2^{n}}\left(W_{\frac{tj}{2^{n}}} - W_{\frac{t(j-1)}{2^{n}}}\right)\right] = 2^{n}Var\left[W_{t}\right] = 2^{n}\left(\frac{t}{2^{n}}\right)^{\alpha}$. Hence $\alpha$ has to equal 1 (?).
+It holds: $\int_{0}^{t} 1 dW_{s} = W_{t}$ and $Var[W_{t}] = t^{\alpha}$ by assumption. But: 
+$Var[\xi_{n}^{t}] = Var\left[\sum_{j=1}^{2^{n}}\left(W_{\frac{tj}{2^{n}}} - W_{\frac{t(j-1)}{2^{n}}}\right)\right] = 2^{n}Var\left[W_{\frac{t}{2^n}}\right] = 2^{n}\left(\frac{t}{2^{n}}\right)^{\alpha}$, where we use that the increments are i.i.d. Since  $Var[\xi_{n}^{t}] \xrightarrow{n \rightarrow \infty} Var[W_{t}]$ (by the dominated convergence theorem (?)), $\alpha$ has to equal 1. \\
 
 Consider the process:
 
-\begin{definition}[Ornstein-Uhlenbeck process] 
+\begin{definition}[Ornstein-Uhlenbeck process (SA script Example 10.7)] 
 For $\alpha > 0$, $(W_{t})_{t\geq 0}$ a Wiener process, $x_{0} \in \mathbb{R}$. Consider the following SDE:
 \[
-dX_{t}^{(\omega)} = -\alpha X_{t}^{(\omega)} dt + \sigma dW_{t}, X_{0}^{(\omega)} = x_{0}
+dX_{t}^{(w)} = -\lambda X_{t}^{(w)} dt + \sigma dW_{t}, X_{0}^{(w)} = x_{0}
 \]
 or equivalently
 \[
-X_{t}^{(\omega)} = x_{0} - \alpha\int_{0}^{t}X_{s}^{(\omega)}ds + \sigma W_{t}, t \geq 0
+X_{t}^{(w)} = x_{0} - \lambda\int_{0}^{t}X_{s}^{(w)}ds + \sigma W_{t}, t \geq 0
 \]  
 \end{definition}
 
 $\textbf{Claim}$: 
 \[
-X_{t} = \exp(-\alpha t)x_{0} + \sigma\int_{0}^{t}\exp(-\alpha (t-s))dW_{s}
+X_{t} = \exp(-\lambda t)x_{0} + \sigma\int_{0}^{t}\exp(-\lambda (t-s))dW_{s}
 \]
-solves the above SDE. We check this applying Ito's product rule to $\sigma e^{-\alpha t}\int_{0}^{t}e^{\alpha s}dB_{s}$:
+solves the above SDE. We check this applying Ito's product rule to $\sigma e^{-\lambda t}\int_{0}^{t}e^{\lambda s}dB_{s}$:
 \[
-dX_{t} = -\alpha x_{0}e^{-\alpha t}dt - \alpha\sigma(e^{-\alpha t \int_{0}^{t}e^{\alpha s}dB_{s}})dt + \sigma e^{-\alpha t}e^{\alpha t}dB_{t} = -\alpha X_{t} dt + \sigma dB_{t}
+dX_{t} = -\lambda x_{0}e^{-\lambda t}dt - \lambda\sigma(e^{-\lambda t}\int_{0}^{t}e^{\lambda s}dW_{s})dt + \sigma e^{-\lambda t}e^{\lambda t}dW_{t} = -\lambda X_{t} dt + \sigma dW_{t}
 \]
 
-If we choose $X_{0} \sim N(0,\frac{1}{2\alpha})$ as an initial distribution, which is independent of $(W_{t})_{t\geq 0}$ than $E[X_{t}] = 0, t \geq 0$ and $Cov[X_{s},X_{t}] = \frac{1}{2\alpha}\exp(-\alpha\lvert t-s \rvert)$. Hence $Var[X_{t}]=E[(X_{t})^{2}]=\frac{1}{2\alpha}$ and $X_{t} \sim N(0,\frac{1}{2\alpha})$, because the sum of normal variables is again a normal variable with the means and variances added up. This means that $X_{t}$ is wide sense stationary. We proof the claims:
-First: $E[X_{t}] = 0, t \geq 0$. It holds: 
-\[
-E[X_{t}] = \exp(-\alpha t)E[X_{0}] + \exp(-\alpha t)E[\int_{0}^{t} \exp(\alpha s) dW_{s}] = \exp(-\alpha t)E[\int_{0}^{t} \exp(\alpha s) dW_{s}]
-\]
-It remains to show that: $E[\int_{0}^{t} \exp(\alpha s) dW_{s}] = 0$.
-Since the Paley-Wiener stochastic integral converges P-a.s we can apply the dominated convergence theorem (majorant ?) to the approximating sequence $\xi_{n}^{t}$: 
-\[
-E[\xi_{n}^{t}] = 2^{n}\sum_{j=1}^{2^{n}}(h(\frac{tj}{2^{n}})-h(\frac{t(j-1)}{2^{n}}))E[(W_{\frac{tj}{2^{n}}}-W_{\frac{t(j-1)}{2^{n}}})] = 0 
-\]
+If we choose $X_{0} \sim N(0,\frac{1}{2\lambda})$ as an initial distribution, which is independent of $(W_{t})_{t\geq 0}$ than $E[X_{t}] = 0$, $Cov[X_{s},X_{t}] = \frac{1}{2\lambda}e^{(-\lambda\lvert t-s \rvert)}$ for $t,s \geq 0$ and $X_{t}$ is wide sense stationary. It follows that $Var[X_{t}]=E[(X_{t})^{2}]=\frac{1}{2\lambda}$ and $X_{t} \sim N(0,\frac{1}{2\lambda}), \forall t \geq 0$, because the sum of normal random variables is again a normal random variable.
 
-Next we want to prove: $Cov[X_{s},X_{t}] = \frac{1}{2\alpha}\exp(-\alpha \lvert t-s \rvert)$. 
+To proof the statements about the expectation and the covariance of $X_{t}$ we use some  results from stochastic analysis and probability theory.
+From stochastic analysis we use a weeker form of Ito's isometry:
 
-To proof this we use the following results from stochastic analysis and probability theory:
-
-From stochastic analysis:
-
-Ito isometry
-
-\begin{lemma}
- Let H be a progressively measurable step process and $E[\int_{0}^{\infty}H_{s}ds]<\infty$. Then:
+\begin{lemma}[Ito's isometry]
+ Let $t \geq 0$ and $g \in L^2[0,t]$. Then:
  \[
- E[(\int_{0}^{\infty}H_{s}dB_{s})^{2}] = E[\int_{0}^{\infty}H_{s}^{2}ds]
+ E[(\int_{0}^{t}g(s)dW_{s})^{2}] = \int_{0}^{t}g(s)^2ds
  \]
 \end{lemma}
 
-There is another way to define stochastic integrals for progressively measurable processes. Only note the following: 
+The following Lemma shows that $\int_{0}^{t}e^{\alpha s}dW_{s}$ is a martingale.   \textit{(I)}
 
 \begin{lemma}
-    We have seen that for $g \in L^{2}[0,t]$ we can define $\int_{0}^{t}g(s)dB_{s}$. Provided that both integral exists, the Paley-Wiener integral agrees with the stochastic integral via progressively measurable step processes.
-\end{lemma}
-
-
-\begin{lemma}
-    Let $(H_{s}(\omega))_{s\geq 0}$ be progressively measurable with $E[\int_{0}^{t} H_{s}(\omega)^{2}ds] < \infty, t \geq 0$. Then there exists a modification $(M_{t})_{t\geq 0}$ of $(\int_{0}^{t}H_{s}dB_{s})_{t\geq}$ such that there exists $F \in \mathcal{F}$ with $P(F) = 1$ and $t \mapsto M_{t}(\omega)$ is continuous for all $\omega \in F$. Further, $(M_{t})_{t\geq 0}$ is a martingale and hence:
+    Let $g \in L^2[0,t]$ for every $t \geq 0$. Then $(\int_{0}^{t}g(s)dW_{s})_{t\geq 0}$ is a martingale and hence:
     \[
-    E[\int_{0}^{t}H_{s}dB_{s}] = 0 \ \forall t \geq 0
+    E[\int_{0}^{t}g(s)dB_{s}] = 0, \ \forall t \geq 0
     \]
 \end{lemma}
 
-From probability theory we use these to results about conditional expectations:
+From probability theory we use the following two results about conditional expectations:
 
 \begin{lemma}
-    $E[E[X|\mathcal{F}]] = E[X]$
+    Let $X: \Omega \rightarrow \mathbb{R}$ be an $(\mathcal{F}_{0},\mathcal{B}(\mathbb{R}))$- measurable random variable with $E[\lvert X \rvert] < \infty$ or $X \geq 0$ and $\mathcal{F} \subseteq \mathcal{F}_{0}$ a $\sigma$-algebra. Then it holds:
+    \[
+    E[E[X|\mathcal{F}]] = E[X]
+    \]
 \end{lemma}
 
 \begin{lemma}
     If X is $\mathcal{F}$-measurable, $E[\lvert XY \rvert] < \infty$ and $E[\lvert Y \rvert]< \infty$ then:
     \[
-    E[XY|\mathcal{F}] = XE[Y|\mathcal{F}]  almost surely
+    E[XY|\mathcal{F}] = XE[Y|\mathcal{F}], \ P-a.s
     \]
 \end{lemma}
 
-Let $s \leq t$. Then:
+Let $0 \leq s \leq t$. Then:
+
 \[
-Cov[X_{s}X_{t}]=E[X_{s}X_{t}] = e^{-\alpha(t+s)}E[X_{0}^{2}] + e^{-\alpha(t+s)}E[\int_{0}^{t}e^{\alpha u}dB_{u}\int_{0}^{t}e^{\alpha v}dB_{v}]
+E[X_{t}] = e^{-\lambda t}E[X_{0}] + e^{-\lambda t}E[\int_{0}^{t} e^{\lambda s} dW_{s}] = e^{-\lambda t}E[\int_{0}^{t} e^{\lambda s} dW_{s}] \stackrel{(I)}{=}  0
 \]
-From Lemma 3 it follows that $M_{t} = \int_{0}^{t}e^{\alpha u}dB_{u}$ is a martingale. We show that for any martingale $(M_{t})_{t \geq 0}$ the following holds: 
+
+Next we want to prove: $Cov[X_{s},X_{t}] = \frac{1}{2\lambda}e^{-\lambda \lvert t-s \rvert}$. 
+\begin{equation}
+    Cov[X_{s}X_{t}]=E[X_{s}X_{t}] = e^{-\lambda(t+s)}E[X_{0}^{2}] + e^{-\lambda(t+s)}E[\int_{0}^{t}e^{\lambda u}dW_{u}\int_{0}^{s}e^{\lambda v}dW_{v}]
+    \label{cov white noise noise}
+\end{equation}
+
+We show that for any martingale $(M_{t})_{t \geq 0}$ the following holds: 
+\begin{equation}
+    E[M_{t}M_{s}] = E[M_{s}^{2}], \ s \leq t
+    \label{result cond exp}
+\end{equation}
+
+Lemma 5 gives us:
 \[
-E[M_{t}M_{s}] = E[M_{s}^{2}], \ s \leq t
+E[M_{t}M_{s}] = E[E[M_{t}M_{s}|\mathcal{F}_{s}]]
 \]
-Lemma 4 gives us:
+Since $M_{s}$ is $\mathcal{F}_{s}$-measurable, Lemma 6 yields:
 \[
-E[M_{t}M_{s}] = E[E[M_{t}M_{s}|\mathcal{F_{s}}]]
+E[E[M_{t}M_{s}|\mathcal{F}_{s}]] = E[M_{s}E[M_{t}|\mathcal{F}_{s}]]
 \]
-Since $M_{s}$ is $\mathcal{F}_{s}$-measurable, Lemma 5 yields:
-\[
-E[E[M_{t}M_{s}|\mathcal{F_{s}}]] = E[M_{s}E[M_{t}|\mathcal{F}_{s}]]
-\]
-For a martingale it holds: $E[M_{t}|\mathcal{F}_{s}] = M_{s}, s \leq t$. The claim follows. Continue:
+For a martingale it holds: $E[M_{t}|\mathcal{F}_{s}] = M_{s}, s \leq t$. Equation \ref{result cond exp} follows. Continue with \ref{cov white noise noise}:
 
 
 \begin{subequations}
     \begin{align*}
-        E[X_{s}X_{t}] &= \frac{1}{2\alpha}e^{-\alpha(t+s)} + e^{-\alpha(t+s)}E[(\int_{0}^{s}e^{\alpha v}dB_{v})^{2}]   \\
-         &= \frac{1}{2\alpha}e^{-\alpha(t+s)} + e^{-\alpha(t+s)}\int_{0}^{s}e^{2\alpha v}dv \\
-         &= \frac{1}{2\alpha}e^{-\alpha(t+s)} + e^{-\alpha(t+s)}\frac{1}{2\alpha}(e^{2\alpha s} - 1) \\
-         &= \frac{1}{2\alpha}e^{-\alpha(t-s)} 
+        E[X_{s}X_{t}] &= \frac{1}{2\lambda}e^{-\lambda(t+s)} + e^{-\lambda(t+s)}E[(\int_{0}^{s}e^{\lambda v}dW_{v})^{2}]   \\
+         &= \frac{1}{2\lambda}e^{-\lambda(t+s)} + e^{-\lambda(t+s)}\int_{0}^{s}e^{2\lambda v}dv, \ \ \ (Lemma \ 3) \\
+         &= \frac{1}{2\lambda}e^{-\lambda(t+s)} + e^{-\lambda(t+s)}\frac{1}{2\lambda}(e^{2\lambda s} - 1) \\
+         &= \frac{1}{2\lambda}e^{-\lambda(t-s)} 
     \end{align*}
 \end{subequations}   
 
-Further for $\tau > 0, t \in \mathbb{R}$ it holds:
+\qed
+
+Hence it holds for $\tau > 0$:
 \[
-R_{X}(\tau) =  \frac{1}{2\alpha}\exp(-\alpha\tau)
+R_{X}(\tau) =  \frac{1}{2\lambda}\exp(-\lambda\tau)
 \]
 
 
 
 
-
-
-
-\begin{definition}[Gaussian process]
-    A stochastic process $(X_{t})_{t\geq 0}$ is a \textbf{Gaussian process} if for all $t_{1} < t_{2} < ... < t_{n}$, the vector $(X_{t_{1}},...,X_{t_{n}})$ is a Gaussian process.
-\end{definition}
-
-$(W_{t}) \ t \geq 0$ is a gaussian process.
-
-
-
-Why SDE?
-white noise and red noise
-stationarity
 
 \subsection{red noise in ct stoch modelling}
 From \cite{Morr:2022}.
