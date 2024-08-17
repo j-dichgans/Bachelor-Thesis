@@ -288,33 +288,34 @@ converges P-a.s and in $L^{2}$. We denote the limit by
 At this point we want to highlight the importance in the definition of the Wiener process that the variance of $W_{t}$ is proportionate to time. Per definition it holds $W_{t} \sim N(0,t)$. Suppose another power $t^{\alpha}, \alpha > 0$ was chosen. 
 
 It holds: $\int_{0}^{t} 1 dW_{s} = W_{t}$ and $Var[W_{t}] = t^{\alpha}$ by assumption. But: 
-$Var[\xi_{n}^{t}] = Var\left[\sum_{j=1}^{2^{n}}\left(W_{\frac{tj}{2^{n}}} - W_{\frac{t(j-1)}{2^{n}}}\right)\right] = 2^{n}Var\left[W_{\frac{t}{2^n}}\right] = 2^{n}\left(\frac{t}{2^{n}}\right)^{\alpha}$, where we use that the increments are i.i.d. Since  $Var[\xi_{n}^{t}] \xrightarrow{n \rightarrow \infty} Var[W_{t}]$ (by the dominated convergence theorem (?)), $\alpha$ has to equal 1. \\
+$Var[\xi_{n}^{t}] = Var\left[\sum_{j=1}^{2^{n}}\left(W_{\frac{tj}{2^{n}}} - W_{\frac{t(j-1)}{2^{n}}}\right)\right] = 2^{n}Var\left[W_{\frac{t}{2^n}}\right] = 2^{n}\left(\frac{t}{2^{n}}\right)^{\alpha}$, where we use that the increments are independent and identically distributed (i.i.d.) Since  $Var[\xi_{n}^{t}] \xrightarrow{n \rightarrow \infty} Var[W_{t}]$ (by the dominated convergence theorem (?)), $\alpha$ has to equal 1. \\
 
 Consider the process:
 
 \begin{definition}[Ornstein-Uhlenbeck process (SA script Example 10.7)] 
 For $\alpha > 0$, $(W_{t})_{t\geq 0}$ a Wiener process, $x_{0} \in \mathbb{R}$. Consider the following SDE:
 \[
-dX_{t}^{(w)} = -\lambda X_{t}^{(w)} dt + \sigma dW_{t}, X_{0}^{(w)} = x_{0}
+dU_{t} = -\lambda U_{t} dt + \sigma dW_{t}, U_{0} = x_{0}
 \]
+\label{def:OU process}
 or equivalently
 \[
-X_{t}^{(w)} = x_{0} - \lambda\int_{0}^{t}X_{s}^{(w)}ds + \sigma W_{t}, t \geq 0
+U_{t} = x_{0} - \lambda\int_{0}^{t}U_{s}ds + \sigma W_{t}, t \geq 0
 \]  
 \end{definition}
 
 $\textbf{Claim}$: 
 \[
-X_{t} = \exp(-\lambda t)x_{0} + \sigma\int_{0}^{t}\exp(-\lambda (t-s))dW_{s}
+U_{t} = \exp(-\lambda t)x_{0} + \sigma\int_{0}^{t}\exp(-\lambda (t-s))dW_{s}
 \]
 solves the above SDE. We check this applying Ito's product rule to $\sigma e^{-\lambda t}\int_{0}^{t}e^{\lambda s}dB_{s}$:
 \[
-dX_{t} = -\lambda x_{0}e^{-\lambda t}dt - \lambda\sigma(e^{-\lambda t}\int_{0}^{t}e^{\lambda s}dW_{s})dt + \sigma e^{-\lambda t}e^{\lambda t}dW_{t} = -\lambda X_{t} dt + \sigma dW_{t}
+dU_{t} = -\lambda x_{0}e^{-\lambda t}dt - \lambda\sigma(e^{-\lambda t}\int_{0}^{t}e^{\lambda s}dW_{s})dt + \sigma e^{-\lambda t}e^{\lambda t}dW_{t} = -\lambda U_{t} dt + \sigma dW_{t}
 \]
 
-If we choose $X_{0} \sim N(0,\frac{1}{2\lambda})$ as an initial distribution, which is independent of $(W_{t})_{t\geq 0}$ than $E[X_{t}] = 0$, $Cov[X_{s},X_{t}] = \frac{1}{2\lambda}e^{(-\lambda\lvert t-s \rvert)}$ for $t,s \geq 0$ and $X_{t}$ is wide sense stationary. It follows that $Var[X_{t}]=E[(X_{t})^{2}]=\frac{1}{2\lambda}$ and $X_{t} \sim N(0,\frac{1}{2\lambda}), \forall t \geq 0$, because the sum of normal random variables is again a normal random variable.
+If we choose $U_{0} \sim N(0,\frac{1}{2\lambda})$ as an initial distribution, which is independent of $(W_{t})_{t\geq 0}$ than $E[U_{t}] = 0$, $Cov[U_{s},U_{t}] = \frac{1}{2\lambda}e^{(-\lambda\lvert t-s \rvert)}$ for $t,s \geq 0$ and $U_{t}$ is wide sense stationary. It follows that $Var[U_{t}]=E[(U_{t})^{2}]=\frac{1}{2\lambda}$ and $U_{t} \sim N(0,\frac{1}{2\lambda}), \forall t \geq 0$, because the sum of normal random variables is again a normal random variable.
 
-To proof the statements about the expectation and the covariance of $X_{t}$ we use some  results from stochastic analysis and probability theory.
+To proof the statements about the expectation and the covariance of $U_{t}$ we use some  results from stochastic analysis and probability theory.
 From stochastic analysis we use a weeker form of Ito's isometry:
 
 \begin{lemma}[Ito's isometry]
@@ -352,12 +353,12 @@ From probability theory we use the following two results about conditional expec
 Let $0 \leq s \leq t$. Then:
 
 \[
-E[X_{t}] = e^{-\lambda t}E[X_{0}] + e^{-\lambda t}E[\int_{0}^{t} e^{\lambda s} dW_{s}] = e^{-\lambda t}E[\int_{0}^{t} e^{\lambda s} dW_{s}] \stackrel{(I)}{=}  0
+E[U_{t}] = e^{-\lambda t}E[U_{0}] + e^{-\lambda t}E[\int_{0}^{t} e^{\lambda s} dW_{s}] = e^{-\lambda t}E[\int_{0}^{t} e^{\lambda s} dW_{s}] \stackrel{(I)}{=}  0
 \]
 
-Next we want to prove: $Cov[X_{s},X_{t}] = \frac{1}{2\lambda}e^{-\lambda \lvert t-s \rvert}$. 
+Next we want to prove: $Cov[U_{s},U_{t}] = \frac{1}{2\lambda}e^{-\lambda \lvert t-s \rvert}$. 
 \begin{equation}
-    Cov[X_{s}X_{t}]=E[X_{s}X_{t}] = e^{-\lambda(t+s)}E[X_{0}^{2}] + e^{-\lambda(t+s)}E[\int_{0}^{t}e^{\lambda u}dW_{u}\int_{0}^{s}e^{\lambda v}dW_{v}]
+    Cov[U_{s}U_{t}]=E[U_{s}U_{t}] = e^{-\lambda(t+s)}E[U_{0}^{2}] + e^{-\lambda(t+s)}E[\int_{0}^{t}e^{\lambda u}dW_{u}\int_{0}^{s}e^{\lambda v}dW_{v}]
     \label{cov white noise noise}
 \end{equation}
 
@@ -380,7 +381,7 @@ For a martingale it holds: $E[M_{t}|\mathcal{F}_{s}] = M_{s}, s \leq t$. Equatio
 
 \begin{subequations}
     \begin{align*}
-        E[X_{s}X_{t}] &= \frac{1}{2\lambda}e^{-\lambda(t+s)} + e^{-\lambda(t+s)}E[(\int_{0}^{s}e^{\lambda v}dW_{v})^{2}]   \\
+        E[U_{s}U_{t}] &= \frac{1}{2\lambda}e^{-\lambda(t+s)} + e^{-\lambda(t+s)}E[(\int_{0}^{s}e^{\lambda v}dW_{v})^{2}]   \\
          &= \frac{1}{2\lambda}e^{-\lambda(t+s)} + e^{-\lambda(t+s)}\int_{0}^{s}e^{2\lambda v}dv, \ \ \ (Lemma \ 3) \\
          &= \frac{1}{2\lambda}e^{-\lambda(t+s)} + e^{-\lambda(t+s)}\frac{1}{2\lambda}(e^{2\lambda s} - 1) \\
          &= \frac{1}{2\lambda}e^{-\lambda(t-s)} 
@@ -395,28 +396,25 @@ R_{X}(\tau) =  \frac{1}{2\lambda}\exp(-\lambda\tau)
 \]
 
 
-
-
-
-\subsection{red noise in ct stoch modelling}
+\subsection{Continuous time stochastic modelling}
 From \cite{Morr:2022}.
 
-dynamical modelling usually consists of a deterministic part with an added noise term to capture the unresolved dynamics. Simple discrete time example:
+We want to motivate the use of certain stochastic differential equations, which we will use later. 
+In dynamical modelling it is common to describe the system of interest with a deterministic forcing plus a noise term to capture the unresolved dynamics. We can construct a discrete time stochastic process following this approach:
 
 \begin{equation}
     X_{k+1}-X_{k} = f(X_{k},k) + \sigma\epsilon_{k}, X_{0} = x_{0} \in \mathbb{R}
+    \label{eq:discrete time modelling}
 \end{equation}
 
-
-an usual choice would be independent $\epsilon_{k} \sim \mathcal{N}(0,1)$, also called white noise. (why white noise noise?)[1].
-However in some applications the assumption of independence may be unsuitable due to "persistence in time" of the unresolved dynamics [2,3].
+An usual choice for the noise term would be independent $\epsilon_{k} \sim \mathcal{N}(0,1)$, also called Wiener or white noise \cite{zwanzig:2001}.
+Yet in some applications the assumption of independence of the stochastic increments may be unsuitable due to memory effects in the unresolved dynamics \cite{zwanzig:1961,chorin:2000}.
 
 One common way to model correlated noise is via an AR(1)-process:
 \[
 \epsilon_{k+1} = \phi\epsilon_{k} + z_{k}, \epsilon_{0} \sim \mathcal{N}(0,(1-\phi^2)^{-1})
 \]
-with $0<\phi<1$ and $(z_{k})_{k}\in\mathbb{N}$ iid standard Normal random variables. This type of noise is also called \textit{red noise}. Why red noise? With the specific choice of the distribution of $\epsilon_{0}$ the process is weakly stationary. We proof this only considering $\tau = 1$ for the autocorrelation function, since later we are only interested in $R_{X}(1)$. First we show, that: $\epsilon_{k} \sim \mathcal{N}(0,(1-\phi^2)^{-1}), \forall k \in \mathbb{R}$ by induction. Inductionstart: the statement holds for $\epsilon_{0}$ by definition.
-Inductionstep: Suppose the statement holds for $k \in \mathcal{N}$. Then:
+with $0<\phi<1$ and $(z_{k})_{k}\in\mathbb{N}$ i.i.d standard Normal random variables. This type of noise is also called \textit{red noise}. Later we will give an explanation for this naming. With the specific choice of the distribution of $\epsilon_{0}$ the process is weakly stationary. We proof this only considering $\tau = 1$ for the autocorrelation function, since later we are only interested in $R_{X}(1)$. First we show by induction that: $\epsilon_{k} \sim \mathcal{N}(0,(1-\phi^2)^{-1}), \forall k \in \mathbb{N}_{0}$. Since $\epsilon_{k}$ is a normal random variable $\forall \ k \in \mathbb{N}_{0}$ it is enough to proof the statements for the expectation and variance. The statements holds true for $\epsilon_{0}$ by definition. Suppose the statements hold for $k \in \mathbb{N}$. Then:
 
 \begin{subequations}
     \begin{align}
@@ -425,22 +423,21 @@ Inductionstep: Suppose the statement holds for $k \in \mathcal{N}$. Then:
     \end{align}
 \end{subequations}   
 
-by linearity of the expectation, properties of the variance, the induction hypothesis and the fact that $z_{k} \sim \mathcal{N}(0,1) \forall k \in \mathbb{N}$. Now to show that $R_{\epsilon}(k,k+1) = R_{\epsilon}(0,1) \forall k \in \mathbb{N}_{0}$ it suffices to show that $Cov[\epsilon_{k},\epsilon_{k+1}] = E[\epsilon_{k}\epsilon_{k+1}] - E[\epsilon_{k}]E[\epsilon_{k+1}] = E[\epsilon_{k}\epsilon_{k+1}] = E[\epsilon_{0}\epsilon_{1}] \forall k \in \mathbb{N}_{0}$. This follows from: 
+by linearity of the expectation, properties of the variance, the induction hypothesis, the fact that $z_{k} \sim \mathcal{N}(0,1) \ \forall k \in \mathbb{N}_{0}$ and the independence of $\epsilon_{k}$ and $z_{k}$. Now to show that $R_{\epsilon}(k,k+1) = R_{\epsilon}(0,1) \forall k \in \mathbb{N}_{0}$ it suffices to show that $Cov[\epsilon_{k},\epsilon_{k+1}] = E[\epsilon_{k}\epsilon_{k+1}] - E[\epsilon_{k}]E[\epsilon_{k+1}] = E[\epsilon_{k}\epsilon_{k+1}] = E[\epsilon_{0}\epsilon_{1}] \forall \ k \in \mathbb{N}_{0}$. This follows from: 
 \[
-E[\epsilon_{k}\epsilon_{k+1}] = E[\epsilon_{k}(\phi\epsilon_{k} + z_{k})] = \phi E[\epsilon_{k}^2]
+E[\epsilon_{k}\epsilon_{k+1}] = E[\epsilon_{k}(\phi\epsilon_{k} + z_{k})] = \phi E[\epsilon_{k}^2] = \phi E[\epsilon_{0}^2] = E[\epsilon_{0}\epsilon_{1}]
 \]
-and the fact that $\epsilon_{k}$ and $z_{k}$ are independent and that the $\epsilon_{k}$'s are identically distributed. ?how to prove general case?
 
-The discrete time noise process has a exponentially decaying correlation structure $\epsilon_{k}$. Claim:
+The $(\epsilon_{k})_{k \in \mathbb{N}}$-process has a exponentially decaying correlation structure. \textbf{Claim}:
 \[
-R_{\epsilon}(\tau) = \frac{\phi^{\tau}}{1-\phi^{2}}, \tau \in \mathbb{N}
+R_{\epsilon}(\tau) = \frac{\phi^{\tau}}{1-\phi^{2}}, \tau \in \mathbb{N}_{0}
 \]
-Proof: \\
+\textbf{Proof}: \\
 It holds: 
 \[
 R_{\epsilon}(0)= Var(\epsilon_{k}) = \frac{1}{1-\phi^{2}}
 \]
-Further it holds for $\tau \in \mathbb{N}_{0}$:
+Further it holds for $\tau, k \in \mathbb{N}_{0}$:
 \[
 R_{\epsilon}(\tau+1) = Cov[\epsilon_{k},\epsilon_{k+\tau + 1}] = Cov[\epsilon_{k},\phi\epsilon_{k+\tau}+z_{k+\tau}] = \phi R_{\epsilon}(\tau)
 \]
@@ -448,91 +445,97 @@ since $\epsilon_{k}$ and $z_{k+\tau}$ are independent. Hence for $\tau \in \math
 \[
 R_{\epsilon}(\tau) = \phi^{\tau}R_{\epsilon}(0)=\frac{\phi^{\tau}}{1-\phi^{2}}
 \]
+\qed
 
-Modelling systems in nature it is often more rigorous to take a continuous model. With the help of stochastic analysis we can include randomness into these models. In a similar way to equation \ref{eq:2.2} we can use: 
+The use of continuous models is often advantageous, when describing systems in nature. With the help of stochastic analysis we can include randomness into these models. In a similar way to equation \ref{eq:discrete time modelling} we can use: 
 
 \begin{equation}
     dX_{t} = f(X_{t},t)dt + \sigma dY_{t}, X_{0} = x_{0} \in \mathbb{R}
+    \label{eq:continuous time modelling}
 \end{equation}
 
-In the traditional setting of uncorrelated noise: $Y = (Y_{t})_{t \in \mathbb{R}_{+}}$ is the Wiener process $W = (W_{t})_{t\in \mathbb{R}_{+}}$. The above notation is just a shorthand for the following integral equation:
+Traditionally the Wiener process $Y = W = (W_{t})_{t\in \mathbb{R}_{+}}$ is used for uncorrelated noise. The notation in \ref{eq:continuous time modelling} is just a shorthand for the following integral equation:
 \[
 X_{t} = X_{0} + \int_{0}^{t}f(X_{s},s)ds + \sigma Y_{t}
 \]
 
 where $Y_{t}$ is in the class of Ito-processes that have the following form:
+\begin{equation}
+    Y_{t} = Y_{0} + \int_{0}^{t}\alpha_{s}ds + \int_{0}^{t}\beta_{s}dW_{s}
+    \label{eq:Ito process}
+\end{equation}
 
-\[
-Y_{t} = Y_{0} + \int_{0}^{t}\alpha_{s}ds + \int_{0}^{t}\beta_{s}dW_{s}
-\]
+with $\alpha = (\alpha_{t})_{t\in\mathbb{R}_{+}}$ and $\beta = (\beta{t})_{t\in\mathbb{R}_{+}}$ being suitable processes.
+In \cite{Morr:2022} Morr et all. want to translate the concept of correlated noise from discrete-time models to the continuous case. As we will see, when discussing how to simulate SDEs, the Euler-Mayurama method enables us to translate the continuous case into a discrete one. The opposite task is not uniquely determined. However under certain assumptions the number of possible processes for $Y_{t}$ can be reduced. First we assume that $Y_{t}$ has the form $\alpha_{t}dt$. Since $(\epsilon_{k})_{k\in\mathbb{N}_{0}}$ is a discrete time stationary gaussian markov process, we also require $\alpha = (\alpha_{t})_{t\in\mathbb{R}_{+}}$ to have these properties in continuous time. According to \cite{doob:1942} all measurable, stationary, gaussian, markov processes are of the Ornstein-Uhlenbeck type. (argument to narrow, scaling autocov?).
 
-with ?suitable? processes $\alpha = (\alpha_{t})_{t\in\mathbb{R}_{+}}$ and $\beta = (\beta{t})_{t\in\mathbb{R}_{+}}$.
-In \cite{Morr:2022} wants to translate the concept of correlated noise from discrete-time models to the continuous case. As we will see when discussing how to simulate SDEs, the Euler-Mayurama method enables us to translate the continuous case into a discrete one. The opposite task is not uniquely determined. Under certain assumptions the number of possible processes for $Y_{t}$ can be reduced. Since $(\epsilon_{k})_{k\in\mathbb{N}}$ is a discrete time stationary gaussian markov process, we also require $\alpha = (\alpha_{t})_{t\in\mathbb{R}_{+}}$ to have these properties in continuous time. According to \cite{doob:1942} all measurable, stationary, gaussian, markov processes are of the Ornstein-Uhlenbeck type. (argument to narrow, scaling autocov?).
+However we didn't justify the prehand restriction to $dY_{t} = \alpha dt$. We will now turn to spectral characteristics of the $(\epsilon_{k})_{k\in\mathbb{N}_{0}}$ process to motivate this constraint. One important characteristic of a stochastic process is its Power Spectral Density:
 
-Characterization via the PSD:
-?motivation for the PSD?
 
 \begin{definition}[Power Spectral Density (PSD)]
-...conditions. The PSD of $Y_{t}$:
+The PSD of a stochastic process $(X_{t})_{t \geq 0}$ is given by:
 \[
-S_{Y}(\omega) := lim_{T\rightarrow\infty}E[\frac{1}{T}\lvert\int_{0}^{T}exp(-i\omega t)dY_{t}\rvert^{2}]
+S_{X}(\omega) := lim_{T\rightarrow\infty}E[\lvert \frac{1}{\sqrt{T}}\int_{0}^{T}exp(-i\omega t)X_{t}dt\rvert^{2}], \ \omega \in \mathbb{R}
 \]
+if the limit exists.
 \end{definition}
 
 \begin{theorem}[Wiener-Khinchin theorem]
-...conditions. Then we have:
+Let $(X_{t})_{t}$ be a (wide sense) stationary, centered process with $E[X_{t}^2]<\infty \ \forall t \geq 0$ and absolutely integrable $R_{x}(\tau)$. Then we have:
 \[
-S_{Y}(\omega) = \mathcal{F}[R_{Y}(\tau)](\omega) := \int_{-\infty}^{\infty}\exp(-i\omega\tau)R_{Y}(\tau)d\tau
+S_{X}(\omega) = \mathcal{F}[R_{X}(\tau)](\omega) := \int_{-\infty}^{\infty}\exp(-i\omega\tau)R_{X}(\tau)d\tau
 \]
 \end{theorem}
 
-We require out process $Y_{t}$ to have the same PSD as its discrete counterpart $\epsilon_{k}$:
+Equivalent results hold true for discrete processes, replacing the integrals by Riemann sums.
+
+We require our process $Y_{t}$ to have the same PSD as its discrete counterpart $\epsilon_{k}$, which we can calculate via the discrete Wiener-Khinchin theorem:
 \[
 S_{\epsilon} = \mathcal{F}[R_{\epsilon}(\tau)](\omega) = \frac{-2log(\phi)}{(1-\phi^{2})(log(\phi)^{2}+\omega^{2})} = \mathcal{O}(\omega^{-2})
 \]
 
-In many applied areas the decayrate of $\mathcal{O}(\omega^{-2})$ is the defining property of red noise. For a matter of fact, the term \textit{red noise} is due to the fact that low frequencies have the highest amplitude in light and the PSD. We already argued for the OU-process before. However we didn't justify the prehand restriction to $dY_{t} = \alpha dt$. Under appropiate assumptions on $\alpha$ and $\beta$ we can constrain the suitable choices for red noise equivalents in the continuous time modelled by an Ito-differential significantly by demanding the vanishing of the PSD in the high-frequency domain because we get $\beta_{t} = 0$ P-a.s $\forall t \geq 0$. Together with the reasoning about Gaussian Markov processes from above, we get that the Ornstein-Uhlenbeck process
-\[
-    dU_{t}^{(\omega)} = -\alpha U_{t}^{(\omega)} dt + \sigma dW_{t}, U_{0} \sim N(0,\frac{1}{2\theta})
-\]
-is a unique way to model continuous time red noise with $dY_{t} = \alpha_{t}dt = U_{t}dt$. 
+In many applied areas the decayrate of $\mathcal{O}(\omega^{-2})$ is the defining property of red noise. Indeed the term \textit{red noise} is due to the fact that low frequencies have the highest amplitude in red light and the PSD. 
+Under appropriate technical assumptions on $\alpha$ and $\beta$ used in \ref{eq:Ito process}, demanding a vanishing PSD of $Y_{t}$ in the high-frequency domain implies $\beta_{t} = 0$ P-a.s $\forall t \geq 0$, justifying the previous restriction. Together with the reasoning about Gaussian Markov processes from above, we get that the Ornstein-Uhlenbeck process $U_{t}$, with initial distribution $X_{0} \sim \mathcal{N}(0,(1-\phi)^2)$ is a unique way to model continuous time red noise. Hence we choose $dY_{t} = \alpha_{t}dt = U_{t}dt$. 
 
-Both the exponential decay of the autocovariance function and the characteristic decayrate of $\mathcal{O}(\omega^{-2})$ for the PSD is shown by the Ornstein-Uhlenbeck process U. We already calculated $R_{U}(\tau)$. An application of the Wiener-Khinchin theorem (or fubini tonelli?) gives us: 
+Both the exponential decay of the autocovariance function and the characteristic decayrate of $\mathcal{O}(\omega^{-2})$ for the PSD is shown by the Ornstein-Uhlenbeck process $U_{t}$, as we have seen for the discrete time red noise process $(\epsilon_{k})_{k\in\mathbb{N}_{0}}$. We already calculated $R_{U}(\tau)$. 
+An application of the Wiener-Khinchin theorem gives us: 
 \[
     S_{U}(\omega) = \frac{1}{\theta^{2} + \omega^{2}}
 \]
-We also compute the PSD of $W_{t}$:
+We complete the Prerequisites section by motivating the term 'white' noise for Wiener noise. The PSD of $W_{t}$ is constant:
 \[
 S_{W}(\omega) =  lim_{T\rightarrow\infty}E[\frac{1}{T}\lvert\int_{0}^{T}exp(-i\omega t)dW_{t}\rvert^{2}] = lim_{T\rightarrow \infty}E[\frac{1}{T}\int_{0}^{T}1dt] = 1
 \]
-where Ito's isometry was used in the second equality (?). Since all frequencies are equally present the Wiener noise is also called "white" noise.
-
-
-red noise motivates unique, decay structure
+where Ito's isometry was used in the second equality (?).
 
 
 
 \chapter{SDE settings and their stationary characteristics}
 
-We already motivated the use of stochastically forced dynamical systems modelled by an SDE:
-\[
-    dX_{t} = f(X_{t},t)dt + \sigma dY_{t}, X_{0} = x_{0} \in \mathbb{R}
-\]
-to capture the dynamics of a fold bifurcation system (in our case e.g. a climate TP) driven by a bifurcation parameter $\mu(t)$ with unresolved dynamics being included in the noise term. Also we discussed that we are mainly interested into the linearized dynamics of the system around the path of an equilibrium $X^{*}(\mu)$ and that we want to gain information about the evolution of the linear restoring rate $\lambda(\mu)$. In the case of CSD we would have $\lambda(\mu) \searrow 0$ and this would give us the possibility of an EWS before reaching a tipping point. The use of the traditional EWS $AC(1)$ and variance has also been intuitively motivated. Shortly we mentioned that these two indicators lack reliability in terms of false positives or false negative signals due to their stationarity assumption on the system. This will motivate the introduction of a new more reliable indicator called ROSA. For testing and comparing of the new method to the old indicators in the case of non-stationary positively correlated noise and to make the above more precise we will introduce two SDE settings, which we'll be explored more in depth. One way to modell the linearised dynamics around an equilibrium $X^{*}(\mu)$ is via white noise $W_{t}$:
+We already motivated the use of stochastically forced dynamical systems described by an SDE of the form:
 \begin{equation}
-        dX_{t}^{(\omega)} = -\lambda X_{t}^{(\omega)}dt + \sigma dW_{t}, X_{0}^{(\omega)} = 0 \label{eq: 3.1}
+    dX_{t} = f(X_{t},t)dt + \sigma dY_{t}, X_{0} = x_{0} \in \mathbb{R}
+    \label{eq:SDE for stochastically forced dynamical systems}
 \end{equation}
-This is an Ornstein-Uhlenbeck process, which we already introduced in the section Prerequisites. Why could it make sense to modell our unresolved dynamics with gaussian noise? (From Jacobs: Why gaussian noise?) This is due to the Central Limit Theorem, which says for $X_{i}, i \geq 1$ independent and identically distributed (i.i.d.) random variables with finite variance the standardization of their sum converges to a standard normal random variable in distribution. Hence in the limit this sum has a gaussian probability density. When we model a physical system like the climate with a SDE that undergoes a bifurcation than we have processes on different time scales. The time scale of the bifurcation is much slower than the time scale of the unresolved dynamics realized by the noise term. The increment $dY_{t}$ is the sum of many events on a level below the dynamics as described by $f(X_{t},t)$. An example would be the weather. If we assume that we can treat these different events as i.i.d random variables than the total impact would be the sum of the smaller impacts and would follow a normal distribution as $dW_{t} \sim N(0,dt)$. \cite{Kurt:2010} 
-The increments $dW_{t}$ are independent. However this assumption of independence of the unresolved dynamics is often violated in nature, because of memory effects in many systems. We can preserve memory in the system by using the following model using red noise \cite{Hanggi:1994,Morr:2022}:
+With this we want to capture the dynamics of a fold bifurcation system (in our case e.g. an earth system component that exhibits a TP) driven by a bifurcation parameter $\mu(t)$ with unresolved dynamics being included in the noise term. Our main interest is into the linearized dynamics of the system around an equilibrium-path $X^{*}(\mu)$ and we would like to gain information about the evolution of the linear restoring rate $\lambda(\mu)$. In the case of CSD we have $\lambda(\mu) \searrow 0$ and this gives us the possibility of an EWS before reaching a tipping point. The use of the traditional EWS $AC(1)$ and Variance has been motivated intuitively. Shortly we mentioned that these two indicators lack reliability in terms of false positives or false negative signals due to their stationarity assumption on the system. This motivates the introduction of the more robust ROSA-method. 
+In the following we will introduce two SDE settings for the linearized dynamics of equation \ref{eq:SDE for stochastically forced dynamical systems}. 
+After deriving the stationary characteristics of these SDE's we can justify the use of the old EWS more rigorously. Both settings will also be used to test and compare the old methods against the new one.
+One way to modell the linearised dynamics around an equilibrium $X^{*}(\mu)$ is via white noise $W_{t}$:
+\begin{equation}
+        dX_{t}^{(w)} = -\lambda X_{t}^{(w)}dt + \sigma dW_{t}, X_{0}^{(w)} = 0 
+        \label{eq: white noise linearized SDE}
+\end{equation}
+This is an Ornstein-Uhlenbeck process, which we already introduced in the section Prerequisites. Why could it make sense to modell our unresolved dynamics with gaussian noise? This is due to the Central Limit Theorem, which states that for $X_{i}, i \geq 0$ i.i.d. random variables with finite variance the standardization of their sum converges in distribution to a standard normal random variable. Hence in the limit this sum has a gaussian probability density. When we model a physical system like some earth-system-component with a SDE that undergoes a bifurcation, than we have processes on different time scales. The bifurcation 'lives' on a much slower time scale than the unresolved dynamics realized by the noise term. The increment $dY_{t}$ is the sum of many smaller events. If we assume that we can treat these different events as i.i.d random variables than the total impact $dY_{t}$ would be the sum of the smaller impacts and would follow a normal distribution such as $dW_{t} \sim N(0,dt)$. \cite{Kurt:2010} \\
+The increments $dW_{t}$ are independent. However, as explained in the last chapter, this assumption is often violated in nature. We can preserve memory in the system by using the following linearized red noise model \cite{Hanggi:1994,Morr:2022}:
 
 \begin{subequations}
     \begin{align}
         dX_{t} &= -\lambda X_{t}dt + \kappa U_{t}dt, X_{0} = 0 \label{eq: 3.2a} \\
         dU_{t} &= -\theta U_{t}dt + dW_{t}, U_{0} = 0 \label{eq: 3.2b}
     \end{align}
+    \label{eq:red noise linearized SDE}
 \end{subequations}
 
-Here the noise term $\kappa U_{t}dt$ itself is described by an OU-process. There also exist other positive correlated continuous models, but the frequency properties of red noise are the best suited for many applications in Physics as for example the climate system \cite{Hasselmann:1976, Hanggi:1993, Liao:2022}. We will see that the red noise case includes the white noise case since the latter is a parameter limit of the former. The SDEs for $X_{t}^{(\omega)}$ and $X_{t}$ can be explicitly solved. We already solved \eqref{eq: 3.2b} in the section prerequisites. To solve \eqref{eq: 3.2a} we can use the variations of constants formula (Appendix Math Bio):
+Here the noise term $\kappa U_{t}dt$ itself is described by an OU-process. There also exist other positive correlated continuous models, but the frequency properties of red noise are the best suited for many applications in Physics as for example the climate system \cite{Hasselmann:1976, Hanggi:1993, Liao:2022}. We will see that the white noise case is a parameter limit of the red noise case. The SDEs for $X_{t}^{(w)}$ and $X_{t}$ can be explicitly solved. We already solved \eqref{eq: white noise linearized SDE} in the section prerequisites. To solve \eqref{eq:red noise linearized SDE} we can for a moment treat $U_{t}$ as a deterministic function of t and use the variations of constants formula for ODE's (Appendix Math Bio): \\
 
 \begin{lemma}[Variations of constants]
     Let $I \subset \mathbb{R}$ be an open interval. The initial value problem
