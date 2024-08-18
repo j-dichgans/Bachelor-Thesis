@@ -519,9 +519,9 @@ We already motivated the use of stochastically forced dynamical systems describe
 With this we want to capture the dynamics of a fold bifurcation system (in our case e.g. an earth system component that exhibits a TP) driven by a bifurcation parameter $\mu(t)$ with unresolved dynamics being included in the noise term. Our main interest is into the linearized dynamics of the system around an equilibrium-path $X^{*}(\mu)$ and we would like to gain information about the evolution of the linear restoring rate $\lambda(\mu)$. In the case of CSD we have $\lambda(\mu) \searrow 0$ and this gives us the possibility of an EWS before reaching a tipping point. The use of the traditional EWS $AC(1)$ and Variance has been motivated intuitively. Shortly we mentioned that these two indicators lack reliability in terms of false positives or false negative signals due to their stationarity assumption on the system. This motivates the introduction of the more robust ROSA-method. 
 In the following we will introduce two SDE settings for the linearized dynamics of equation \ref{eq:SDE for stochastically forced dynamical systems}. 
 After deriving the stationary characteristics of these SDE's we can justify the use of the old EWS more rigorously. Both settings will also be used to test and compare the old methods against the new one.
-One way to modell the linearised dynamics around an equilibrium $X^{*}(\mu)$ is via white noise $W_{t}$:
+One way to model the linearized dynamics around an equilibrium $X^{*}(\mu)$ is via white noise $W_{t}$:
 \begin{equation}
-        dX_{t}^{(w)} = -\lambda X_{t}^{(w)}dt + \sigma dW_{t}, X_{0}^{(w)} = 0 
+        dX_{t}^{(w)} = -\lambda X_{t}^{(w)}dt + \sigma dW_{t}, X_{0}^{(w)} = 0, \ \ \lambda,\sigma \in \mathbb{R}
         \label{eq: white noise linearized SDE}
 \end{equation}
 This is an Ornstein-Uhlenbeck process, which we already introduced in the section Prerequisites. Why could it make sense to modell our unresolved dynamics with gaussian noise? This is due to the Central Limit Theorem, which states that for $X_{i}, i \geq 0$ i.i.d. random variables with finite variance the standardization of their sum converges in distribution to a standard normal random variable. Hence in the limit this sum has a gaussian probability density. When we model a physical system like some earth-system-component with a SDE that undergoes a bifurcation, than we have processes on different time scales. The bifurcation 'lives' on a much slower time scale than the unresolved dynamics realized by the noise term. The increment $dY_{t}$ is the sum of many smaller events. If we assume that we can treat these different events as i.i.d random variables than the total impact $dY_{t}$ would be the sum of the smaller impacts and would follow a normal distribution such as $dW_{t} \sim N(0,dt)$. \cite{Kurt:2010} \\
@@ -529,13 +529,14 @@ The increments $dW_{t}$ are independent. However, as explained in the last chapt
 
 \begin{subequations}
     \begin{align}
-        dX_{t} &= -\lambda X_{t}dt + \kappa U_{t}dt, X_{0} = 0 \label{eq: 3.2a} \\
-        dU_{t} &= -\theta U_{t}dt + dW_{t}, U_{0} = 0 \label{eq: 3.2b}
+        dX_{t} &= -\lambda X_{t}dt + \kappa U_{t}dt, X_{0} = 0 \label{eq: 3.2a} \ \ \lambda,\kappa \in \mathbb{R}  \\ 
+        dU_{t} &= -\theta U_{t}dt + dW_{t}, U_{0} = 0 \label{eq: 3.2b} \ \ \theta \in \mathbb{R}
     \end{align}
     \label{eq:red noise linearized SDE}
 \end{subequations}
 
-Here the noise term $\kappa U_{t}dt$ itself is described by an OU-process. There also exist other positive correlated continuous models, but the frequency properties of red noise are the best suited for many applications in Physics as for example the climate system \cite{Hasselmann:1976, Hanggi:1993, Liao:2022}. We will see that the white noise case is a parameter limit of the red noise case. The SDEs for $X_{t}^{(w)}$ and $X_{t}$ can be explicitly solved. We already solved \eqref{eq: white noise linearized SDE} in the section prerequisites. To solve \eqref{eq:red noise linearized SDE} we can for a moment treat $U_{t}$ as a deterministic function of t and use the variations of constants formula for ODE's (Appendix Math Bio): \\
+Here the noise term $\kappa U_{t}dt$ is itself described by an OU-process. There also exist other positive correlated continuous models, but the frequency properties of red noise are the best suited for many applications in Physics including the climate system \cite{Hasselmann:1976, Hanggi:1993, Liao:2022}. 
+Now we want to explicitly solve the SDEs for $X_{t}^{(w)}$ and $X_{t}$. We already solved \eqref{eq: white noise linearized SDE} in the section prerequisites. To solve \eqref{eq:red noise linearized SDE} we can treat $U_{t}$ and $X_{t}$ for a moment as deterministic functions of time and use the variations of constants formula for ODE's (Appendix Math Bio): \\
 
 \begin{lemma}[Variations of constants]
     Let $I \subset \mathbb{R}$ be an open interval. The initial value problem
@@ -548,13 +549,19 @@ Here the noise term $\kappa U_{t}dt$ itself is described by an OU-process. There
     \end{subequations}
     with $a,b : I \mapsto \mathbb{R}$ continuous has a unique solution on $I$ given by:
     \[
-    y(t) = y_{0}e^{A(t)} + \int_{t_{0}}^{t}e^{A(t)-A(s)}b(s)ds, where \ A(t) = \int_{t_{0}}^{t}a(s)ds
+    y(t) = y_{0}e^{A(t)} + \int_{t_{0}}^{t}e^{A(t)-A(s)}b(s)ds, \ \ \ \ \ where \ A(t) = \int_{t_{0}}^{t}a(s)ds
     \]
 \end{lemma}
+In our case we have $a(t) \equiv -\lambda$ and $b(t) = \kappa U_{t}$. Hence the solution for $X_{t}$ is given by:
 
-Here we treat \eqref{eq: 3b} as an ODE for a moment, with $a(t) \equiv -\lambda$ and $b(t) = \kappa U_{t}$.
+\begin{equation}
+    X_{t} = \kappa\int_{0}^{t}\exp(-\lambda(t-s))U_{s}ds
+    \label{red noise solution}
+\end{equation}
 
-At this point we use only constant parameters $\lambda,\sigma,\kappa,\theta$ in our models. We do so, since we are interested in the stationary characteristics of both processes, namely the variance, the autocorrelation function $AC(\tau)$ and the power spectral density $S(\omega)$. The two former two should then be approximated by consistent estimators using data from the time series to give the traditional EWS. For the ROSA method we will be interested in retrieving $\lambda$ by fitting to the PSD. We already showed that the OU-process $X_{t}^{(\omega)}$ is wide-sense stationary $\forall t \geq 0$ using as an initial distribution already the stationary one $X_{0}^{(\omega)} \sim N(0,\frac{1}{2\lambda})$. Additionally we computed its characteristics. See a summary in table \ref{tab:white_noise_stat_char}. 
+The next step is to derive the stationary characteristics, namely AC(1) and Variance, for both processes. We will also compute the PSD for the theoretical background of the ROSA method, discussed in chapter 6. Consistent estimators for the stationary characteristics will be provided. These can than be applied to a time series generated by the SDEs introduced above or to paleoclimate records. 
+
+For the ROSA method we will be interested in retrieving $\lambda$ by fitting to the PSD. We already showed that the OU-process $X_{t}^{(w)}$ is wide-sense stationary $\forall t \geq 0$ using $X_{0}^{(w)} \sim N(0,\frac{1}{2\lambda})$ as an initial distribution. Additionally we computed its characteristics. See a summary in table \ref{tab:white_noise_stat_char}. 
 
 
 \begin{table}[t]
@@ -568,30 +575,30 @@ AC($\tau$) & $\exp(-\lambda |\tau|)$\\
 c.t PSD $S(\omega)$ & $\sigma^2$/($\lambda^2 + \omega^2$)\\
 \hline
 \end{tabular}
-\caption{stationary characteristics $X_{t}^{(\omega)}$}
+\caption{stationary characteristics for $X_{t}^{(w)}$}
 \label{tab:white_noise_stat_char}
 \end{table}
 
-Suppose we chose $X_{0}^{(\omega)} = 0$ as an initial distribution instead. The we have:
+Suppose we chose $X_{0}^{(w)} = 0$ as an initial distribution instead. We will show that $X_{t}^{(w)}$ is asymptotically stationary. It holds (reference  ?):
 
  \begin{align*}
-    E(X_{t}^{(\omega)}) &= 0   && \forall t \geq 0 \\
-    \text{Cov}(X_{t}^{(\omega)},X_{s}^{(\omega)}) &= \frac{\sigma ^2}{2\lambda}(e^{-\lambda\lvert t-s \rvert}-e^{-\lambda(t+s)}) && \forall t, s \geq 0 \\
-    \text{Var}(X_{t}^{(\omega)}) &= \frac{\sigma^2}{2\lambda}(1-\exp(-2\lambda t)) && \forall t \geq 0 
+    E(X_{t}^{(w)}) &= 0   && \forall t \geq 0 \\
+    \text{Cov}(X_{t}^{(w)},X_{s}^{(w)}) &= \frac{\sigma ^2}{2\lambda}(e^{-\lambda\lvert t-s \rvert}-e^{-\lambda(t+s)}) && \forall t, s \geq 0 \\
+    \text{Var}(X_{t}^{(w)}) &= \frac{\sigma^2}{2\lambda}(1-\exp(-2\lambda t)) && \forall t \geq 0 
 \end{align*}
 
-For $t\rightarrow \infty$ it holds: 
+For $t\rightarrow \infty$ it follows: 
 \[
-\text{Var}(X_{t}^{(\omega)})\rightarrow\frac{\sigma^2}{2\lambda}
+\text{Var}(X_{t}^{(w)})\rightarrow\frac{\sigma^2}{2\lambda}
 \]
 and 
 \[
-R_{X^{(\omega)}}(\tau) =\text{Cov}(X_{t}^{(\omega)},X_{t+\tau}^{(\omega)}) = \frac{\sigma^2}{2\lambda}(e^{-\lambda\lvert \tau \rvert} - e^{-\lambda(2t + \tau)}) \rightarrow \frac{\sigma ^2}{2\lambda}\exp(-\lambda\lvert \tau \rvert)
+\text{Cov}(X_{t}^{(w)},X_{t+\tau}^{(w)}) = \frac{\sigma^2}{2\lambda}(e^{-\lambda\lvert \tau \rvert} - e^{-\lambda(2t + \tau)}) \rightarrow \frac{\sigma ^2}{2\lambda}\exp(-\lambda\lvert \tau \rvert) = R_{X^{(w)}}(\tau)
 \]
-Hence we see that in the limit $t\rightarrow \infty$ $X_{t}^{(\omega)}$ converges to the same stationary distribution as for the case $X_{0}^{(\omega)} \sim N(0,\frac{1}{2\lambda})$. 
-We take the limit values for Var and Cov as a good approximation also for finite t.
+Hence we see that in the limit $t\rightarrow \infty$, $X_{t}^{(w)}$ converges to the same stationary distribution as for the case $X_{0}^{(w)} \sim N(0,\frac{1}{2\lambda})$. 
+In applications we take the stationary characteristics as good approximations also for finite times.
 
-Now we turn to the red noise case. We can again either have $X_{0} = 0, U_{0} = 0$ and get a stationary distribution in the limit or we use a certain initial distribution $(X_{0},U_{0})$ such that $X_{t}$ is stationary for all $t \geq 0$. We provide the stationary characteristics of the red noise case in table \ref{tab:red_noise_stat_char}.
+Now we turn to the red noise case. We can again either have $X_{0} = 0, U_{0} = 0$ and get a stationary distribution in the limit or we use a certain initial distribution $(X_{0},U_{0})$ such that $X_{t}$ is stationary for all $t \geq 0$. The stationary characteristics of the red noise case are provided in table \ref{tab:red_noise_stat_char}.
 
 \begin{table}[h!]
 \centering
@@ -604,11 +611,11 @@ AC($\tau$) & $(\lambda\exp(-\theta\lvert\tau\rvert)-\theta\exp(-\lambda\lvert\ta
 c.t PSD $S(\omega)$ & $\kappa^2/((\theta^2 + \omega^2)(\lambda^2 + \omega^2))$\\
 \hline
 \end{tabular}
-\caption{stationary characteristics $X_{t}$}
+\caption{stationary characteristics for $X_{t}$. The case $\lambda = \theta$ coincides with the limit $\theta \rightarrow \lambda$ for the case $\lambda \neq \theta$.}
 \label{tab:red_noise_stat_char}
 \end{table}
 
-We derive these properties. \cite{gardiner:2009}(page 110) As we have seen already the OU process is a gaussian process. since the Riemann sum of normal random variables converges again to a normal random variable it follows that also $X_{t}$ is a gaussian process. We write \eqref{eq: 3.2a}\eqref{eq: 3.2b} more compact as a linear system of SDEs: 
+We derive these properties. \cite{gardiner:2009}(page 110) As we have seen already the OU process is a gaussian process. Since the Riemann sums of normal random variables converge again to a normal random variable it follows that also $X_{t}$ is a gaussian process. We write \eqref{eq:red noise linearized SDE} more compact as a linear system of SDEs: 
 \[
 dY_{t} = AY_{t}dt + BdW_{t}
 \]
@@ -630,7 +637,7 @@ Y_{t} =
     0 & 1
 \end{pmatrix}
 \]
-Since both $X_{t}$ and $U_{t}$ are gaussian processes it holds: $Y_{t} \sim N(\mu(t),\Sigma(t)),\ \mu \in \mathbb{R}^{2}, \ \Sigma \in \mathbb{R}^{2x2}$. We want to find a $\Sigma_{0}$ for $(X_{0},U_{0}) \sim N(0,\Sigma_{0})$ such that $\Sigma(t) \equiv \Sigma_{0}$. We can do this by solving the following Lyapunov equation corresponding to the linear system of SDEs above: 
+Given that $X_{t}$ and $U_{t}$ are gaussian processes it holds: $Y_{t} \sim N(\mu(t),\Sigma(t)),\ \mu(t) \in \mathbb{R}^{2}, \ \Sigma(t) \in \mathbb{R}^{2x2}, \ \forall t\geq 0$. We want to find a $\Sigma_{0} \in \mathbb{R}^{2x2}$ for $(X_{0},U_{0}) \sim N(0,\Sigma_{0})$ such that $\Sigma(t) \equiv \Sigma_{0}$. We can do this by solving the following Lyapunov equation corresponding to the linear system of SDEs above: 
 \[
 0 = \dot{\Sigma}(t) = A\Sigma(t) + \Sigma(t) A^{T} + BB^{T} 
 \]
@@ -648,10 +655,10 @@ E[(X_{t+\tau},U_{t+\tau})^{T}(X_{t},U_{t})] = \kappa^{2}\frac{\lambda\exp(-\thet
 \]
 and the PSD by an application of the Wiener-Khinchin theorem:
 \[
-S(\omega) = \mathcal{F}[R_{X}(\tau)](\omega) = \frac{\kappa^{2}}{(\theta^{2} + \omega^{2})(\lambda^{2} + \omega^{2})}
+S_{X}(\omega) = \mathcal{F}[R_{X}(\tau)](\omega) = \frac{\kappa^{2}}{(\theta^{2} + \omega^{2})(\lambda^{2} + \omega^{2})}
 \]
 
-Letting $\kappa \rightarrow \infty, \theta \rightarrow \infty, \frac{\kappa}{\theta} \rightarrow \sigma$ we observe that the characteristics of $X_{t}^{(\omega)}$ are a parameter limit of the characteristics of $X_{t}$. (More general model convergences are discussed in \cite{horsthemke:1984}). When describing the risk of false signals and benchmarking the new method against the traditional ones, we will consider only $X_{t}$, since $X_{t}^{(\omega)}$ can be seen as a limit case of the former.
+Letting $\kappa \rightarrow \infty, \theta \rightarrow \infty, \frac{\kappa}{\theta} \rightarrow \sigma$ we observe that the characteristics of $X_{t}^{(w)}$ are a parameter limit of the characteristics of $X_{t}$. This is why we we will consider only $X_{t}$ in chapters 5, 8 and 9.
 Another important observation is the symmetry of the stationary characteristics of $X_{t}$ with respect to a swap of $\lambda$ and $\theta$. Hence we have to be carefull, when we want to infer e.g. information about $\lambda$.
 
 \begin{table}[h!]
@@ -665,13 +672,13 @@ $\theta \rightarrow 0$  & $\nearrow \infty$ & $\nearrow 1$ & $\nearrow \infty$\\
 $\kappa \rightarrow \infty$ & $\nearrow \infty$ & - & $\nearrow \infty$\\    
 \hline
 \end{tabular}
-\caption{danger of false signals: in each row we let one parameter go to a limit value, while holding the other two parameters fixed, and consider how this effects the variance and AC(1). As it has been intuitively motivated already, we see that we expect the variance to go to infinity and the $AC(1)$ to unity for CSD, although we would observe the same for $\theta \rightarrow 0$ due to the symmetry of the characteristics w.r.t $\lambda$ and $\theta$. The independence of $AC(1)$ on $\kappa$ is indicated by $-$. This would reveil $\kappa \rightarrow \infty$ as a false positive. For all three limits we would expect an increase of the PSD for low frequencies $\omega$, what we call spectral reddening.}
+\caption{The danger of false signals: in each row we let one parameter go to a limit value, while holding the other two parameters fixed, and consider how this effects the Variance and AC(1). As it has been intuitively motivated already, we see that we expect the Variance to go to infinity and the $AC(1)$ to unity for CSD, although we would observe the same for $\theta \rightarrow 0$ due to the symmetry of the characteristics w.r.t $\lambda$ and $\theta$. The independence of $AC(1)$ on $\kappa$ is indicated by $-$. This would reveil $\kappa \rightarrow \infty$ as a false positive. For all three limits we would expect an increase of the PSD for low frequencies $\omega$, what we call spectral reddening.}
 \label{tab:danger_of_false_signals}
 \end{table}
 
-The equations \ref{eq: 3.2a} and \ref{eq: 3.2b} describe a setting of linearized dynamics around a fixed equilibrium point. Since we want to study early warning signal methods for tipping points we are interested in bifurcation systems, where the equilibrium point $x*$ depends on $\mu(t)$ the bifurcation parameter that changes over time. With this also the linear restoring rate $\lambda(\mu(t))$ depends on time. Since $\mu$ changes on a very slow time scale, for not too large time windows the process $X_{t}$ can still be regarded as stationary with the respective underlying rate $\label(\mu)$ treated as being constant for that time span. We will discuss this more in detail in the next chapter "Simulation of SDEs".
+The equations \ref{eq:red noise linearized SDE} describe a setting of linearized dynamics around a fixed equilibrium point. Since we want to study early warning signal methods for tipping points we are interested in bifurcation systems, where the equilibrium point $x^{*}$ depends on $\mu(t)$ - the bifurcation parameter that changes over time. Alongside $\mu(t)$ the linear restoring rate $\lambda(\mu(t))$ also depends on time. Since we assume that $\mu$ changes on a very slow time scale, the process $X_{t}$ can still be regarded as stationary for not too large time windows, with the respective underlying rate $\lambda(\mu)$ treated as being constant for that time span. 
 
-In table \ref{tab:danger_of_false_signals} we show the influence of the parameters $\lambda, \kappa$ and $\theta$ on the quantities variance, $AC(1)$ and the behaviour of the PSD for low frequencies $\omega$. The risk of false positives is obviuous, when considering the second row, where $\theta \rightarrow 0$. However false negatives are also possible. This could happen, when the true trend of $\lambda \rightarrow 0$ is masked by simultaneous evolutions of the parameters that keep the observed indicators constant.
+In table \ref{tab:danger_of_false_signals} we show the influence of the parameters $\lambda, \kappa$ and $\theta$ on the quantities Variance, $AC(1)$ and the behaviour of the PSD for low frequencies $\omega$. The risk of false positives is obviuous, when considering the second row, where $\theta \rightarrow 0$. However false negatives are also possible. This could happen, when the true trend of $\lambda \rightarrow 0$ is masked by simultaneous evolutions of the parameters that keep the observed indicators constant.
 
 
 
@@ -680,15 +687,15 @@ In table \ref{tab:danger_of_false_signals} we show the influence of the paramete
 
 \chapter{Simulation of SDEs}
 
-In the last chapter we introduced two SDE settings. We argued that it is often more appropriate to use continuous time models to represent dynamics in nature. In the continuous realm it was also relatively easy to derive the stationary characteristics of both processes. We needed to this to understand what we expect our indicators to do in the case of CSD while we also noticed the risk of false signals. 
-In application or testing contexts we would have a discrete time series available on which we want to apply our EWS methods. For simulations of such time series we have to understand how to find discrete models for the continuous time processes $X_{t}^{(\omega)}$ and $X_{t}$. We start with deriving a discrete version of the Ornstein-Uhlenbeck process $U_{t}^{(c)}$.
+In the last chapter we introduced two SDE settings. We argued that it is often more appropriate to use continuous time models to represent dynamics in nature. In the continuous realm it was also relatively easy to derive the stationary characteristics of both processes. We needed to this to understand what we expect our indicators to do in the case of CSD, while we also noticed the risk of false signals. 
+In application or testing contexts we would have a discrete time series available on which we want to apply our EWS methods. For simulations of such time series we have to understand how to find discrete models for the continuous time processes $X_{t}^{(w)}$ and $X_{t}$. We start with deriving a discrete version of the Ornstein-Uhlenbeck process $U_{t}^{(c)}$.
 \[
-dU_{t}^{c} = -\theta U_{t}dt + \sigma dW_{t} 
+dU_{t}^{c} = -\theta U_{t}dt + \sigma dW_{t}, \ \ U_{t}^{(c)} = 0
 \]
 
 Our goal is to reproduce the stationary characteristics of $U_{t}^{(c)}$  via the $AR(1)$ process:
 \[
-     U_{t+\tau}^{(d)} = \phi U_{t} ^{(d)}+ \gamma \epsilon_{t} 
+     U_{t+\tau}^{(d)} = \phi U_{t} ^{(d)}+ \gamma \epsilon_{t}, \ \ \phi, \gamma \in \mathbb{R}, \ t,\tau \geq 0
 \]
 with 
 \[
@@ -707,13 +714,13 @@ R_{U^{(d)}}(\tau) = \frac{\sigma ^2}{2\theta}\exp(-\theta\lvert \tau \rvert)
 It should hold:
 
 \begin{equation*}
-    \frac{\sigma^2}{2\theta} = \text{Var}[Z_{t+\tau}] = \phi ^2 \text{Var}[Z_{t}] + \gamma ^2 \text{Var}[\epsilon_{t}] = \phi ^2 \text{Var}[Z_{t}] + \gamma ^2
+    \frac{\sigma^2}{2\theta} = \text{Var}[U_{t+\tau} ^{(d)}] = \phi ^2 \text{Var}[U_{t} ^{(d)}] + \gamma ^2 \text{Var}[\epsilon_{t}] = \phi ^2 \text{Var}[U_{t} ^{(d)}] + \gamma ^2
 \end{equation*}
 
 In addition, we demand: 
   \begin{align*} 
-      \frac{\sigma ^2}{2\theta}\exp(-\theta\lvert \tau \rvert) &= \text{Cov}[Z_{t+\tau},Z_{t}] = \text{Cov}[\phi Z_{t} + \gamma \epsilon_{t}, Z_{t}] = \\
-      \phi\text{Cov}[Z_{t},Z_{t}] &= \phi \text{Var}[Z_{t}] = \phi \frac{\sigma^2}{2\theta}
+      \frac{\sigma ^2}{2\theta}\exp(-\theta\lvert \tau \rvert) &= \text{Cov}[U_{t+\tau} ^{(d)},U_{t} ^{(d)}] = \text{Cov}[\phi U_{t} ^{(d)} + \gamma \epsilon_{t}, U_{t}^{(d)}] = \\
+      \phi\text{Cov}[U_{t}^{(d)},U_{t}^{(d)}] &= \phi \text{Var}[U_{t}^{(d)}] = \phi \frac{\sigma^2}{2\theta}
   \end{align*}
 
 
@@ -730,10 +737,10 @@ We deduce:
 If we now want to simulate a sample path of a red noise driven system
 
 \[ 
-     dX_{t} = f(X_{t},\mu(t))dt + \kappa U_{t}dt, X_{0} = x_{0}
+     dX_{t} = f(X_{t},\mu(t))dt + \kappa U_{t}dt,\ \  X_{0} = x_{0}
 \]
 \[
-     dU_{t} = -\theta U_{t}dt + dW_{t}, U_{0} = 0
+     dU_{t} = -\theta U_{t}dt + dW_{t},\ \ U_{0} = 0
 \]
 on a time span $[0,T], T > 0$, we do the following: 
 \begin{itemize}
@@ -754,20 +761,20 @@ on a time span $[0,T], T > 0$, we do the following:
 
 If the system of interest is driven by white noise: 
 \[
-    dX_{t}^{(\omega)} = f(X_{t},\mu(t))dt + \sigma dW_{t}, X_{0} = x_{0}, W_{0} = 0
+    dX_{t}^{(w)} = f(X_{t}^{(w)},\mu(t))dt + \sigma dW_{t}, \ \ X_{0}^{(w)} = x_{0}, W_{0} = 0
 \]
 we can use the Euler-Mayurama Method:
 \[
-X_{t+\delta t} = X_{t} + f(X_{t},\mu(t))\delta t + \sigma\Tilde{\epsilon}_t
+X_{t+\delta t}^{(w)} = X_{t}^{(w)} + f(X_{t}^{(w)},\mu(t))\delta t + \sigma\Tilde{\epsilon}_t
 \]
 
-with $\Tilde{\epsilon}_t \sim N(0,\delta t)$ to simulate a sample path of $X_{t}^{(\omega)}$. Here we used the fact that $W_{\delta t} \sim N(0,\delta t)$. Afterwards we again filter this sample path at every unit step $\Delta t = 1$ to get our time series.
+with $\Tilde{\epsilon}_t \sim N(0,\delta t)$ to simulate a sample path of $X_{t}^{(w)}$. Here we used the fact that $W_{\delta t} \sim N(0,\delta t)$. Afterwards we again filter this sample path at every unit step $\Delta t = 1$ to get our time series.
 
 
 
 \chapter{Consistent estimators for traditional EWS}
 
-Suppose now we are given a time series that we either simulated as described in the last chapter or collected from observations, e.g paleoclimate records. In chapter 3 we showed that we can expect a monotonic increase for the variance and $AC(1)$ if $\lambda \rightarrow 0$ by derving the stationary characteristics of $X_{t}$. Our goal is now to find consistent estimators $Var_N, AC(1)_N$ for these traditional EWS that we can then apply to our time series. Since we can treat $X_{t}^{(\omega)}$ as a limit case of $X_{t}$ we will focus here on the red noise case. We claim that for a time series $(X_{k})_{k\in\mathbb{N}}$ generated by a stationary red noise drive system like (?) for $N \rightarrow \infty$ it holds:
+Suppose now we are given a time series that we either simulated as described in the last chapter or collected from observations, e.g paleoclimate records. In chapter 3 we showed that we can expect a monotonic increase for the Variance and $AC(1)$ if $\lambda \rightarrow 0$. Our goal is now to find consistent estimators $Var_N, AC(1)_N$ for the stationary characteristics that we can then apply to our time series. Since we can treat $X_{t}^{(w)}$ as a limit case of $X_{t}$ we will focus here on the red noise case. We claim that for a time series $(X_{k})_{k\in\mathbb{N}}$ generated by a stationary red noise drive system like \ref{eq:red noise linearized SDE} it holds for $N \rightarrow \infty$:
 
 \begin{subequations}
         \begin{align*}
@@ -776,12 +783,12 @@ Suppose now we are given a time series that we either simulated as described in 
         \end{align*}
 \end{subequations}
 
-To prove this we use the following Lemma (SM2 Morr):
+To prove this we use the following Lemma (SM2 \cite{Morr:2024}):
 
 \begin{lemma}
-    Let $(Y_{k})_{k\in \mathbb{N}}$ be a sequence of random variables, each with mean $\mu < \infty$. Further, assume that they are stationarily correlated with
+    Let $(Y_{k})_{k\in \mathbb{N}_{0}}$ be a sequence of random variables, with $\mu = E[Y_{k}] < \infty, \ k \geq 0$. Further, assume that they are stationarily correlated with
     \[
-    c_{n} = Cov[Y_{k},Y_{k+n}], n \in \mathbb{N}
+    c_{n} = Cov[Y_{k},Y_{k+n}], \ n \in \mathbb{N}
     \]
     so that the $c_{n}$ are summable:
     \[
@@ -789,27 +796,28 @@ To prove this we use the following Lemma (SM2 Morr):
     \]
     Then we have the convergence
     \[
-    Q_{N} := \frac{1}{N}\sum_{k=0}^{N-1}Y_{k} \xrightarrow{P} \mu, N \rightarrow \infty
+    Q_{N} := \frac{1}{N}\sum_{k=0}^{N-1}Y_{k} \xrightarrow{P} \mu, \ N \rightarrow \infty
     \]
-    with convergence rate $\mathcal{O}(N^{-1})$.
+    \label{lemma:summable covariance}
 \end{lemma}
 
 and apply it:
 
 \begin{lemma}
-    Let X be the process defined in Eq (?) with the appropriate initial distribution $(U_{0},X_{0})$ such that it is stationary. Then we have for ervery $\tau \geq 0$
+    Let X be the process defined in equation \ref{eq:red noise linearized SDE} with the appropriate initial distribution $(U_{0},X_{0})$ such that it is stationary. Then we have for ervery $\tau \geq 0$
     \[
-    \hat{R(\tau)}_{N} := \frac{1}{N-\tau} \sum_{k=0}^{N-\tau -1} X_{k}X_{k+\tau} \xrightarrow{P} Cov[X_{0},X_{\tau}] = R(\tau)
+    R(\tau)_{N} := \frac{1}{N-\tau} \sum_{k=0}^{N-\tau -1} X_{k}X_{k+\tau} \xrightarrow{P} Cov[X_{0},X_{\tau}] = R(\tau)
     \]
     and in particular
     \[
-    \hat{Var}_{N} := \hat{R(0)}_{N} = \frac{1}{N} \sum_{k=0}^{N-1} X_{k}^{2} \xrightarrow{P}Var[X_{0}]
+    Var_{N} := R(0)_{N} = \frac{1}{N} \sum_{k=0}^{N-1} X_{k}^{2} \xrightarrow{P}Var[X_{0}]
     \]
+    \label{lemma: consistent estimator proof}
 \end{lemma}
 
-The proof relies on using $Y_{k} := X_{k}X_{k+\tau}$ and showing that $\lvert Cov[Y_{k},Y_{k+n}] \rvert$ decays exponentially with n. Then we can use the Lemma 7(?). Since both quantities converge to a non-zero constant and $\hat{Var}_N \neq 0 \ P-a.s$ the result for $AC(1)_{N}$ follows by:
+The proof relies on using $Y_{k} := X_{k}X_{k+\tau}$ and showing that $\lvert Cov[Y_{k},Y_{k+n}] \rvert$ decays exponentially with n for every $\tau \geq 0$. Then Lemma \ref{lemma:summable covariance} yields the statement. Since both $R(\tau)_{N}$ and $Var_{N}$ converge to a non-zero constant and $Var_N \neq 0, \ P-a.s$ the result for $AC(1)_{N}$ follows by:
 \[
-\hat{AC(\tau)}_N = \frac{\hat{R(\tau)}_{N}}{\hat{Var}_{N}} \xrightarrow{P} AC(\tau)
+AC(\tau)_N = \frac{R(\tau)_{N}}{Var_{N}} \xrightarrow{P} AC(\tau), \ \ \forall \tau \geq 0
 \]
 for $\tau = 1$.
 
@@ -817,9 +825,9 @@ for $\tau = 1$.
 
 \chapter{Theory behind the ROSA method}
 
-In the last section we introduced consistent estimators for the traditional EWS methods variance and $AC(1)$. The risk of false signals was already mentioned when discussing the stationary characteristics of $X_{t}$. We will also see examples for that in the chapter "Failure of traditional EWS: spurious and masking under changing parameters". In this section we want to explain some theory behind the new more reliable ROSA indicator. The higher reliability of the ROSA method comes at the cost that we need more information about the process namely about the noise. 
+In the last section we introduced consistent estimators for the Variance and $AC(1)$. The risk of false signals was already mentioned, when discussing the stationary characteristics of $X_{t}$. We will also see examples for this in chapter 8. In this section we want to explain some theory behind the more robust ROSA method. The higher reliability of the ROSA method comes at the cost that we need more information about the process, namely about the noise. 
 
-Our new indicator is based on fitting the ratio of the PSD of the whole process $X_{t}$ and the PSD of the noise process $\xi_{t}$ against a continous time limit target. That is why it is called: "ratio of spectra method" or ROSa. While motivating the use of the OU process as a continuous time red noise equivalent via its spectral characteristics we already considered the concept of power spectral density. With the Wiener-Khintchin theorem we derived the PSD of $X_{t}$ to be:
+Our new indicator is based on fitting the ratio of the PSD of the process $X_{t}$ and the PSD of the noise process $\xi_{t}$ against a continous time limit target. That is why it is called: 'ratio of spectra method' or ROSA. While motivating the use of the OU-process as a continuous time red noise equivalent via its spectral characteristics, we already considered the concept of power spectral density. With the Wiener-Khintchin theorem we derived the PSD of the linearized red noise driven $X_{t}$-process to be:
 
 \[
 S_{X}(\omega) = \mathcal{F}[R_{X}(\tau)](\omega) = \frac{\kappa^{2}}{(\theta^{2} + \omega^{2})(\lambda^{2} + \omega^{2})}
@@ -831,30 +839,30 @@ and the PSD of $U_{t}$:
 S_{U}(\omega) = \frac{1}{\lambda^2 + \omega^2}
 \]
 
-While these results were derived via infinite fourier integrals in a continuous time setting, we only have a finte number of discrete time series values at our disposal. In the following we want to understand this dichotomy better.
+While these results were derived via infinite fourier integrals in a continuous time setting, we only have a finte number of discrete time series values at our disposal when fitting against the continuous target. In the following we want to understand this dichotomy better.
 
-Suppose we have a finite signal $X_{t}^{T}(\omega), t \in [0,T]$. Then we can define the following fourier integral: 
+Suppose we have a finite signal $X_{t}^{T}, t \in [0,T]$. Then we can define the following fourier integral: 
 \[
-    G^{T}[X]_{ f} := \frac{1}{\sqrt{T}}\int_{0}^{T}X_{t}^{T}e^{i f t}dt
+    G^{T}[X]_{\omega} := \frac{1}{\sqrt{T}}\int_{0}^{T}X_{t}^{T}e^{i \omega t}dt
 \]
 
-Recall the definition of the PSD for a process $Y_{t}$ (condidtions...):
+Recall the definition of the PSD for a stochastic process $X_{t}$:
 
 \[
-S_{Y}(\omega) := lim_{T\rightarrow\infty}E[\frac{1}{T}\lvert\int_{0}^{T}exp(-i\omega t)Y_{t}dt \rvert^{2}]
+S_{X}(\omega) := lim_{T\rightarrow\infty}E[\frac{1}{T}\lvert\int_{0}^{T}X_{t}e^{(-i\omega t)}dt \rvert^{2}]
 \]
 
-When we want to approximate this PSD by using a single realization of sample path we have to drop the expectation or assume this realization to be the expecte value. Hence we will also use the following definition of the PSD:
+When we want to approximate this PSD by using a single sample path we have to drop the expectation or assume this realization to be the expected value. Hence we will also use the following definition of the PSD:
 
 \[
-    \Tilde{S}(\omega) := \lim_{T\rightarrow\infty} \lvert G^{T}[X]_{\omega}\rvert ^2
+    \Tilde{S}_{X}(\omega) := \lim_{T\rightarrow\infty} \lvert G^{T}[X]_{\omega}\rvert ^2
 \]
 
 
 We assume that our data is generated by the red noise driven linearized SDE and that we sample at discrete time steps $\Delta t = T/N$, with T the time of observation and N the number of equally spaced samples between 0 and T. Hence we can write for the discretized version of the red noise driven system:
 
         \begin{equation}  
-        \frac{X_{\frac{(n+1)T}{N}}-X_{\frac{nT}{N}}}{T/N} = -\lambda X_{\frac{nT}{N}} + \sigma U_{\frac{nT}{N}}, n = 0, \dots, N-1 \label{eq: 6}
+        \frac{X_{\frac{(n+1)T}{N}}-X_{\frac{nT}{N}}}{T/N} = -\lambda X_{\frac{nT}{N}} + \kappa U_{\frac{nT}{N}}, n = 0, \dots, N-1 \label{eq: 6}
         \end{equation}
 
 
@@ -865,10 +873,10 @@ We approximate $G^{T}[X]_{\omega}$ with the following discrete fourier integral:
     \]
 
 
-We apply $G_{N}^{T}[\cdot]_{\omega}$ to both sides of equation \ref{eq: 6}. Before doing so we mention the following time shift property of the fourier transform, which we will use in the next step:
+We apply $G_{N}^{T}[\cdot]_{\omega}$ to both sides of equation \ref{eq: 6}. Before doing so, we mention the following time shift property of the fourier transform, which we will use in the next step:
 
 \[
-f(t-t_{0}) \xleftrightarrow{\mathcal{F}} e^{-i2\pi t_{0}\xi}\Tilde{f}(\xi)
+f(t-t_{0}) \xleftrightarrow{\mathcal{F}} e^{-i2\pi t_{0}\xi}\Tilde{f}(\xi), \ \ \ t_{0},\xi \in \mathbb{R}
 \]
 
 By applying this shifting argument to the discrete case and accounting for the boundary terms we get: 
@@ -877,38 +885,37 @@ By applying this shifting argument to the discrete case and accounting for the b
     \frac{N}{T}(exp(i\omega\frac{T}{N})-1)G_{N}^{T}[X]_{\omega} + exp(i\omega\frac{T}{N})(X_{T}-X_{0})/\sqrt{T} = 
     \]
     \[
-     -\lambda G_{N}^{T}[X]\omega + \sigma G_{N}^{T}[U]_{\omega}
+     -\lambda G_{N}^{T}[X]\omega + \kappa G_{N}^{T}[U]_{\omega}
     \]
 
 
 We rearrange this to get:
     \[
-    \lvert G_{N}^{T}[X]_{\omega}\rvert ^2 = \frac{\lvert \sigma G_{N}^{T}[U]_{\omega} - exp(i\omega\frac{T}{N})(X_{T}-X_{0})/\sqrt{T}\rvert ^2}{\lvert \lambda + \frac{N}{T}(exp(i\omega\frac{T}{N} - 1)\rvert^2}
+    \lvert G_{N}^{T}[X]_{\omega}\rvert ^2 = \frac{\lvert \kappa G_{N}^{T}[U]_{\omega} - exp(i\omega\frac{T}{N})(X_{T}-X_{0})/\sqrt{T}\rvert ^2}{\lvert \lambda + \frac{N}{T}(exp(i\omega\frac{T}{N} - 1)\rvert^2}
     \]
 
-For $(U_{\frac{nT}{N}})_{n \in \{0,...,N-1\}}$ define $\hat{U}:[0,T]\rightarrow\mathbb{R}, \hat{U}^{N} := \sum_{n=0}^{N-1}1_{[\frac{nT}{N},\frac{(n+1)T}{N}]}(t)U_{\frac{nT}{N}}$. Then it holds:
+For $(U_{\frac{nT}{N}})_{n \in \{0,...,N-1\}}$ define $\hat{U}:[0,T]\rightarrow\mathbb{R}, \hat{U}_{t}^{N} := \sum_{n=0}^{N-1}1_{[\frac{nT}{N},\frac{(n+1)T}{N}]}(t)U_{\frac{nT}{N}}$. Then it holds:
 \[
-G_{N}^{T}[U]_{f} = G^{T}[\hat{U}^{N}]_{f}
+G_{N}^{T}[U]_{\omega} = G^{T}[\hat{U}^{N}]_{\omega}
 \]
-$U_{t}$ is pathwise continuous on [0,T] (?) and hence bounded. (?really pointw converg?) The dominated convergence theorem implies:
+$U_{t}$ is pathwise continuous on [0,T] (proof ?) and hence bounded by $M := max_{t\in [0,T]} \lvert U_{t} \rvert$. Since $\hat{U}_{t}^{N}$ converges pointwise to $U_{t}$ for every realization, the dominated convergence theorem implies:
 \[
-lim_{N\rightarrow\infty}G^{T}[\hat{U}^{N}]_{f} = G^{T}[U]_{f}
+lim_{N\rightarrow\infty}G^{T}[\hat{U}^{N}]_{\omega} = G^{T}[U]_{\omega}
 \]
 
 Thus for $N \rightarrow \infty$ we get:
 \[
-    \lvert G^{T}[X]_{\omega} \rvert^2 = \frac{\lvert\sigma G^{T}[U]_{\omega} - exp(i\omega\frac{T}{N})(X_{T}-X_{0})/\sqrt{T}\rvert ^2}{\lambda^2 + \omega^2}
+    \lvert G^{T}[X]_{\omega} \rvert^2 = \frac{\lvert\kappa G^{T}[U]_{\omega} - exp(i\omega\frac{T}{N})(X_{T}-X_{0})/\sqrt{T}\rvert ^2}{\lambda^2 + \omega^2}
 \]
 
-Letting $T \rightarrow \infty$ and dividing by $\lvert\sigma G[U]_{\omega}\rvert^2$ finally yields:
+Letting $T \rightarrow \infty$ and dividing by $\lvert\kappa G[U]_{\omega}\rvert^2$ finally yields:
 \[
-    \frac{\lvert G[X]_{\omega} \rvert^2}{\lvert\sigma G[U]_{\omega}\rvert^2} = \frac{1}{\lambda^2 + \omega^2}
+    \frac{\lvert G[X]_{\omega} \rvert^2}{\lvert\kappa G[U]_{\omega}\rvert^2} = \frac{1}{\lambda^2 + \omega^2}
 \]
 
-However it is important to keep in mind that in practice we are not able to achieve these exact limits. For estimating the PSD of a process $X_{t}$ we will always rely on the discrete fourier integral ans since we sample at unit step $\Delta t = 1$ we will use $G_{T}^{T}[X]_{f}$. We can only choose T as large as possible to get closer to the continuous target. In practice we will than approximate $\lambda$ by fitting $\frac{\lvert G_{T}^{T}[X]_{\omega} \rvert ^2}{\lvert \kappa G_{T}^{T}[U]_{\omega} \rvert ^2}$ to the right hand side $\frac{1}{\lambda^2 + \omega^2}$. The next chapter will also provide an example of a fit of observed PSD versus theoretical PSD.
+However it is important to keep in mind that in practice we are not able to achieve these exact limits. For estimating the PSD of a process $X_{t}$ we will always rely on the discrete fourier integral and since we sample at unit step $\Delta t = 1$ we will use $G_{T}^{T}[X]_{\omega}$, hence T = N. Further we can only choose T as large as possible to get closer to the continuous target. In practice we will than approximate $\lambda$ by fitting $\frac{\lvert G_{T}^{T}[X]_{\omega} \rvert ^2}{\lvert \kappa G_{T}^{T}[U]_{\omega} \rvert ^2}$ to the right hand side $\frac{1}{\lambda^2 + \omega^2}$. The next chapter will also provide an example of a fit of an observed PSD versus the theoretical PSD.
 
 
-We could also fit against the exact target of equation (?). But having the noise PSD on the left hand side, enables us to also use the method when we only have information about the PSD and not the exact noise realization itself (?).
 
 
 
