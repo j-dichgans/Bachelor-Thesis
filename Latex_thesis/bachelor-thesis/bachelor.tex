@@ -744,7 +744,7 @@ If we now want to simulate a sample path of a red noise driven system
 \]
 on a time span $[0,T], T > 0$, we do the following: 
 \begin{itemize}
-    \item use a solution stepsize of $\delta t = 1/N$ for some $N \in \mathbb{N}$
+    \item use a simulation stepsize of $\delta t = 1/N$ for some $N \in \mathbb{N}$
     \item use the AR(1) process:
     \[
     U_{t+\delta t} = \exp(-\theta \delta t)U_{t} + \sqrt{\frac{1}{2\theta}(1-\exp(-2\theta \delta t))}\epsilon_{t}
@@ -922,7 +922,7 @@ However it is important to keep in mind that in practice we are not able to achi
 \chapter{Success of traditional EWS and ROSA under constant parameters}
 
 With the necessary theoretical background we will now give an example of a stochastically forced dynamical system, where all indicators succesfully gave an EWS before reaching the TP.
-We will apply the traditional EWS (Var, AC(1)) and the ROSA method to the following fold bifurcation model: 
+We will apply the traditional EWS (Variance, AC(1)) and the ROSA method to the following fold bifurcation model: 
         \[
             \frac{dx}{dt} = x - \frac{1}{3}x^3 - \mu(t) + \xi(t) =: f(x,\mu) + \xi(t)
         \]
@@ -932,73 +932,72 @@ where $\mu(t) \in [-1,1]$. Bifurcations happen at the critical thresholds $\mu_{
 Specifically we will consider the following two scenarios: \\
     the white noise case
     \[
-    dx = f(x,\mu)dt + \sigma dW
+    dX_{t} = f(X_{t},\mu(t))dt + \sigma dW_{t}
     \]
 
 and the red noise case
     
     \begin{align*}   
-    dx & = f(x,\mu)dt + \kappa U_{t}dt \\
-    dU_{t} & = -\theta U_{t} dt + dW
+    dX_{t} & = f(X_{t},\mu(t))dt + \kappa U_{t}dt \\
+    dU_{t} & = -\theta U_{t} dt + dW_{t}
     \end{align*}
 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.55\textwidth]{bachelor-thesis/figures/13_8_clarke_fig_1_reimp.png}
+    \includegraphics[width=0.55\textwidth]{bachelor-thesis/figures/19_8_clarke_fig_1_reimp.png}
     \caption{modified from \cite{Clarke:2023} Figure 1; AC: ---, Var: - - -}
     \label{success_of_trad_ews_and_rosa}
 \end{figure}
 
-We want to simulate a time series on a time span of [0,T] that starts at the equilibrium point corresponding to $\mu(0) = -1$. Then we slowly change the underlying deterministic part of the system by increasing $\mu(t)$ and thereby eventually drive the system over the edge of a tipping point. A more explicit explanation of the implementation of the code underlying figure \ref{success_of_trad_ews_and_rosa} follows now. To get the bifurcation plot in Panel A we first compute the paths of equilibria $x^{*}(t)$. There is an upper and lower stable branch plus an unstable middle branch for $\mu \in [-2/3,2/3]$. The evolution of the true linear restoring rate following the upper branch is computed by: $\lambda(t) = -f'(x^{*}(t),\mu(t))$. We then simulate the time series for both scenarios as explained in the chapter "Simulation of SDEs". In this case we use an observation time of T = 10000, a sample step of $\Delta t = 1$ and a simulation step of $dt = 1/10$. We use a linear ramp for $\mu:  [-1,1] \rightarrow \mathbb{R}$:
+We want to simulate a time series on a time span of [0,T] that starts at the equilibrium point corresponding to $\mu(0) = -1$. Then we slowly change the underlying deterministic part of the system by increasing $\mu(t)$ and thereby eventually drive the system over the edge of a tipping point. A more explicit explanation of the implementation of the code underlying figure \ref{success_of_trad_ews_and_rosa} follows now. To get the bifurcation plot in Panel A we first compute the paths of equilibria $X^{*}(t)$. There is an upper and lower stable branch plus an unstable middle branch for $\mu \in [-2/3,2/3]$. The evolution of the true linear restoring rate following the upper branch is computed by: $\lambda(t) = -f'(x^{*}(t),\mu(t))$. We then simulate the time series for both scenarios as explained in chapter 4. In this case we use an observation time of T = 10000, a sample step of $\Delta t = 1$ and a simulation step of $\delta t = 1/10$. We use a linear ramp for $\mu:  [-1,1] \rightarrow \mathbb{R}$:
 \[
 \mu(t) := \frac{2}{T}t-1
 \]
 
 For simulating both time series we used $(\sigma,\kappa,\theta) = (0.01,0.05,1)$. 
-Than we compute the three indicator series on windows of length 200. In each window we first detrend the filtered time series with a second order polynomial to take away the trend induced by the equilibrium path. For the computation of the variance python uses the biased estimator as introduced in chapter Consistent estimators for traditional EWS. The lag-1 autocorrelation is computed as $r_{1}$ hence without the fraction $\frac{N}{N-1}$. ?Since this fraction converges to zero $r_{1}$ is still a consistent estimator. For the computation of the ROSA method we need both the filtered time series $X_{t}$ as well as the filtered noise series $\hat{\xi}_{t}$ (We denote the respective filtered noise series with a hat). For the white noise case $\xi_{t} = dW_{t}$ we sum up the increments for each unit time interval:
+Than we compute the three indicator series on windows of length W = 200. Hence we have 1000/200=50 windows. In each window we first detrend the filtered time series with a second order polynomial to take away the trend induced by the equilibrium path. For the computation of the variance python uses the biased estimator as introduced in chapter 5. The lag-1 autocorrelation is computed as $r_{1} := \frac{N-1}{N}AC(1)_{N}$, hence without the fraction $\frac{N}{N-1}$. Since this fraction converges to zero, $r_{1}$ is still a consistent estimator. For the computation of the ROSA method we need both the filtered time series $X_{t}$ as well as the filtered noise series $\widehat{\xi}_{t}$ (we denote the respective filtered noise series with a hat). For the white noise case $\xi_{t} = dW_{t}$ we sum up the increments for each unit time interval:
 \[
-\hat{xi}_{i} = \sum_{j = 0}^{9}\xi_{10i+j}, i \in \{0,...,T-1\}
+\widehat{\xi}_{i} = \sum_{j = 0}^{9}\xi_{10i+j}, \ i \in \{0,...,T-1\}
 \]
-For the red noise case we choose:
+For the red noise case we have to include the factor $\delta t$:
 \[
-\hat{xi}_{i} = \xi_{10i}, i \in \{0,...,T\}
-\]
-
-As explained in the previous chapter we then take:
-\[
-S_{f}^{X} = G_{T}^{T}[X]_{f} = \lvert \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}\exp(i\omega k)X_{k} \rvert ^2
-\]
-as an approximation of the PSD of both the time series $X_{t}$ and the noise series $\hat{\xi}_{t}$, where T = N = window length = (200). We then compute via a least square fit an approximation of $\lambda(t)$:
-\[
-\hat{\lambda}(t) = argmin_{\lambda > 0} \sum_{f \in F} log((\frac{\lvert G_{T}^{T}[X_{t}]_{f}\rvert^2}{\lvert \kappa G_{T}^{T}[\hat{\xi}_{t}]_{f} \rvert^2}) - log(\frac{1}{\lambda^2 + f^2}))^2, t \in \{0,...,T/window length = 50\}
+\widehat{\xi}_{i} = (\sum_{j = 0}^{9}\xi_{10i+j})\delta t, \ i \in \{0,...,T-1\}
 \]
 
-As a frequency domain we use $F_{N}:=\{2\pi l/N | l = 1,...,N/2 - 1\}$ if N is even and $F_{N} := \{2\pi l/N | l = 1,...,(N-1)/2 \}$ if N is odd. We take the logarithm inside the least square fitting problem to weight the frequencies more evenly (?). We only probe the discrete time PSD on positive frequencies since the negative don't add new information (?). Further the discrete time PSD esimate is $2\pi$ periodic.
+We then take:
 
-In \ref{observed_vs_continuous_PSD} we want to give an example of the goodness of fit of the observed PSD ratio versus the theoretical fraction $\frac{1}{\lambda^2 + f^2}$. To create this plot we first computed a mean restoring rate $\Bar{\lambda} = \frac{1}{500}sum_{t=0}^{999}\lambda(t) = \frac{1}{500}sum_{t=0}^{999}-f(x^{*}(t),\mu(t)) = \frac{1}{500}sum_{t=0}^{999}(1-x^{*}(t)^2)$ on the window [0,1000] as an approximation for the assumed underlying stationary model. We then loglog-plot the ratio $\frac{1}{\Bar{\lambda}^2 + f^2}$ and the observed PSD ratio on the frequency domain $F_{1000}$, where we use the white noise time series. We see that the observed PSD ratio fluctuates around the true trend, although we used finite T = N = 1000.
-In the chapter Benchmark of traditional EWS and ROSA we will see, that the method works even better for longer windows.
+\[
+(G_{W}^{W}[Y]_{\omega})_{j} = \lvert \frac{1}{\sqrt{W}}\sum_{k=0}^{W-1}\exp(i\omega k)Y_{jW + k} \rvert ^2, \ \ j \in \{0,...,49\}, \ Y \in \{X, \widehat{\xi}\}
+\]
+as an approximation of the PSD of both the time series $X_{t}$ and the noise series $\widehat{\xi}_{t}$ in the respective time window. We then compute an approximation of $\lambda(t)$ via a least square fit:
+\[
+\widehat{\lambda}_{j} = argmin_{\lambda > 0} \sum_{\omega \in F_{W}} (log(\frac{\lvert G_{W}^{W}[X_{t}]_{\omega}\rvert^2}{\lvert \kappa G_{W}^{W}[\widehat{\xi}_{t}]_{\omega} \rvert^2}) - log(\frac{1}{\lambda^2 + \omega^2}))^2, j \in \{0,...,49\}
+\]
 
+As a frequency domain we use $F_{N}:=\{2\pi l/N | l = 1,...,N/2 - 1\}$ if N is even and $F_{N} := \{2\pi l/N | l = 1,...,(N-1)/2 \}$ if N is odd. So in this case N = W. We take the logarithm inside the least square fitting problem to weight the frequencies more evenly. 
 
-Our estimators suppose a constant linearised model but $\lambda$ changes in each window. However the change is on a slow enough time scale for our methods to still work.
+In figure \ref{observed_vs_continuous_PSD} we want to give an example of the goodness of fit of the observed PSD ratio versus the theoretical fraction $\frac{1}{\lambda^2 + \omega^2}$. To create this plot we first computed a mean restoring rate $\Bar{\lambda} = \frac{1}{500}\sum_{t=0}^{999}\lambda(t) = -\frac{1}{500}\sum_{t=0}^{999}f'(X^{*}(t),\mu(t)) = -\frac{1}{500}\sum_{t=0}^{999}(1-X^{*}(t)^2)$ on the window [0,999] as an approximation of the linearized restoring rate in this time frame. We then loglog-plot the ratio $\frac{1}{\Bar{\lambda}^2 + \omega^2}$ and the observed PSD ratio on the frequency domain $F_{1000}$, where we used a white noise driven time series. We see that the observed PSD ratio fluctuates fairly well around the true trend, although we had to use a finite window length of one thousand.
+In chapter 9 we will see, that the ROSA method works even better for longer windows.
 
-In the plot We see that in this case for constant $\kappa$ and $\theta$ all three indicators show a true EWS.
+In figure \ref{success_of_trad_ews_and_rosa} we see that in our case of constant $\kappa$ and $\theta$ all three indicators show a true EWS.
 
 
 \begin{figure}
     \centering
     \includegraphics[width=0.66\textwidth]{bachelor-thesis/figures/13_8_observed_vs_continuous_PSD.png}
+    \caption{Observed vs. theoretical PSD}
     \label{observed_vs_continuous_PSD}
 \end{figure}
 
 
-We want to shortly discuss differences in our implementation to the one of Clarke in \cite{Clarke:2023} Figure 1. This figure has the same structure as \ref{success_of_trad_ews_and_rosa}. Clarke argues that the presence of autocorrelated noise can mask the changes in AC. Indeed the AC shown in the red noise case (Panel C) doesn't give an early warning signal. However as we have derived theoretically via the evolution of the stationary characterisitcs the increase in variance and AC(1) would be expected in both the white and red noise case. Our example in the plot confirms this. 
-In Clarke's implementation there is no differentiation between the bifurcation parameter $\mu$ and $t$. This has several disadvantages: Firstly due to $\mu = t$, t looses its interpretation as time. Additionally now the bifurcation process is on the same time scale as the progression of time. Hence the assumption that the process is approximately stationary in each window is not true anymore. clarke tries to fix the issue of equal time scales by introducing a factor $\epsilon = 0.01$
+We want to shortly discuss differences in our implementation to the one of Clarke in \cite{Clarke:2023} Figure 1. This figure has the same structure as \ref{success_of_trad_ews_and_rosa}. Clarke argues that the presence of autocorrelated noise can mask the changes in the AC of the system. Indeed the AC shown in the red noise case (Panel C) of Clarke's figure 1 doesn't give an early warning signal. However as we have derived theoretically an increase in Variance and AC(1) would be expected in both the white and red noise case. Our example in the plot confirms this. 
+In Clarke's implementation there is no differentiation between the bifurcation parameter $\mu$ and time $t$. This has several disadvantages: Firstly due to $\mu = t$, t looses its interpretation as time, since $\mu \in [-1,1]$. Additionally now the bifurcation process is on the same time scale as the progression of time. Hence the assumption that the process is approximately stationary in each window is not valid anymore. clarke tries to fix the issue of equal time scales by introducing a factor $\epsilon = 0.01$
 \[
 \epsilon\frac{dx}{dt} = x - \frac{1}{3}x^3-\mu(t) + \eta(t)
 \]
-thus making the process faster and ensuring that x reverts back to equilibrium quickly. However the us of $\Delta t = \delta t$ instead of 1 as a sampling rate and the introduction of the extra parameter $\epsilon$ makes the rest of the calculations more complicated and prone to errors. Further Clarke doesn't use distinct time windows but a sliding window approach. The PSD is calculated with the scipy.signal.welch method, which divides the time series into overlapping sections, computes a modified periodogram for each section and then averages these periodograms. This introduces another layer of complication in the computation. 
-We argue that our approach with a linear ramp for $\mu(t)$, a seperation of simulation step $\delta t = 1/10$ and sample step $\Delta t = 1$ as well as our straightforward estimator of the PSD make the implementation more understandable and rigorous.
+thus making the process faster and ensuring that x reverts back to equilibrium quickly. However the use of $\Delta t = \delta t$ instead of 1 as a sampling rate and the introduction of the extra parameter $\epsilon$ makes the rest of the calculations more complicated and prone to errors. Further Clarke doesn't use distinct time windows but a sliding window approach. The PSD is calculated with the scipy.signal.welch method, which divides the time series into overlapping sections, computes a modified periodogram for each section and then averages these periodograms. This introduces another layer of complexity into the computation. 
+We argue that our approach with a linear ramp for $\mu(t)$, a seperation of simulation step $\delta t = 1/10$ and sample step $\Delta t = 1$ as well as our simpler estimator of the PSD make the implementation more understandable and rigorous.
 
 
 
@@ -1006,7 +1005,7 @@ We argue that our approach with a linear ramp for $\mu(t)$, a seperation of simu
 
 In the last chapter we saw an example of a successful application of the three indicators on a simple bifurcation model. While $\lambda(t)$ changed in time due to the bifurcation process, the parameters $\sigma$ and $\kappa$ were fixed. 
 
-We want to illustrate the risk of false positive and false negative signals when using the variance and AC(1) as EWS with examples in an abstract fold bifurcation setting. As discussed previously we can focus on the red noise case.
+We want to illustrate the risk of false positive and false negative signals when using the Variance and AC(1) as EWS with examples in an abstract fold bifurcation setting. As discussed previously we can focus on the red noise case.
 
 Compared to before we now allow also for $\kappa$ and $\theta$ to change in time:
     \begin{subequations}
@@ -1016,14 +1015,14 @@ Compared to before we now allow also for $\kappa$ and $\theta$ to change in time
     \end{align*}
     \end{subequations}
 
-The linearization is assumed to be a good enough approximation to a real fold bifurcation (Morr). Due to the fact that the parameters now change in time, the process isn't actually stationary anymore. However, if the paramters change slow enough, the process is nearly stationary in each window. Hence our methods can still be applied.
+The linearization is assumed to be a good enough approximation to a real fold bifurcation. Due to the fact that the parameters now change in time, the process isn't actually stationary anymore. However, if the paramters change slow enough, the process is nearly stationary in each window. Hence our methods can still be applied.
 
 We assume a decline of $\lambda$ that is typical for a fold bifurcation: 
     \[
     \lambda(t) := \lambda_{0}\sqrt{1-t/T}
     \]
 
-Recall the stationary characteristics of the red noise driven linearized system with constant paramteters $X_{t}$: 
+Recall the stationary characteristics of $X_{t}$ as described by the SDE \ref{eq:red noise linearized SDE}: 
 
 \begin{table}[h!]
 \centering
@@ -1051,20 +1050,20 @@ We further define linear ramps for the parameters $\kappa$ and $\theta$:
 
 where $\kappa_{0},\kappa_{T},\theta_{0},\theta_{T} \in \mathbb{R}$. 
 
-In the following we describe the setup of the examples for a false positive and a false negative signal. For both cases we will simulate two time series each on a time span of [0,14000], a solution step $dt = 1/10$ and with a window length of 700 for the computation of the indicator series. In both cases one time series undergoes a true CSD, while the other time series uses a fixed $\lambda(t) \equiv \lambda_{0}$. We again use the Euler-Mayurama method for integration only now also respecting the time dependence of $\kappa$ and $\theta$.
+In the following we describe the setup of the examples for a false positive and a false negative signal. For both cases we will simulate two time series each on a time span of [0,14000], with a simulation step $dt = 1/10$ and with a window length of 700 for the computation of the indicator series. In both cases one time series undergoes a true CSD, while the other time series uses a fixed $\lambda(t) \equiv \lambda_{0}$. We again use the Euler-Mayurama method for integration only now also respecting the time dependence of $\kappa$ and $\theta$.
 
-We first give an example of false positive Signals by the traditional EWS. To do so we choose: $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (1.2,3.3,3,1)$. Hence a linear increase in $\kappa$ and a linear decrease in $\theta$. Assuming instantaneous alignment of the stationary characteristics with the changing parameters we get for both decreasing and fixed $\lambda$: 
+We first give an example of a false positive signals by the traditional EWS. To do so we choose: $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (1.2,3.3,3,1)$. Hence a linear increase in $\kappa$ and a linear decrease in $\theta$. Assuming instantaneous alignment of the stationary characteristics with the changing parameters we get for both decreasing and fixed $\lambda$: 
 \[
-Variance(t) = \frac{\kappa(t)^2}{2\lambda(t)\theta(t)(\lambda(t) + \theta(t))} \nearrow, \ t \rightarrow T
+Var(t) = \frac{\kappa(t)^2}{2\lambda(t)\theta(t)(\lambda(t) + \theta(t))} \nearrow, \ t \rightarrow T
 \]
 \[
 AC(1) = \frac{(\lambda(t)\exp(-\theta(t))-\theta(t)\exp(-\lambda(t)))}{(\lambda(t)-\theta(t))} \nearrow, \ t \rightarrow T
 \]
 
-We expect the traditional indicators to follow the same trend. This is indeed the case as we see in \ref{false positive}. In the third row of the plot we see that the ROSA method follows the true evolution of $\lambda(t)$ quite closely in the left column and shows a roughly constant trend in the right column thus avoiding a false positive.
+We expect the traditional indicators to follow the same trend. This is indeed the case as we see in \ref{false positive example}. In the third row of the plot we see that the ROSA method follows the true evolution of $\lambda(t)$ quite closely in the left column and shows a roughly constant trend in the right column, thus avoiding a false positive.
 
-
-\begin{minipage}{0.49\textwidth}
+\begin{figure}
+    \begin{minipage}{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/true_positive.png}
     \end{minipage}
@@ -1075,14 +1074,16 @@ We expect the traditional indicators to follow the same trend. This is indeed th
     \end{minipage}
     \begin{minipage}{\textwidth}
     \centering
-    \label{false positive}
-    modified from \cite{Morr:2024} figure 1, AC: ---, Var: - - -
-\end{minipage}
+    \caption{Modified from \cite{Morr:2024} figure 1, AC: ---, Var: - - -}
+    \label{false positive example}
+    \end{minipage}
+\end{figure}
 
-Now we turn to a false negative example. For the simulation of both time series we choose: $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (3.2,2.3,1,3.7)$. In this case we have for decreasing $\lambda$ a decline in the variance beside the increase close to T and an increase in AC(1). Hence the variance gives a false negative signal. For fix $\lambda(t) \equiv \lambda_{0}$ both indicators a decreasing. This is again matched by the results from the simulation as seen in \ref{false negative}. The ROSA method again matches $\lambda(t)$ well and doesn't show false signals.
 
+Now we turn to a false negative example. For the simulation of both time series we choose: $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (3.2,2.3,1,3.7)$. In this case we have for decreasing $\lambda$ a decline in the variance beside the increase close to T and an increase in AC(1). Hence the variance gives a false negative signal. For fix $\lambda(t) \equiv \lambda_{0}$ both indicators a decreasing. This is again matched by the results from the simulation as seen in \ref{false negative example}. The ROSA method again matches $\lambda(t)$ well and doesn't show false signals.
 
-\begin{minipage}{0.49\textwidth}
+\begin{figure}
+    \begin{minipage}{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/false_negative_var.png}
     \end{minipage}
@@ -1093,15 +1094,17 @@ Now we turn to a false negative example. For the simulation of both time series 
     \end{minipage}
     \begin{minipage}{\textwidth}
     \centering
-    \label{false negative}
-    modified from \cite{Morr:2024} figure 3, AC: ---, Var: - - -
-\end{minipage}
+    \caption{modified from \cite{Morr:2024} figure 3, AC: ---, Var: - - -}
+    \label{false negative example}
+    \end{minipage}    
+\end{figure}
+
 
 These were however only two examples. We want to provide more evidence for the robustness of the ROSA method, by comparing it to the old indicators on a wider ranch of parameter settings. This will be done in the next chapter.
     
 
 
-\chapter{Benchmark of traditional EWS with ROSA}
+\chapter{Benchmarking of traditional EWS with ROSA}
 
 We showed the risk of false signals with the traditional EWS under changing parameters.
 The ROSA method showed no wrong signals.
@@ -1126,7 +1129,7 @@ Or stays fixed:
     \lambda(t)\equiv\lambda_{0}
     \]
 
-We want a reliable indicator, meaning one that leads to as little as possible false positives and as many as possible true positives. All indicators $AC(1),Var,ROSA$ should show an increase for CSD. Hence we have to quantify what we define as a positve signal and what not. To do this we use the Kendall rank correlation coefficient (or Kendall's $\tau$ coefficient) as defined in ~ \ref{def:Kendall tau} and choose a threshold above which we count something as a positive signal. 
+We want a reliable indicator, meaning one that leads to as little as possible false positives and as many as possible true positives. All indicators AC(1),Variance and ROSA should show an increase in their indicator series for CSD. Hence we have to quantify what we define as a positve signal and what not. To do this we use the Kendall rank correlation coefficient (or Kendall's $\tau$ coefficient) as defined in \ref{def:Kendall tau} and choose a threshold above which we count something as a positive signal. 
 
 
 The procedure to benchmark our indicators quantitatively is the following:
