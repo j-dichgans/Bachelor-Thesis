@@ -48,8 +48,8 @@ coverBCOR=11mm% binding correction for the cover - adapt accordingly
 \usepackage[autostyle=true]{csquotes}
 
 
-\title{ROSA Method}
-\subtitle{and its application}
+\title{The ratio of spectra method (ROSA) for more reliable early warning signals}
+
 
 \author{Jakob Dichgans}
 
@@ -91,7 +91,7 @@ The traditional early warning signals were applied to paleoclimate data and dete
 
 Although we are interested here mainly in climate science as an application, the theory of EWS for TP's can be applied in many other contexts of complex dynamical systems as well. Systemic failures like asthma attacks \cite{Venegas:2005} or epileptic seizures in medicine \cite{Litt:2001, McSharry:2003}, market crashes in finance \cite{Kambhu:2007,May:2008} or catastrophic shifts in wildlife or fish populations for ecosystem services \cite{Scheffer:2001, MillenniumEcosystemAssessment:2005}. 
 
-In figure \ref{fig:1.1} we show different ways of how the equilibrium state of a system can react to changes in the conditions of the system. In the four panels we plot the equilibria states as a function of a bifurcation parameter representing the conditions of the system. The solid black lines illustrate stable states and the dashed black lines in panels c and d illustrate unstable ones. Additional grey arrows indicate the direction of movement of the system if it is outside of equilibrium. If the system is close to a tipping point like F2 a small change in the conditions (Panel c) or a small perturbation (Panel d) can lead to a sudden large shift in the system state. Panel b gives an example for a scenario where in the absence of a real bifurcation a small change in a critical area of the conditions can still lead to a large shift of the state. In Panel a the large change in the system state is caused by a large external forcing. We will focus on the fold bifurcation scenarios of c and d for testing purposes of the EWS and give an example of a simple climate model in the end where such a bifurcation also arises.
+In figure \ref{fig:Critical transitions in the fold catastrophe mode} we show different ways of how the equilibrium state of a system can react to changes in the conditions of the system. In the four panels we plot the equilibria states as a function of a bifurcation parameter representing the conditions of the system. The solid black lines illustrate stable states and the dashed black lines in panels c and d illustrate unstable ones. Additional grey arrows indicate the direction of movement of the system if it is outside of equilibrium. If the system is close to a tipping point like F2 a small change in the conditions (Panel c) or a small perturbation (Panel d) can lead to a sudden large shift in the system state. Panel b gives an example for a scenario where in the absence of a real bifurcation a small change in a critical area of the conditions can still lead to a large shift of the state. In Panel a the large change in the system state is caused by a large external forcing. We will focus on the fold bifurcation scenarios of c and d for testing purposes of the EWS and give an example of a simple climate model in the end where such a bifurcation also arises.
 
 
 % In the Earth system the noise corresponds to external drivers of the system, which are not included in the model. Often this key assumption is violated, eg. due to oscillatory variability in the Earth System (C:28). An example is the El-Nino Southern Oscillations which has a large impact on the Amazon Rainforest - a potential tipping element (C:29). (Incompatability with long memory process (30,31) ?). Relaxing the assumptions on the noise can change the characteristics of the traditional EWS or can make them disappear (C:31). Hence EWS without an assumption on the noise would be of use. 
@@ -100,8 +100,8 @@ In figure \ref{fig:1.1} we show different ways of how the equilibrium state of a
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.8\textwidth]{bachelor-thesis/figures/scheffer_box_1.jpg}
-    \caption{Critical transitions in the fold catastrophe model, modified from \cite{Scheffer:2009} Box 1}
-    \label{fig:1.1}
+    \caption{Modified from \cite{Scheffer:2009} Box 1: Critical transitions in the fold catastrophe model}
+    \label{fig:Critical transitions in the fold catastrophe mode}
 \end{figure}
 
 
@@ -207,14 +207,6 @@ Now we can also define the autocorrelation function for WSS-processes:
 \[
 \text{AC}(\tau) := \frac{R_{X}(\tau)}{(\text{Var}(X_{t})\text{Var}(X_{t+\tau}))^{\frac{1}{2}}}, \ \tau \geq 0
 \]
-
-
-\begin{definition}[AC]
-Let $(X_{t}) = (X_{0},...,X_{n}) \in \mathbb{R}^{n+1}$ be a time series with mean $\Bar{X}$. The $\widehat{AC(1)}$ or lag-1-Autocorrelation is defined by: 
-\[
-\widehat{AC(1)} = \frac{\sum_{t=0}^{n-1}(X_{t}-\Bar{X})(X_{t+1}-\Bar{X})}{\sum_{t=0}^{n}(X_{t}-\Bar{X})^2}
-\]
-\end{definition}
 
 The following Lemma gives a connection between the AC(1) and the linearized restoring rate (\cite{Morr:2024} SM2): 
 
@@ -946,7 +938,7 @@ and the red noise case
 \begin{figure}
     \centering
     \includegraphics[width=0.55\textwidth]{bachelor-thesis/figures/19_8_clarke_fig_1_reimp.png}
-    \caption{modified from \cite{Clarke:2023} Figure 1; AC: ---, Var: - - -}
+    \caption{Modified from \cite{Clarke:2023} Figure 1; AC: ---, Var: - - -}
     \label{success_of_trad_ews_and_rosa}
 \end{figure}
 
@@ -1129,18 +1121,21 @@ Or stays fixed:
     \lambda(t)\equiv\lambda_{0}
     \]
 
-We want a reliable indicator, meaning one that leads to as little as possible false positives and as many as possible true positives. All indicators AC(1),Variance and ROSA should show an increase in their indicator series for CSD. Hence we have to quantify what we define as a positve signal and what not. To do this we use the Kendall rank correlation coefficient (or Kendall's $\tau$ coefficient) as defined in \ref{def:Kendall tau} and choose a threshold above which we count something as a positive signal. 
+We want a reliable indicator, meaning one that leads to as little as possible false positives and as many as possible true positives. All indicators AC(1), Variance and ROSA should show an increase in their indicator series for CSD. Hence we have to quantify what we define as a positve signal and what not. To do this we use the Kendall rank correlation coefficient (or Kendall's $\tau$ coefficient) as defined in \ref{def:Kendall tau} and choose a threshold above which we count something as a positive signal. 
+
 
 
 The procedure to benchmark our indicators quantitatively is the following:
-T = 14000, window length = 700 hence number of disjoint windows = 20, steps per unit time = 10, we choose n = 1000 parameters $(\lambda_{0},\kappa_{0},\kappa_{T},\theta_{0},\theta_{T})$ where $\lambda_{0} \sim \text{Unif}(0.3,0.5)$ and $\kappa_{0},\kappa_{T},\theta_{0},\theta_{T} \sim \text{Unif}(0.5,4)$. For each parameter setting we generate one path where $\lambda(t)$ is decreasing and one where it is not. We do this using the Euler Method. Then we compute the indicators Variance, $AC(1)$ and ROSA for both time series. Afterrwards we calculate the Kendall's $\tau$ value for the indicator series from the three EWS for decreasing and fixed evolution of $\lambda(t)$. We create an array of 1001 threshold values equally spaced between -1 and 1. We compute the true positive rate for all indicators taking the mean of the corresponding Kendall's $\tau$ values of the 1000 settings with a decreasing $\lambda(t)$ that are greater than the threshold. To get the false positive rate, we do the same, now only with the corresponding Kendall's $\tau$ values of the settings with a fixed $\lambda(t)$. Repeat this for all 1001 threshold values. We get the ROC curves by plotting the true positive rates against the false positive rates for the three indicators.
-The AUC value is defined as the area under the ROC curve. To compute (approximate: since not actually rectangels, we approximate from above) the AUC values we take the vector of the true positve rates  $tp_{i}, i \in \{Variance,AC(1),ROSA\}$ and the corresponding vector of the false positive rates $fp_{i}, i \in \{Variance,AC(1),ROSA\}$: $fp_{x}^{i} = [0,fp_{i}[1:]-fp_{i}[:-1], i \in \{Variance,AC(1),ROSA\}$ and then $auc_{i} = round(<fp_{x}^{i},tp_{i}>,2), i \in \{Variance,AC(1),ROSA\}$
+We generate n = 1000 parameter settings $(\lambda_{0},\kappa_{0},\kappa_{T},\theta_{0},\theta_{T})$ where $\lambda_{0} \sim \text{Unif}(0.3,0.5)$ and $\kappa_{0},\kappa_{T},\theta_{0},\theta_{T} \sim \text{Unif}(0.5,4)$. For each parameter setting we generate one time series where $\lambda(t)$ is decreasing and one where it is not, with a time span of T = 14000, window length of W = 700, $\delta t = 1/10$ and $\Delta t = 1$.
 
 
-For a high threshold there is a high proportion of false negative signals for a decreasing $\lambda(t)$. When lowering the threshold for Kendall's $\tau$ from 1 to -1 we would like to have a fast increase in the true positive rate and a slow increase in the false positive rate. Hence a higher AUC value is better. We see that the ROSA method drastically outperforms the two traditional indicators. The $AC(1)$ method is better in detecting CSD then the variance.  
-In the ROC curve plot we don't see the spacing of the treshold values. To gain the complete picture we allow for the whole range of Kendall's $\tau$ down to -1 hence counting negative trends as positive signals, which would be odd in practice. We mark the location of the threshold value 0 on the ROC curves. This is the lowest threshold for a reasonable indication of a true positive signal. ? Due to the symmetry of the trends for the null model, the corresponding false positive rate to this point is 50\% ?. In practice we would choose a rather high threshold to increase the significance of positive results and to decrease the false positve rate.
+ We do this using the Euler Method. Then we compute the Variance, $AC(1)$ and ROSA indicators for both time series. Afterwards we calculate the Kendall's $\tau$ value for the indicator series from the three EWS for decreasing and fixed evolution of $\lambda(t)$. We create an array of 1001 threshold values equally spaced between -1 and 1. To compute the true positive rate for all indicators we take the mean of the corresponding Kendall's $\tau$ values of the 1000 settings with a decreasing $\lambda(t)$ that are greater than the threshold. We get the false positive rate in the same way, now only with the corresponding Kendall's $\tau$ values of the settings with a fixed $\lambda(t)$. This is repeated for all 1001 threshold values. We get the ROC curves by plotting the true positive rates against the false positive rates for the three indicators.
+The AUC value is defined as the area under the ROC curve and can be computed from the false and true positive vectors. 
 
-For fold bifurcations a stark decline in the linearized restoring rate shortly before the bifurcation is typicall. However allowing the indicators in our test set up to observe the time series up until the time of tipping is problematic in two ways: it overestimates the usefulness of the indicator since in practice we want an indicator that warns us sufficiently early before tipping; also when approaching the tipping point noise-induced tipping, as described in \ref{fig:1.1} , can't be excluded \cite{Ashwin:2012,Meng:2020}. To assess the capability of the indicators to detect the approaching of a TP early enough, we perform the same analysis, but now only on 60\% of the data. The procedure stays the same, despite now calculating the indicators on only the first 12 = 20 * 0.6 windows. The ROC curve plots for both scenarios (100\% and 60\% of observed Data) are plotted in figure \ref{Figure 9.1}
+For a high threshold there is a high proportion of false negative signals for a decreasing $\lambda(t)$. When lowering the threshold for Kendall's $\tau$ from 1 to -1 (advancing from the bottom left corner to the top right in figure \ref{fig:ROC_curves}) we would like to have a fast increase in the true positive rate and a slow increase in the false positive rate. Hence a higher AUC value is better. In figure \ref{fig:ROC_curves} we see that the ROSA method drastically outperforms the two traditional indicators. The $AC(1)$ method is better in detecting CSD than the variance.  
+In the ROC curve plot we don't see the spacing of the threshold values. To gain the complete picture we allow for the whole range of Kendall's $\tau$ down to -1, hence counting negative trends as positive signals, which would be odd in practice. We mark the location of the threshold value 0 on the ROC curves. This is the lowest threshold for a reasonable indication of a true positive signal. Due to the symmetry of the trends for the null model, the corresponding false positive rate to this point is 50\%. In practice we would choose a rather high threshold to increase the significance of positive results and to decrease the false positve rate.
+
+For fold bifurcations a stark decline in the linearized restoring rate shortly before the bifurcation is typical. However allowing the indicators in our test setup to observe the time series up until the time of tipping is problematic in two ways: it overestimates the usefulness of the indicator, since in practice we want an indicator that warns us sufficiently early before tipping; also when approaching the tipping point noise-induced tipping, as described in \ref{fig:Critical transitions in the fold catastrophe mode} , can't be excluded \cite{Ashwin:2012,Meng:2020}. To assess the capability of the indicators to detect the approaching of a TP early enough, we perform the same analysis, but now only on 60\% of the data. The procedure stays the same, despite now calculating the indicators on only the first $12 = 20 \cdot 0.6$ windows. The ROC curve plots for both scenarios (100\% and 60\% of observed Data) are provided in figure \ref{Figure 9.1}
 
 
 \begin{figure}[h!]
@@ -1160,15 +1155,15 @@ For fold bifurcations a stark decline in the linearized restoring rate shortly b
     \centering
     \begin{minipage}[b]{0.9\textwidth}
         \centering     
-        Figure 9.1: modified from \cite{Morr:2024} figure 2. In the left panel the analysis is conducted on the full evolution of $\lambda(t)$. For the AUC values, view the legend. The ROSA method shows perfect differentiation between false positives and true positives. The $AC(1)$ indicator is also significantly better then the variance. The location, where Kendall's $\tau$ is 0, is denoted by the symbols. In the right panel only 60\% of the data was observed. All indicators performed worse as expected, because the sharp decline of the restoring rate is not present in the data and hence the signs of CSD are more subtle. Again the ROSA method outperformed the traditional EWS with the $AC(1)$ being better than the variance.
+        Figure 9.1: Modified from \cite{Morr:2024}, Figure 2. In the left panel the analysis is conducted on the full evolution of $\lambda(t)$. For the AUC values, view the legend. The ROSA method shows perfect differentiation between false positives and true positives. The $AC(1)$ indicator is also significantly better than the variance. The location, where Kendall's $\tau$ is 0, is denoted by the symbols. In the right panel only 60\% of the data was observed. All indicators performed worse as expected, because the sharp decline of the restoring rate is not present in the data and hence the signs of CSD are more subtle. Again the ROSA method outperformed the traditional EWS with the $AC(1)$ being better than the variance.
     \end{minipage}
-    \label{fig:figure 9.1}
+    \label{fig:ROC_curves}
 \end{figure}
 
-in \cite{Morr:2024} Morr proposed three additional indicators $\phi,\lambda^{(ACS)},\lambda^{(PSD)}$. In the case of 100\% observed data the AUC valuess were $\phi [0.99], \lambda^{(ACS)} [1.0], \lambda^{(PSD)} [1.0]$ and in the case of 60\% of observed data it was  $\phi [0.85], \lambda^{(ACS)} [0.94], \lambda^{(PSD)} [0.94]$. (explain these indicators shortly). We see that the ROSA indicator was at least as good as all of these in both cases.
-The worse performance of the variance and $AC(1)$ in the case of 60\% observed data is due to the fact, that changes in $\theta$ and $\kappa$ are now often relatively larger than the change in $\lambda(t)$, since the part of the sharp decline is missing now. As we have seen in the previous chapter the changes in $\theta$ and $\kappa$ can hide the true evolution of $\lambda(t)$. The ROSA method performs worse because for cases of true CSD the Kendall $\tau$ value is smaller when only observing 60\% of the data, since the sharp decline is not present. Hence the method detects fewer cases of true positives for a fixed threshold.
+In \cite{Morr:2024} Morr described three additional indicators $\phi,\lambda^{(ACS)},\lambda^{(PSD)}$. In the case of 100\% observed data the AUC values were 0.99,1.0,1.0 (for $\phi,\lambda^{(ACS)},\lambda^{(PSD)}$ respectively) and in the case of 60\% of observed data it was 0.85,0.94,0.94 (for $\phi,\lambda^{(ACS)},\lambda^{(PSD)}$ respectively). We see that the ROSA indicator was at least as good as all of these in both cases.
+The worse performance of the variance and $AC(1)$ in the case of 60\% observed data is due to the fact, that changes in $\theta$ and $\kappa$ are now often relatively larger than the change in $\lambda(t)$, since the part of the sharp decline is missing now. This can mask the true evolution of $\lambda(t)$, as we have seen also in the previous chapter. The ROSA method performs worse because for cases of true CSD the Kendall $\tau$ value is smaller when only observing 60\% of the data, since the sharp decline is not present. Hence the method detects fewer cases of true positives for a fixed threshold.
 
-We want to further illustrate the dependence of  quality of the indicators on the fraction of observed CSD and the time series length. For the dependence on percentage of observed data we fix the time series length at T = 14000 and let the fractions vary in [0.2,0.4,0.6,0.8,1]. To analyse the dependence on the length of the time series, we fix the fraction of observed data at 60\% and let the time length vary in the range [5000,10000,15000,20000,25000,30000]. We see that the quality of the traditional EWS methods mainly depends on the fraction of observed data, while the length of the time series doesn't play much of a role. Contrary for the ROSA method the power of the method increases both with a higher fraction of observed data as well as with a longer time series. Again the newly proposed EWS is better than the old ones in all cases. 
+We want to further illustrate the dependence of  quality of the indicators on the fraction of observed data and the length of the time series. For the dependence on percentage of observed data we fix the time series length at T = 14000 and let the fractions vary in [0.2,0.4,0.6,0.8,1]. To analyze the dependence on the length of the time series, we fix the fraction of observed data at 60\% and let the time length vary in the range [5000,10000,15000,20000,25000,30000]. Figure \ref{fig:time_length_and_fraction_of_observed_data_dependence} shows that the quality of the traditional EWS methods mainly depend on the fraction of observed data, while the length of the time series is almost negligible. Contrary for the ROSA method the power of the method increases both with a higher fraction of observed data as well as with a longer time series. The newly proposed method is again better than the old ones in all cases. 
 
 
 \begin{figure}[h!]
@@ -1190,7 +1185,8 @@ We want to further illustrate the dependence of  quality of the indicators on th
         \centering     
         Figure 9.2: 
     \end{minipage}
-    \label{fig:figure 9.2}
+    \caption{Modified from \cite{Morr:2024}, Figure 5. The left panel shows how the AUC values depend on the fraction of observed data for a fixed time series length of T = 14000. In the right panel the dependency of the AUC values on the time series length is displayed for a constant fraction of 60\% of observed data . }
+    \label{fig:time_length_and_fraction_of_observed_data_dependence}
 \end{figure}
 
 
@@ -1198,9 +1194,9 @@ We want to further illustrate the dependence of  quality of the indicators on th
 
 In this section we would like to apply the ROSA method to a climate modell, where tipping occurs due to a fold-bifurcation: the Snowball Earth model, which is a simple Energy Balance Model (EBM). First we shortly discuss the theory behind these simple models, taken from \cite{Kaper:2013}. The key quantity of Earth's climate system is temperature. In an EBM the state of Earth's climate is summarized in the variable temperature averaged over the entire globe. The simplest EBM doesn't cover any spatial dimensions and is thus sometimes referred to as zero-dimensional EBM. It is governed by an ODE. To derive this ODE we have to consider the energy budget of the Earth.
 
-Almost all the energy for Earth's climate system comes from the sun in the form of electromagnetic radiation. A part of this is absorped by the solar photosphere (the outer shell of a star). Treating the sun as a black body at 5780K temperature is a good approximation for the solar energy spectrum.
+Almost all the energy for Earth's climate system comes from the sun in the form of electromagnetic radiation. A part of this is absorped by the solar photosphere (the outer shell of a star). Treating the sun as a black body at 5780 K temperature is a good approximation for the solar energy spectrum.
 
-The flux of solar radiation through a unit area of a sphere at a distance of one astronomical unit away from the sun is called the solar constant measures and is measured as $1,368Wm^{-2}$. Due to the sunspot cycle it is not exactly constant but varies around $0.1\%$
+The flux of solar radiation through a unit area of a sphere at a distance of one astronomical unit away from the sun is called the solar constant and is measured as $1,368Wm^{-2}$. Due to the sunspot cycle it is not exactly constant but varies around $0.1\%$
 
 The incident solar radiation (insolation) is more precise. It refers to the energy per unit area at a particular point in time and space. In contrast to the solar constant the insolation varies significantly  with time of day, season, latitude etc. To keep our model simple we stay with the solar constant.
 
@@ -1220,7 +1216,7 @@ Be $R$ the radius of the Earth and $S_{0}$ the solar constant. If we would look 
 \begin{equation}
     E_{in} = (1-\alpha)Q
 \end{equation}
-Now we consider $E_{out}$. The Earth also emits electromagnetic radiation, but mostly very long waves (infrared regime). We approximate the Earth as a black body with surface temperature $T$.Then according to the Stefan-Boltzmann law, the earth radiates 
+Now we consider $E_{out}$. The Earth also emits electromagnetic radiation, but mostly very long waves (infrared regime). We approximate the Earth as a black body with surface temperature $T$. Then according to the Stefan-Boltzmann law, the earth radiates 
 \begin{equation}
     E_{out}(T) = \sigma T^4
 \end{equation}
@@ -1236,9 +1232,9 @@ Solving for T:
 \begin{equation}
     T^* = (\frac{(1-\alpha)Q}{\sigma})^\frac{1}{4}
 \end{equation}
-With $Q = \frac{1}{4}S_{0}= 342 Wm^{-2}$ and $\alpha = 0.3$, which is a common value for Earth's albedo, we get an equilibrium temperature of $T^* = 254.8K$. This is much colder than our real surface temperature of $287.7K$. In the next paragraph. we will include the greenhouse effect into our model, which can explain a large part of the difference.
+With $Q = \frac{1}{4}S_{0}= 342 Wm^{-2}$ and $\alpha = 0.3$, which is a common value for Earth's albedo, we get an equilibrium temperature of $T^* = 254.8K$. This is much colder than our real surface temperature of $287.7K$. In the next paragraph we will include the greenhouse effect into our model, which can explain a large part of the difference.
 \\ 
-Greenhouse gases like carbon dioxide ($CO_{2}$), methane, water vapor and aerosols (dust particles, water droplets, etc.) increase the opacity of the atmosphere in the infrared regime (wavelengths greater than $0.7 \mu m$). Due to the very different emitting temperatures of Earth and Sun their emitting regimes barely intersect (Fig 2.4). While the sun emits only waves with length below $4 \mu m$ the earth emits only waves with lengths greater than $4 \mu m$. Hence the greenhouse effect decreases $E_{out}$ and has no impact on $E_{in}$. Therefore the global mean temperature increases. We incorporate this effect on $E_{out}$ by multiplying it with a factor $\epsilon \in (0,1)$. The modified energy balance equation: 
+Greenhouse gases like carbon dioxide ($CO_{2}$), methane, water vapor and aerosols (dust particles, water droplets, etc.) increase the opacity of the atmosphere in the infrared regime (wavelengths greater than $0.7 \mu m$). Due to the very different emitting temperatures of Earth and Sun, their emitting regimes barely intersect (Fig 2.4). While the sun emits only waves with length below $4 \mu m$ the earth emits only waves with lengths greater than $4 \mu m$. Hence the greenhouse effect decreases $E_{out}$ and has no impact on $E_{in}$. Therefore the global mean temperature increases. We incorporate this effect on $E_{out}$ by multiplying it with a factor $\epsilon \in (0,1)$. The modified energy balance equation: 
 \begin{equation}
     (1-\alpha)Q = \epsilon \sigma T^4
 \end{equation}
@@ -1263,29 +1259,30 @@ This gives us:
 \]
 This makes sure that a larger proportion of energy is reflected back to space, when the temperature is low enough for the earth to be covered by ice and snow.
 The energy balance equation with a temperature dependent $E_{in}$: 
-\[
+\begin{equation}
  C\frac{dT}{dt} = (1-\alpha(T)Q - \epsilon\sigma T^4
-\]
+ \label{simple EBM}
+\end{equation}
 Below we plot $(1-\alpha(T))Q$ and $\epsilon\sigma T^4$ against $T$. We see that there are three equilibria at $T_{1}^* = 288K$, $T_{2}^* = 265K$ and $T_{3}^* = 233K$, where $T_{1}^*$ and $T_{3}^*$ are stable and $T_{2}^*$ is unstable. Our current climate corresponds to $T_{1}^*$. In the \textit{Snowball Earth} scenario $T_{3}^*$ the earth would be entirely covered by snow and ice. 
 
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{bachelor-thesis/figures/se_multiple_equilibria.png}
-    \caption{modified from \cite{Kaper:2013} figure 2.5}
+    \caption{Modified from \cite{Kaper:2013}, Figure 2.5}
     \label{fig:enter-label}
 \end{figure}
 
-We have to keep in mind that the time scale of an EBM covers millions of years. Hence all recent ice ages and the most severe periods of glaciation of the last million years correspond to the state $T_{1}^*$. The question arises though, whether the planet has visited the state $T_{3}^*$ in the past. There is some geological evidence suggesting that the Earth was completely frozen during the Cryogenian (720-635 Myrs BP) and Huronian (2400 - 2100 Myrs BP) age (Lecture 2 Boers) (Engler: 4 times during 750-580 neoproterozoic age). How could the earth escape this state of complete glaciation? There was still some CO2 released into the atmosphere e.g. from volcanic erruptions, but no biomass existed that could take this up. This lead to a large accumulation of CO2 and consequently an increase in the greenhouse effect. In our simple model this corresponds to a decrease of $\epsilon$ and the orange curve. At some point the stable equilibrium $T_{3}^*$ would vanish and the climate system would suddenly transition to a much warmer stable equilibrium. Paleoclimate reccords exist that provide evidence for such rapid change at the end of glaciation periods (Cambrian explosion). Other questions that come to mind are: why wasn't there a snowball earth period during the last 500 million years and could there be another one in the future? We know that the continents were closer to the equator during the proterozoic age and that rock-erosion is a main actor in the removal of CO2. This lead to a low level of CO2 and greenhouse gas effect, while the polor caps could expand during ice ages. With todays distribution of the continents being closer to the poles the rock erosion would end earlier during an ice age, leading to an earlier regulating effect due to the greenhouse gas effect. During the cold war there was the fear that an outbreak of a nuclear war could cause the earth to freeze. 
+We have to keep in mind that the time scale of an EBM covers millions of years. Hence all recent ice ages and the most severe periods of glaciation of the last million years correspond to the state $T_{1}^*$. The question arises though, whether the planet has visited the state $T_{3}^*$ in the past. There is some geological evidence suggesting that the Earth was completely frozen during the Cryogenian (720-635 Myrs BP) and Huronian (2400 - 2100 Myrs BP) age (Lecture 2 Boers). How could the earth escape this state of complete glaciation? There was still some CO2 released into the atmosphere e.g. from volcanic erruptions, but no biomass existed that could take this up. This lead to a large accumulation of CO2 and consequently an increase in the greenhouse effect. In our simple model this corresponds to a decrease of $\epsilon$ and the orange curve. At some point the stable equilibrium $T_{3}^*$ would vanish and the climate system would suddenly transition to a much warmer stable equilibrium. Paleoclimate reccords exist that provide evidence for such rapid change at the end of glaciation periods (Cambrian explosion). Other questions that come to mind are: why wasn't there a snowball earth period during the last 500 million years and could there be another one in the future? We know that the continents were closer to the equator during the proterozoic age and that rock-erosion is a main actor in the removal of CO2. This lead to a low level of CO2 and greenhouse gas effect, while the polor caps could expand during ice ages. With todays distribution of the continents being closer to the poles the rock erosion would end earlier during an ice age, leading to an earlier regulating effect due to the greenhouse gas effect. During the cold war there was the fear that an outbreak of a nuclear war could cause the earth to freeze. 
 
-Now we want to understand how the equilibrium states develope when we change the solar constant $S_{0}$. To do this we plot the bifurcation diagram below. We have a fold bifurcation model with bifurcation points at $Q_{-}$ and $Q_{+}$. Here $q := Q/Q_{0}$ is the bifurcation parameter, where $Q_{0} = 342 Wm^{-2}$. When we let $q$ cross $Q_{-}$ from above, then $T_{1}^*$ and $T_{2}^*$ merge and disappear, leading to the snowball earth state $T_{3}^*$ (lower branch). If we cross $Q_{+}$ from below, then we only have the state $T_{1}^*$ (upper branch) free of ice. We also notice that there is hysteresis build into the system. 
+Now we want to understand how the equilibrium states develope when we change the solar constant $S_{0}$. To do this we plot the bifurcation diagram in figure \ref{fig:se_bif}. We have a fold bifurcation model with bifurcation points at $Q_{-}$ and $Q_{+}$. Here $q := Q/Q_{0}$ is the bifurcation parameter, where $Q_{0} = 342 Wm^{-2}$. When we let $q$ cross $Q_{-}$ from above, then $T_{1}^*$ and $T_{2}^*$ merge and disappear, leading to the snowball earth state $T_{3}^*$ (lower branch). If we cross $Q_{+}$ from below, then we only have the state $T_{1}^*$ (upper branch) free of ice. 
 
-In the next step we want to apply the traditional EWS and ROSA method to our simple EBM.
-The simulation works the same as for the abstract setting from the last chapter only now with a different function used for the SDE. We let our time series start in the lower branch and linearly increase $q$ until it tips over into the upper branch. In the upper panel of fig \ref{fig:ROSA test} we see the full picture, where $q$ ranges from 0.7 to 1.4. We observe that the rate $-\lambda(t)$ first increases before going to zero. In the previous sections we always had the case that we computed our EWS only on the already decreasing part of $-\lambda$. As we see here this doesn't have to be the case in general. To better compare our methods we simulate the time series again in the more crucial region of $q \in [1.1,1.3]$ as illustrated in the lower row of \ref{fig:ROSA test}. In the left panel the system is driven by white noise and all methods show an increase as expected (kendalltaus: $AC(1)$ (0.3142857142857143), Variance (0.40952380952380957), ROSA (0.8857142857142857)) whereas in the right panel we provoke a false negative for the traditional EWS by linearly decreasing $\kappa$ (from 3.2 to 2.3) and linearly increasing $\theta$ (from 1 to 3.7). The ROSA method also works in the red noise case. (ROSA more monotonic: earlier detectable).
+In the next step we want to apply the traditional EWS and the ROSA method to our simple EBM.
+The simulation works the same as described in earlier chapters only now with a different function used for the SDE. We let our time series start in the lower branch and linearly increase $q$ until the time series tips over into the upper branch. In the upper panel of fig \ref{fig:ROSA test} we see the full picture, where $q$ ranges from 0.7 to 1.4. We observe that the rate $\lambda(t)$ first increases before going to zero. In the previous sections we always had the case that we computed our EWS methods only on the already decreasing part of $\lambda$. As we see here this doesn't have to be the case in general. To better compare our methods we simulate the time series again in the more crucial region of $q \in [1.1,1.3]$ as illustrated in the lower row of figure \ref{fig:ROSA test}. In the left panel the system is driven by white noise and all methods show an increase as expected. The Kendall $\tau$ coefficients are given by 0.47 (AC(1)), 0.73 (Variance), 0.86 $(-\widehat{\lambda})$. In the right panel we provoke a false negative for the traditional EWS by linearly decreasing $\kappa$ (from 3.2 to 2.3) and linearly increasing $\theta$ (from 1 to 3.7). The ROSA method also works in the red noise case.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.6\textwidth]{bachelor-thesis/figures/se_bif_plot.png}
-    \caption{modified from \cite{Kaper:2013} figure 2.6}
+    \caption{Modified from \cite{Kaper:2013}, Figure 2.6}
     \label{fig:se_bif}
 \end{figure}
 
@@ -1294,7 +1291,7 @@ The simulation works the same as for the abstract setting from the last chapter 
 \begin{figure}[b]
     \centering
     \includegraphics[width=0.9\textwidth]{bachelor-thesis/figures/ROSA_test_se.jpg}
-    \caption{ROSA test}
+    \caption{We apply our three indicators to the simple EBM as defined in \ref{simple EBM}. In the upper row the bifurcation parameter ranges from 0.7 to 1.4 and in the lower row from 1.1 to 1.3. }
     \label{fig:ROSA test}
 \end{figure}
 
