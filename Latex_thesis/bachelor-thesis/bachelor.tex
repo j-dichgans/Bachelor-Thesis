@@ -84,15 +84,14 @@ A brief abstract of this thesis in English.
 
 
 We take the motivation for the ROSA method mainly from \cite{Clarke:2023}.\\
-Paleoclimate records suggest that critical thresholds of major earth system components were crossed in the past \cite{Brovkin:2021}, where major parts of the Earth's system abruptly shifted from one state to another. Relatively small changes in the external forcing, such as a change in greenhouse gas concentrations or incoming solar radiation can cause these rapid shifts. Since the rise of global temperatures, primarily due to burned fossil fuels, there is a growing concern \cite{Lenton:2019,Steffen:2018,Ritchie:2021} that key Earth System components (called "Tipping Elements") will cross Tipping points (TP) in the future and will undergo fast irreversible transitions \cite{Lenton:2008}. In some cases like the Greenland ice sheet, there is concern that a TP might have already been crossed.
+Paleoclimate records suggest that critical thresholds of major earth system components were crossed in the past \cite{Brovkin:2021}, where major parts of the Earth's system abruptly shifted from one state to another. Relatively small changes in the external forcing, such as a change in greenhouse gas concentrations or incoming solar radiation, can cause these rapid shifts. Since the rise of global temperatures, primarily due to burned fossil fuels, there is a growing concern \cite{Lenton:2019,Steffen:2018,Ritchie:2021} that key Earth System components (called "Tipping Elements") will cross Tipping points (TP) in the future and will undergo fast irreversible transitions \cite{Lenton:2008}. In some cases like the Greenland ice sheet, there is concern that a TP might have already been crossed.
 Crossing a tipping point and transitioning to a qualitatively different state can be mathematically understood as a bifurcation. The critical thresholds are often crossed due to a small change in a parameter describing the forcing of the system. Although different types of bifurcation exist \cite{Ashwin:2012}, we will focus on bifurcation-induced tipping (B-tipping) and especially fold bifurcations. Today different elements of the Earth system like the Atlantic Meridional Overturning Circulation (AMOC) \cite{Stommel:1961}, the Amazon Rain forest \cite{Cox:2000}, the permafrost \cite{Steffen:2018} or the Greenland ice sheet \cite{Feldmann:2015} are considered to be potential tipping elements. Several abrupt shifts were observed in the Coupled Model Intercomparison Project - Phase 5 \cite{Taylor:2012} and other earth system models (ESMs) \cite{Drijfhout:2015}, providing evidence that tipping points might occur. The crossing of tipping points would have severe impacts and including tipping points in integrated assessment models (IAMs) would significantly increase the Social Cost of Carbon \cite{Dietz:2021}. Many people would face significant problems as studies of specific tipping point impacts have shown: an AMOC collapse would threaten to halt large parts of arable farming in the UK \cite{Ritchie:2020} and there would be a higher risk of fires for communities in high altitudes due to the self-heating of soils \cite{Clarke:2021}.    \\
-Knowing the exact thresholds for TP's would be useful but is out of reach \cite{Steffen:2018,Drijfhout:2015}. Nevertheless, there are common characteristics for systems approaching a B-tipping, due to the theory of Normal Forms \cite{Strogatz:2015,Guckenheimer:1983}. The most important one is \emph{critical slowing down} (CSD). In general systems return to equilibrium after a small perturbation. As the system approaches a tipping point this return-time increases \cite{Scheffer:2012}, the variance will increase and its autocorrelation tends to unity \cite{Scheffer:2009,Held:2004}. The latter two statistical indicators are considered traditional 'Early Warning Signals' (EWS). (Care with EWS ?). We will discuss CSD and the theory behind these EWS more in detail in the following chapters. \\
+Knowing the exact thresholds for TP's would be useful but is out of reach \cite{Steffen:2018,Drijfhout:2015}. Nevertheless, there are common characteristics for systems approaching a B-tipping, due to the theory of Normal Forms \cite{Strogatz:2015,Guckenheimer:1983}. The most important one is \emph{critical slowing down} (CSD). In general systems return to equilibrium after a small perturbation. As the system approaches a tipping point this return-time increases \cite{Scheffer:2012}, the variance will increase and its autocorrelation tends to unity \cite{Scheffer:2009,Held:2004}. The latter two statistical indicators are considered traditional 'Early Warning Signals' (EWS). We will discuss CSD and the theory behind these EWS more in detail in the following sections. \\
 The traditional early warning signals were applied to paleoclimate data and detected TP's \cite{Boers:2018}. They were applied to a 5-year resolution time series obtained from the raw North Greenland Ice Core Project (NGRIP) record to indicate the arrival of the Dansgaard–Oeschger (DO) events. These EWS also suggest the approach of TP's in the Greenland Ice Sheet \cite{Boers:2021} and in the AMOC  \cite{Boers:2021b} following the rise of global temperatures. Despite the successful applications of the traditional EWS they also have a flaw. They depend on a stationarity assumption of the process, something which is often violated in nature, yielding the risk of false positive or false negative signals. We will give examples for this later. 
 
 Although we are interested here mainly in climate science as an application, the theory of EWS for TP's can be applied in many other contexts of complex dynamical systems as well. Systemic failures like asthma attacks \cite{Venegas:2005} or epileptic seizures in medicine \cite{Litt:2001, McSharry:2003}, market crashes in finance \cite{Kambhu:2007,May:2008} or catastrophic shifts in wildlife or fish populations for ecosystem services \cite{Scheffer:2001, MillenniumEcosystemAssessment:2005}. 
 
-In Figure \ref{fig:Critical transitions in the fold catastrophe mode} we show different ways of how the equilibrium state of a system can react to changes in the conditions of the system. We plot the equilibria states as a function of a bifurcation parameter representing the conditions of the system. The solid black lines illustrate stable states and the dashed black lines in panels c and d illustrate unstable ones. Additional grey arrows indicate the direction of movement of the system if it is outside of equilibrium. If the system is close to a tipping point like F2 a small change in the conditions (Panel c) or a small perturbation (Panel d) can lead to a sudden large shift in the system state. Panel b gives an example of a scenario where in the absence of a real bifurcation a small change in a critical area of the conditions can still lead to a large shift in the state. In Panel a the large change in the system state is caused by a large external forcing. We will focus on the fold bifurcation scenarios of c and d for testing purposes of the EWS and give an example of a simple climate model at the end where such a bifurcation also arises.
-
+In Figure \ref{fig:Critical transitions in the fold catastrophe mode} we show different ways of how the equilibrium state of a system can react to changes in the conditions of the system. We plot the equilibria states as a function of a bifurcation parameter representing the conditions of the system. The solid black lines illustrate stable states and the dashed black lines in panels c and d illustrate unstable ones. Additional grey arrows indicate the direction of movement of the system if it is outside of equilibrium. If the system is close to a tipping point like F2 a small change in the conditions (Panel c) or a small perturbation (Panel d) can lead to a sudden large shift in the system state. Panel b gives an example of a scenario where in the absence of a real bifurcation a small change in a critical area of the conditions can still lead to a large shift in the state. In Panel a the large change in the system state is caused by a large external forcing. This work will focus on the fold bifurcation scenarios of c and d.
 
 % In the Earth system the noise corresponds to external drivers of the system, which are not included in the model. Often this key assumption is violated, eg. due to oscillatory variability in the Earth System (C:28). An example is the El-Nino Southern Oscillations which has a large impact on the Amazon Rainforest - a potential tipping element (C:29). (Incompatibility with long memory process (30,31) ?). Relaxing the assumptions on the noise can change the characteristics of the traditional EWS or can make them disappear (C:31). Hence EWS without an assumption on the noise would be of use. 
 
@@ -105,7 +104,7 @@ In Figure \ref{fig:Critical transitions in the fold catastrophe mode} we show di
 \end{figure}
 
 
-\section{Motivation for the traditional EWS: Variance and $AC(1)$}
+\section{Motivation for the traditional EWS (TEWS): Variance and $AC(1)$}
 \label{sec: Motivation for the traditional EWS: Variance and $AC(1)$}
 
 This section mostly builds on \cite{Scheffer:2009}(paragraph: Theory).\\
@@ -136,39 +135,42 @@ We will now study how the system evolves if we add a small perturbation to the s
  -\lambda(a)\epsilon(t)
 \]
 The solution is $\epsilon(t) = \epsilon_{0}\exp(-\lambda(a)t) = \epsilon_{0}\exp(-t/T_{R}(a))$, where $T_{R}(a) := 1/ \lambda(a)$ is the characteristic return time \cite{Wissel:1984}.
-We see that for $a \nearrow b$ it holds that $\lambda(a) \searrow 0$ and $T_{R}(a)\nearrow \infty$. In this case, the recovery rate $\lambda(a)$ is linearly dependent on the size of the basin of attraction.
-
+We see that for $a \nearrow b$ it holds that $\lambda(a) \searrow 0$ and $T_{R}(a)\nearrow \infty$. 
 From CSD we know that the recovery rate after a small disturbance of a system is an indicator for proximity to a bifurcation point \cite{VanNes:2007}. In natural systems, it is mostly not possible to test recovery rates directly. Still, since most systems are under constant natural perturbation we can use statistics and try to deduce information about the linear recovery rate. An increase in the autocorrelation of a time series generated by equation \ref{stochastically forced system} is one important predictor for slowing down \cite{Ives:1995}. This is easy to understand intuitively: Due to the decrease in recovery rate of the system the states get more and more similar to each other. The lag-1 autocorrelation measures how closely the current state is correlated to the past state. Hence we expect an increase in this measure.
 
 Another indicator for an approaching TP is an increase in the variance of the fluctuations of a stochastically forced system. The intuitive explanation is again simple: When the linear recovery rate goes to zero, the reverting back to the equilibrium gets very slow and the perturbations can accumulate leading to an increase in the variance. 
-We will prove these properties of the traditional EWS later more formally. To do so we first introduce some concepts in the following chapter Prerequisites. In Figure \ref{fig:scheffer_fig_1_reimp} we give more intuition for the traditional EWS methods. \\
+We will prove these properties of the TEWS methods later more formally. To do so we first introduce some concepts in the following section Prerequisites. In Figure \ref{fig:scheffer_fig_1_reimp} we give more intuition for the TEWS methods. \\
 
 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.95\textwidth]{reimp_scheff_fig_1.jpg}
+    \includegraphics[width=0.95\textwidth]{bachelor-thesis/figures/scheffer_figure1.jpg}
     \caption{Modified from \cite{Scheffer:2009}, Figure 1:
     Two time series are simulated by the SDE: $dX_{t}=X(1-X/K)-c(X^2/(X^2+1))dt + dW_{t}$ modelling a harvested population with carrying capacity $K = 10$ and maximum harvest rate c (0.5 for high resilience and 2.3 for low resilience). In Panels a,b, and c the system is farther away from the TP and the recovery rate is higher. This leads to a smaller variance in the fluctuations around the equilibrium and a smaller autocorrelation. Panels d,e, and f show the system being closer to the TP with a lower recovery rate. There is a larger variance and autocorrelation.}
     \label{fig:scheffer_fig_1_reimp}
 \end{figure}
 
+\section{Structure of the Bachelor Thesis}
+Following this introduction section, we will start with some theoretical prerequisites from the areas of probability theory and stochastic analysis which we will need later on. With the help of SDEs we can then define a model for stochastically forced dynamical systems and derive their stationary characteristics. This will enable us to show the potentials and shortcomings of the TEWS methods more rigorously. In the subsequent two sections we will show how to numerically integrate the SDEs for simulations of time series and provide consistent estimators for the TEWSs. Afterwards we will give the theoretical background of the ROSA indicator. Having the three EWS methods introduced we will see an example of a successful application of all indicators in a fold bifurcation setting and also the failure of the TEWS methods. A more thorough comparison of the old methods against ROSA method in terms of false positive and false negative signals follows afterwards. Finally we will apply the ROSA method to a very simple climate model.
+
+
+
 
 
 \chapter{Prerequisites}
 
+The areas of probability theory and stochastic analysis provide the possibility to define and analyze stochastically forced dynamical systems. We will discuss some necessary concepts from these fields in the following.
 
-\section{Probability theory \& Statistics}
+\section{Probability theory}
 
-We start with some definitions, which we will need later.
-
-\begin{definition}[Stochastic process (PT script definition 5.1)]
+\begin{definition}[Stochastic process \cite{rolles:2023}]
 Let I $\subseteq \mathbb{R}$. Let $X_{t}:\Omega \rightarrow \mathbb{R}, t \in I$ be a random variable on the same probability space $(\Omega,\mathcal{F},P)$. Then, $X = (X_{t})_{t \in I} $ is called a real-valued stochastic/random process. If $I = \mathbb{N}_{0}$ it is a discrete time process, if  $I = \mathbb{R}_{+}$ it is a continuous process.
 \end{definition}
 
 
 \begin{definition}[Gaussian process]
-    A stochastic process $(X_{t})_{t\geq 0}$ is a Gaussian process if for all $t_{1} < t_{2} < ... < t_{n}$, the vector $(X_{t_{1}},...,X_{t_{n}})$ is a Gaussian process.
+    A stochastic process $(X_{t})_{t\geq 0}$ is a Gaussian process if for all $t_{1} < t_{2} < ... < t_{n} \ n \in \mathbb{N}$, the vector $(X_{t_{1}},...,X_{t_{n}})$ is a Gaussian process.
 \end{definition}
 
 
@@ -183,7 +185,7 @@ It is called 'auto'-covariance function because the covariance is taken with res
 
 
 %stanf_stat_proc
-\begin{definition}[weak sense stationarity]
+\begin{definition}[Weak sense stationarity]
 A stochastic process $(X_{t})_{t\geq 0})$ is weak-sense stationary (WSS), if:
 
 \begin{subequations}
@@ -208,20 +210,11 @@ Now we can also define the autocorrelation function for WSS processes:
 \text{AC}(\tau) := \frac{R_{X}(\tau)}{(\text{Var}(X_{t})\text{Var}(X_{t+\tau}))^{\frac{1}{2}}}, \ \tau \geq 0
 \]
 
-The following Lemma gives a connection between the AC(1) and the recovery rate (\cite{Morr:2024} SM2): 
-
-\begin{lemma}
-    Let $(X_{t})_{t\geq 0}$ be a centered gaussian process. Then it holds for all $\epsilon > 0$:
-    \[
-    E[\frac{X_{k+1}-X_{k}}{X_{k}}1_{\{\lvert X_{k} \rvert > \epsilon\}}] = AC(1) - 1
-    \]
-\end{lemma} 
-
-Later we want to compare our EWS indicators. Then we need to quantify how monotone increasing a series of values is. For this, we will use the Kendall tau coefficient. 
+Later we want to compare our EWS indicators. Then we need to quantify how monotone increasing a series of values is. For this, we will use the Kendall's $\tau$ coefficient. 
 
 \begin{definition}[Kendall's $\tau$ coefficient]
 \label{def:Kendall tau}
-Let $(x_{1},y_{1}),(x_{2},y_{2}),...,(x_{n},y_{n})\in \mathbb{R}^{2}$. A pair of observations $(x_{i},y_{j}),(x_{j},y_{j}), i,j \in [n]$ is concordant if it holds:
+Let $(x_{1},y_{1}),(x_{2},y_{2}),...,(x_{n},y_{n})\in \mathbb{R}^{2}$. A pair of observations $(x_{i},y_{i}),(x_{j},y_{j}), i,j \in [n]$ is concordant if it holds:
 \[
 ((x_{i} > x_{j}) \wedge (y_{i} > y_{j})) \vee
 ((x_{i} < x_{j}) \wedge (y_{i} < y_{j}))
@@ -230,13 +223,13 @@ Otherwise it is discordant. The Kendall $\tau$ coefficient is defined as:
 \[
 \tau := \frac{\#concordant\ pairs - \#number\ of\ discordant\ pairs}{\#pairs} = \frac{2}{n(n-1)}\sum_{i<j}sgn(x_{i}-x_{j})sgn(y_{i}-y_{j})
 \]
-where sgn is the signum function    
+where sgn is the signum function.    
 \end{definition}
 
 
 \section{Stochastic analysis}
 
-\begin{definition}[Wiener process (SA script Def. 1.6)]
+\begin{definition}[Wiener process \cite{gantert:2024}]
 A Wiener process is a stochastic process $(W_{t})_{t\geq 0}$ on some probability space $(\Omega,\mathcal{F},P)$ with the following properties: 
 \begin{itemize}
     \item $W_{0} = 0$ P-a.s
@@ -248,7 +241,7 @@ A Wiener process is a stochastic process $(W_{t})_{t\geq 0}$ on some probability
 Interpretation: 
 
 \begin{itemize}
-    \item $t \mapsto W_{t}(\omega)$ is one random evolution in time
+    \item $\forall \ t \geq 0, \ W_{t}: \Omega \mapsto \mathbb{R}$ is a random variable 
     \item $(W_{t})_{t \geq 0} : \Omega \mapsto C[0,1]$ is a random variable that takes an $\omega$ as input and outputs one realization of a path
 \end{itemize}
 
@@ -265,47 +258,47 @@ h' = f
 
 Now we can define stochastic integrals for a certain class of functions:
 
-\begin{lemma}[The Paley-Wiener stochastic integral (SA script Lemma 3.4)] 
+\begin{lemma}[The Paley-Wiener stochastic integral \cite{gantert:2024}] 
 Let $(W_{s})_{s\geq 0}$ be a Wiener process and $h \in H_{t}, t \geq 0$. Then:
 \[
 \xi_{n}^{t} := 2^{n}\sum_{j=1}^{2^{n}}(h(\frac{tj}{2^{n}})-h(\frac{t(j-1)}{2^{n}}))(W_{\frac{tj}{2^{n}}}-W_{\frac{t(j-1)}{2^{n}}}) 
 \]
 
-converges P-a.s and in $L^{2}$. We denote the limit by
+converges P-a.s and in $L^{2}$. We denote the limit of n to infinity by
 \[
 \int_{0}^{t}h'(s)dW_{s} = \int_{0}^{t}h'dW
 \]
 \end{lemma}
 
-At this point we want to highlight the importance of the fact that in the definition of the Wiener process the variance of $W_{t}$ is defined to be proportionate to time. Per definition it holds $W_{t} \sim N(0,t)$. Suppose another power $t^{\alpha}, \alpha > 0$ was chosen. 
+At this point we want to highlight the importance of the fact that in the definition of the Wiener process the variance of $W_{t}$ is defined to be proportionate to time. Per definition it holds $W_{t} \sim N(0,t)$. Suppose we choose a power $t^{\alpha}, \alpha > 0$ for the variance of $W_{t}$. 
 
-It holds: $\int_{0}^{t} 1 dW_{s} = W_{t}$ and $Var[W_{t}] = t^{\alpha}$ by assumption. But: 
-$Var[\xi_{n}^{t}] = Var\left[\sum_{j=1}^{2^{n}}\left(W_{\frac{tj}{2^{n}}} - W_{\frac{t(j-1)}{2^{n}}}\right)\right] = 2^{n}Var\left[W_{\frac{t}{2^n}}\right] = 2^{n}\left(\frac{t}{2^{n}}\right)^{\alpha}$, where we use that the increments are independent and identically distributed (i.i.d.) Since  $Var[\xi_{n}^{t}] \xrightarrow{n \rightarrow \infty} Var[W_{t}]$ (by the dominated convergence theorem (?)), $\alpha$ has to equal 1. \\
+With $h(s) := s, \ s \in [0,t]$ it holds $h \in H_{t}$ and $h' \equiv 1$. Further we have: $\int_{0}^{t} 1 dW_{s} = W_{t} = \xi_{n}^{t}, \ \forall n \in \mathbb{N}$ and $Var[W_{t}] = t^{\alpha}$ by assumption. From 
+$t^{\alpha} = Var[\xi_{n}^{t}] = Var\left[\sum_{j=1}^{2^{n}}\left(W_{\frac{tj}{2^{n}}} - W_{\frac{t(j-1)}{2^{n}}}\right)\right] = 2^{n}Var\left[W_{\frac{t}{2^n}}\right] = 2^{n}\left(\frac{t}{2^{n}}\right)^{\alpha}, \ \forall n \in \mathbb{N}$ it follows that $\alpha$ has to equal 1, where we used that the increments are independent and identically distributed (i.i.d.)  \\
 
 Consider the process:
 
 \begin{definition}[Ornstein-Uhlenbeck process (SA script Example 10.7)] 
 For $\alpha > 0$, $(W_{t})_{t\geq 0}$ a Wiener process, $x_{0} \in \mathbb{R}$. Consider the following SDE:
 \[
-dU_{t} = -\lambda U_{t} dt + \sigma dW_{t}, U_{0} = x_{0}
+dU_{t} = -\lambda U_{t} dt + \sigma dW_{t}, U_{0} = u_{0}
 \]
 \label{def:OU process}
 or equivalently
 \[
-U_{t} = x_{0} - \lambda\int_{0}^{t}U_{s}ds + \sigma W_{t}, t \geq 0
+U_{t} = u_{0} - \lambda\int_{0}^{t}U_{s}ds + \sigma W_{t}, t \geq 0
 \]  
 \end{definition}
 
 $\textbf{Claim}$: 
 \[
-U_{t} = \exp(-\lambda t)x_{0} + \sigma\int_{0}^{t}\exp(-\lambda (t-s))dW_{s}
+U_{t} = \exp(-\lambda t)u_{0} + \sigma\int_{0}^{t}\exp(-\lambda (t-s))dW_{s}
 \]
-solves the above SDE. We check this applying Ito's product rule to $\sigma e^{-\lambda t}\int_{0}^{t}e^{\lambda s}dB_{s}$:
+solves the above SDE. We check this applying Ito's product rule to $\sigma e^{-\lambda t}\int_{0}^{t}e^{\lambda s}dW_{s}$:
 \[
-dU_{t} = -\lambda x_{0}e^{-\lambda t}dt - \lambda\sigma(e^{-\lambda t}\int_{0}^{t}e^{\lambda s}dW_{s})dt + \sigma e^{-\lambda t}e^{\lambda t}dW_{t} = -\lambda U_{t} dt + \sigma dW_{t}
+dU_{t} = -\lambda u_{0}e^{-\lambda t}dt - \lambda\sigma(e^{-\lambda t}\int_{0}^{t}e^{\lambda s}dW_{s})dt + \sigma e^{-\lambda t}e^{\lambda t}dW_{t} = -\lambda U_{t} dt + \sigma dW_{t}
 \]
 
-If we choose $U_{0} \sim N(0,\frac{1}{2\lambda})$ as an initial distribution, which is independent of $(W_{t})_{t\geq 0}$ than $E[U_{t}] = 0$, $Cov[U_{s},U_{t}] = \frac{1}{2\lambda}e^{(-\lambda\lvert t-s \rvert)}$ for $t,s \geq 0$ and $U_{t}$ is wide sense stationary. It follows that $Var[U_{t}]=E[(U_{t})^{2}]=\frac{1}{2\lambda}$ and $U_{t} \sim N(0,\frac{1}{2\lambda}), \forall t \geq 0$ because the sum of normal random variables is again a normal random variable.
+If we choose $U_{0} \sim N(0,\frac{\sigma^{2}}{2\lambda})$ as an initial distribution, which is independent of $(W_{t})_{t\geq 0}$ than $E[U_{t}] = 0$, $Cov[U_{s},U_{t}] = \frac{\sigma^2}{2\lambda}e^{(-\lambda\lvert t-s \rvert)}$ for $t,s \geq 0$ and $U_{t}$ is wide sense stationary. It follows that $Var[U_{t}]=E[(U_{t})^{2}]=\frac{\sigma^2}{2\lambda}$ and $U_{t} \sim N(0,\frac{\sigma^2}{2\lambda}), \forall t \geq 0$ because the sum of normal random variables is again a normal random variable.
 
 To prove the statements about the expectation and the covariance of $U_{t}$ we use some results from stochastic analysis and probability theory.
 From stochastic analysis we use a weaker form of Ito's isometry:
@@ -350,7 +343,7 @@ E[U_{t}] = e^{-\lambda t}E[U_{0}] + e^{-\lambda t}E[\int_{0}^{t} e^{\lambda s} d
 
 Next we want to prove: $Cov[U_{s},U_{t}] = \frac{1}{2\lambda}e^{-\lambda \lvert t-s \rvert}$. 
 \begin{equation}
-    Cov[U_{s}U_{t}]=E[U_{s}U_{t}] = e^{-\lambda(t+s)}E[U_{0}^{2}] + e^{-\lambda(t+s)}E[\int_{0}^{t}e^{\lambda u}dW_{u}\int_{0}^{s}e^{\lambda v}dW_{v}]
+    Cov[U_{s}U_{t}]=E[U_{s}U_{t}] = e^{-\lambda(t+s)}E[U_{0}^{2}] + \sigma^2 e^{-\lambda(t+s)}E[\int_{0}^{t}e^{\lambda u}dW_{u}\int_{0}^{s}e^{\lambda v}dW_{v}]
     \label{cov white noise noise}
 \end{equation}
 
@@ -373,10 +366,10 @@ For a martingale it holds: $E[M_{t}|\mathcal{F}_{s}] = M_{s}, s \leq t$. Equatio
 
 \begin{subequations}
     \begin{align*}
-        E[U_{s}U_{t}] &= \frac{1}{2\lambda}e^{-\lambda(t+s)} + e^{-\lambda(t+s)}E[(\int_{0}^{s}e^{\lambda v}dW_{v})^{2}]   \\
-         &= \frac{1}{2\lambda}e^{-\lambda(t+s)} + e^{-\lambda(t+s)}\int_{0}^{s}e^{2\lambda v}dv, \ \ \ (Lemma \ 3) \\
-         &= \frac{1}{2\lambda}e^{-\lambda(t+s)} + e^{-\lambda(t+s)}\frac{1}{2\lambda}(e^{2\lambda s} - 1) \\
-         &= \frac{1}{2\lambda}e^{-\lambda(t-s)} 
+        E[U_{s}U_{t}] &= \frac{\sigma^2}{2\lambda}e^{-\lambda(t+s)} + \sigma^2 e^{-\lambda(t+s)}E[(\int_{0}^{s}e^{\lambda v}dW_{v})^{2}]   \\
+         &= \frac{\sigma^2}{2\lambda}e^{-\lambda(t+s)} + \sigma^2 e^{-\lambda(t+s)}\int_{0}^{s}e^{2\lambda v}dv, \ \ \ (Lemma \ 2) \\
+         &= \frac{\sigma^2}{2\lambda}e^{-\lambda(t+s)} + e^{-\lambda(t+s)}\frac{\sigma^2}{2\lambda}(e^{2\lambda s} - 1) \\
+         &= \frac{\sigma^2}{2\lambda}e^{-\lambda(t-s)} 
     \end{align*}
 \end{subequations}   
 
@@ -384,11 +377,12 @@ For a martingale it holds: $E[M_{t}|\mathcal{F}_{s}] = M_{s}, s \leq t$. Equatio
 
 Hence it holds for $\tau > 0$:
 \[
-R_{X}(\tau) =  \frac{1}{2\lambda}\exp(-\lambda\tau)
+R_{X}(\tau) =  \frac{\sigma^2}{2\lambda}\exp(-\lambda\tau)
 \]
 
 
 \section{Continuous time stochastic modeling}
+\label{Continuous time stochastic modeling}
 From \cite{Morr:2022}.
 
 We want to motivate the use of certain stochastic differential equations, which we will use later. 
@@ -420,7 +414,7 @@ by the linearity of the expectation, properties of the variance, the induction h
 E[\epsilon_{k}\epsilon_{k+1}] = E[\epsilon_{k}(\phi\epsilon_{k} + z_{k})] = \phi E[\epsilon_{k}^2] = \phi E[\epsilon_{0}^2] = E[\epsilon_{0}\epsilon_{1}]
 \]
 
-The $(\epsilon_{k})_{k \in \mathbb{N}}$-process has a exponentially decaying correlation structure. \textbf{Claim}:
+The $(\epsilon_{k})_{k \in \mathbb{N}}$-process has an exponentially decaying correlation structure. \textbf{Claim}:
 \[
 R_{\epsilon}(\tau) = \frac{\phi^{\tau}}{1-\phi^{2}}, \tau \in \mathbb{N}_{0}
 \]
@@ -439,7 +433,7 @@ R_{\epsilon}(\tau) = \phi^{\tau}R_{\epsilon}(0)=\frac{\phi^{\tau}}{1-\phi^{2}}
 \]
 \qed
 
-The use of continuous models is often advantageous when describing systems in nature. With the help of stochastic analysis, we can include randomness into these models. In a similar way to equation \ref{eq:discrete time modelling} we can use: 
+The use of continuous models is often advantageous when describing systems in nature. With the help of stochastic analysis, we can include randomness into these models. In a similar way to equation \ref{eq:discrete-time modelling} we can use: 
 
 \begin{equation}
     dX_{t} = f(X_{t},t)dt + \sigma dY_{t}, X_{0} = x_{0} \in \mathbb{R}
@@ -497,7 +491,7 @@ We complete the Prerequisites section by motivating the term 'white' noise for W
 \[
 S_{W}(\omega) =  lim_{T\rightarrow\infty}E[\frac{1}{T}\lvert\int_{0}^{T}\exp(-i\omega t)dW_{t}\rvert^{2}] = lim_{T\rightarrow \infty}E[\frac{1}{T}\int_{0}^{T}1dt] = 1
 \]
-where Ito's isometry was used in the second equality (?).
+where Ito's isometry was used in the second equality.
 
 
 
@@ -517,7 +511,7 @@ One way to model the linearized dynamics around an equilibrium $X^{*}(\mu)$ is v
         \label{eq: white noise linearized SDE}
 \end{equation}
 This is an Ornstein-Uhlenbeck process, which we already introduced in the section Prerequisites. Why could it make sense to model our unresolved dynamics with Gaussian noise? This is due to the Central Limit Theorem, which states that for $X_{i}, i \geq 0$ i.i.d. random variables with finite variance the standardization of their sum converges in distribution to a standard normal random variable. Hence in the limit, this sum has a Gaussian probability density. When we model a physical system like some earth-system component with a SDE that undergoes a bifurcation, than we have processes on different time scales. The bifurcation 'lives' on a much slower time scale than the unresolved dynamics realized by the noise term. The increment $dY_{t}$ is the sum of many smaller events. If we assume that we can treat these different events as i.i.d random variables then the total impact $dY_{t}$ would be the sum of the smaller impacts and would follow a normal distribution such as $dW_{t} \sim N(0,dt)$. \cite{Kurt:2010} \\
-The increments $dW_{t}$ are independent. However, as explained in the last chapter, this assumption is often violated in nature. We can preserve memory in the system by using the following linearized red noise model \cite{Hanggi:1994,Morr:2022}:
+The increments $dW_{t}$ are independent. However, as explained in the last section, this assumption is often violated in nature. We can represent memory in the system by using the following linearized red noise model \cite{Hanggi:1994,Morr:2022}:
 
 \begin{subequations}
     \begin{align}
@@ -527,7 +521,7 @@ The increments $dW_{t}$ are independent. However, as explained in the last chapt
     \label{eq:red noise linearized SDE}
 \end{subequations}
 
-Here the noise term $\kappa U_{t}dt$ is itself described by an OU-process. There also exist other positive correlated continuous models, but the frequency properties of red noise are the best suited for many applications in Physics including the climate system \cite{Hasselmann:1976, Hanggi:1993, Liao:2022}. 
+Here the term $\kappa U_{t}dt$ is itself described by an OU-process and the parameter $\theta$ controls the memory of the noise. There also exist other positive correlated continuous models, but the frequency properties of red noise are the best suited for many applications in Physics including the climate system \cite{Hasselmann:1976, Hanggi:1993, Liao:2022}. 
 Now we want to explicitly solve the SDEs for $X_{t}^{(w)}$ and $X_{t}$. We already solved \eqref{eq: white noise linearized SDE} in the section prerequisites. To solve \eqref{eq:red noise linearized SDE} we can treat $U_{t}$ and $X_{t}$ for a moment as deterministic functions of time and use the variations of constants formula for ODE's (Appendix Math Bio): \\
 
 \begin{lemma}[Variations of constants]
@@ -551,7 +545,7 @@ In our case we have $a(t) \equiv -\lambda$ and $b(t) = \kappa U_{t}$. Hence the 
     \label{red noise solution}
 \end{equation}
 
-The next step is to derive the stationary characteristics, namely AC(1) and Variance, for both processes. We will also compute the PSD for the theoretical background of the ROSA method, discussed in Chapter 6. Consistent estimators for the stationary characteristics will be provided. These can than be applied to a time series generated by the SDEs introduced above or to paleoclimate records. 
+The next step is to derive the stationary characteristics, namely AC(1) and Variance, for both processes. We will also compute the PSD for the theoretical background of the ROSA method, discussed in section 6. Consistent estimators for the stationary characteristics will be provided. These can than be applied to a time series generated by the SDEs introduced above or to paleoclimate records. 
 
 For the ROSA method we will be interested in retrieving $\lambda$ by fitting to the PSD. We already showed that the OU-process $X_{t}^{(w)}$ is wide-sense stationary $\forall t \geq 0$ using $X_{0}^{(w)} \sim N(0,\frac{1}{2\lambda})$ as an initial distribution. Additionally, we computed its characteristics. See a summary in table \ref{tab:white_noise_stat_char}. 
 
@@ -607,7 +601,7 @@ c.t PSD $S(\omega)$ & $\kappa^2/((\theta^2 + \omega^2)(\lambda^2 + \omega^2))$\\
 \label{tab:red_noise_stat_char}
 \end{table}
 
-We derive these properties. \cite{gardiner:2009}(page 110) As we have seen already the OU process is a Gaussian process. Since the Riemann sums of normal random variables converge again to a normal random variable it follows that also $X_{t}$ is a Gaussian process. We write \eqref{eq:red noise linearized SDE} more compact as a linear system of SDEs: 
+We derive these properties. As we have seen already the OU process is a Gaussian process. Since the Riemann sums of normal random variables converge again to a normal random variable it follows that also $X_{t}$ is a Gaussian process. We write \eqref{eq:red noise linearized SDE} more compact as a linear system of SDEs: 
 \[
 dY_{t} = AY_{t}dt + BdW_{t}
 \]
@@ -620,7 +614,7 @@ Y_{t} =
 \end{pmatrix}
 ,\ A = 
 \begin{pmatrix}
-    -\lambda & -\kappa \\
+    -\lambda &  \kappa \\
     0        & -\theta
 \end{pmatrix}
 ,\ B = 
@@ -629,13 +623,13 @@ Y_{t} =
     0 & 1
 \end{pmatrix}
 \]
-Given that $X_{t}$ and $U_{t}$ are Gaussian processes it holds: $Y_{t} \sim N(\mu(t),\Sigma(t)),\ \mu(t) \in \mathbb{R}^{2}, \ \Sigma(t) \in \mathbb{R}^{2x2}, \ \forall t\geq 0$. We want to find a $\Sigma_{0} \in \mathbb{R}^{2x2}$ for $(X_{0},U_{0}) \sim N(0,\Sigma_{0})$ such that $\Sigma(t) \equiv \Sigma_{0}$. We can do this by solving the following Lyapunov equation corresponding to the linear system of SDEs above: 
+Given that $X_{t}$ and $U_{t}$ are Gaussian processes it holds: $Y_{t} \sim N(\mu(t),\Sigma(t)),\ \mu(t) \in \mathbb{R}^{2}, \ \Sigma(t) \in \mathbb{R}^{2x2}, \ \forall t\geq 0$. We want to find a $\Sigma_{0} \in \mathbb{R}^{2x2}$ for $(X_{0},U_{0}) \sim N(0,\Sigma_{0})$ such that $\Sigma(t) \equiv \Sigma_{0}$. We can do this by solving the following Lyapunov equation corresponding to the linear system of SDEs above \cite{gardiner:2009}: 
 \[
 0 = \dot{\Sigma}(t) = A\Sigma(t) + \Sigma(t) A^{T} + BB^{T} 
 \]
 The solution is given by: 
 \[
-\Sigma = 
+\Sigma_{0} = 
 \begin{pmatrix}
     \frac{\kappa^{2}}{2\lambda\theta(\lambda + \theta)} & \frac{\kappa}{2\theta(\lambda + \theta)} \\
     \frac{\kappa}{2\theta(\lambda + \theta)} & \frac{1}{2\theta}
@@ -650,42 +644,42 @@ and the PSD by an application of the Wiener-Khinchin theorem:
 S_{X}(\omega) = \mathcal{F}[R_{X}(\tau)](\omega) = \frac{\kappa^{2}}{(\theta^{2} + \omega^{2})(\lambda^{2} + \omega^{2})}
 \]
 
-Letting $\kappa \rightarrow \infty, \theta \rightarrow \infty, \frac{\kappa}{\theta} \rightarrow \sigma$ we observe that the characteristics of $X_{t}^{(w)}$ are a parameter limit of the characteristics of $X_{t}$. This is why we will consider only $X_{t}$ in chapters 5, 8, and 9.
+Letting $\kappa \rightarrow \infty, \theta \rightarrow \infty, \frac{\kappa}{\theta} \rightarrow \sigma$ we observe that the characteristics of $X_{t}^{(w)}$ are a parameter limit of the characteristics of $X_{t}$. This is why we will consider only $X_{t}$ in sections 5, 8, and 9.
 Another important observation is the symmetry of the stationary characteristics of $X_{t}$ with respect to a swap of $\lambda$ and $\theta$. Hence we have to be careful when we want to infer e.g. information about $\lambda$.
 
 \begin{table}[h!]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
-& Variance & AC(1) & spectral reddening\\
+& Variance & AC(1)\\
 \hline
-$\lambda \rightarrow 0$ & $\nearrow \infty$ & $\nearrow 1$ & $\nearrow \infty$\\
-$\theta \rightarrow 0$  & $\nearrow \infty$ & $\nearrow 1$ & $\nearrow \infty$\\
-$\kappa \rightarrow \infty$ & $\nearrow \infty$ & - & $\nearrow \infty$\\    
+$\lambda \rightarrow 0$ & $\nearrow \infty$ & $\nearrow 1$ \\
+$\theta \rightarrow 0$  & $\nearrow \infty$ & $\nearrow 1$ \\
+$\kappa \rightarrow \infty$ & $\nearrow \infty$ & - \\    
 \hline
 \end{tabular}
-\caption{The danger of false signals: in each row we let one parameter go to a limit value, while holding the other two parameters fixed, and consider how this affects the Variance and AC(1). As it has been intuitively motivated already, we see that we expect the Variance to go to infinity and the $AC(1)$ to unity for CSD, although we would observe the same for $\theta \rightarrow 0$ due to the symmetry of the characteristics w.r.t $\lambda$ and $\theta$. The independence of $AC(1)$ on $\kappa$ is indicated by $-$. This would reveal $\kappa \rightarrow \infty$ as a false positive. For all three limits we would expect an increase of the PSD for low frequencies $\omega$, what we call spectral reddening.}
+\caption{The danger of false signals: in each row we let one parameter go to a limit value, while holding the other two parameters fixed, and consider how this affects the Variance and AC(1). As it has been intuitively motivated already, we see that we expect the Variance to go to infinity and the $AC(1)$ to unity for CSD, although we would observe the same for $\theta \rightarrow 0$ due to the symmetry of the characteristics w.r.t $\lambda$ and $\theta$. The independence of $AC(1)$ on $\kappa$ is indicated by $-$. This would reveal $\kappa \rightarrow \infty$ as a false positive.}
 \label{tab:danger_of_false_signals}
 \end{table}
 
-The equations \ref{eq:red noise linearized SDE} describe a setting of linearized dynamics around a fixed equilibrium point. Since we want to study early warning signal methods for tipping points we are interested in bifurcation systems, where the equilibrium point $x^{*}$ depends on $\mu(t)$ - the bifurcation parameter that changes over time. Alongside $\mu(t)$ the recovery rate $\lambda(\mu(t))$ also depends on time. Since we assume that $\mu$ changes on a very slow time scale, the process $X_{t}$ can still be regarded as stationary for not too large time windows, with the respective underlying rate $\lambda(\mu)$ treated as being constant for that time span. 
+The equations (\ref{eq:red noise linearized SDE}) describe a setting of linearized dynamics around a fixed equilibrium point. Since we want to study early warning signal methods for tipping points we are interested in bifurcation systems, where the equilibrium point $x^{*}$ depends on $\mu(t)$ - the bifurcation parameter that changes over time. Alongside $\mu(t)$ the recovery rate $\lambda(\mu(t))$ also depends on time. Since we assume that $\mu$ changes on a very slow time scale, the process $X_{t}$ can still be regarded as stationary for not too large time windows, with the respective underlying rate $\lambda(\mu)$ treated as being constant for that time span. 
 
-In table \ref{tab:danger_of_false_signals} we show the influence of the parameters $\lambda, \kappa$ and $\theta$ on the quantities Variance, $AC(1)$ and the behavior of the PSD for low frequencies $\omega$. The risk of false positives is obviuous when considering the second row, where $\theta \rightarrow 0$. However false negatives are also possible. This could happen when the true trend of $\lambda \rightarrow 0$ is masked by simultaneous evolutions of the parameters that keep the observed indicators constant.
-
-
+In table \ref{tab:danger_of_false_signals} we show the influence of the parameters $\lambda, \kappa$ and $\theta$ on the quantities Variance, $AC(1)$. The risk of false positives is obviuous when considering the second row, where $\theta \rightarrow 0$. However false negatives are also possible. This could happen when the true trend of $\lambda \rightarrow 0$ is masked by simultaneous evolutions of the parameters that keep the observed indicators constant.
 
 
 
 
-\chapter{Simulation of SDEs}
 
-In the last chapter, we introduced two SDE settings. We argued that it is often more appropriate to use continuous time models to represent dynamics in nature. In the continuous realm it was also relatively easy to derive the stationary characteristics of both processes. We needed to do this to understand what we expect our indicators to do in the case of CSD, while we also noticed the risk of false signals. 
-In application or testing contexts we would have a discrete time series available on which we want to apply our EWS methods. For simulations of such time series, we have to understand how to find discrete models for the continuous time processes $X_{t}^{(w)}$ and $X_{t}$. We start with deriving a discrete version of the Ornstein-Uhlenbeck process $U_{t}^{(c)}$.
+
+\chapter{Numerical integration of SDEs}
+
+In the last section, we introduced two SDE settings. We argued in section \ref{Continuous time stochastic modeling} that it is often more appropriate to use continuous time models to represent dynamics in nature. In the continuous realm it was also relatively easy to derive the stationary characteristics of both processes. We needed to do this to understand what we expect our indicators to do in the case of CSD, while we also noticed the risk of false signals. 
+In application or testing contexts we would have a discrete time series available on which we want to apply our EWS methods. For simulations of such time series, we have to understand how to numerically integrate the differential equations of the continuous time processes $X_{t}^{(w)}$ and $X_{t}$. We start with the Ornstein-Uhlenbeck process $U_{t}$.
 \[
-dU_{t}^{c} = -\theta U_{t}dt + \sigma dW_{t}, \ \ U_{t}^{(c)} = 0
+dU_{t} = -\theta U_{t}dt + \sigma dW_{t}, \ \ U_{t} = 0
 \]
 
-Our goal is to reproduce the stationary characteristics of $U_{t}^{(c)}$  via the $AR(1)$ process:
+Our goal is to reproduce the stationary characteristics of $U_{t}$  via the $AR(1)$ process:
 \[
      U_{t+\tau}^{(d)} = \phi U_{t} ^{(d)}+ \gamma \epsilon_{t}, \ \ \phi, \gamma \in \mathbb{R}, \ t,\tau \geq 0
 \]
@@ -747,7 +741,7 @@ on a time span $[0,T], T > 0$, we do the following:
         X_{t+\delta t} = X_{t} + f(X_{t},\mu(t))\delta t + \kappa U_{t}\delta t
     \]
     to simulate a sample path $(X_{t})_{t\in\{\delta t n, n \in \{0,...,TN\}\}}$ of $X_{t}$
-    \item sample a time series $(\Tilde{X}_t) := (X_t)_{t\in\{0,...,T\}}$
+    \item sample a time series $(\widehat{X}_t) := (X_t)_{t\in\{0,...,T\}}$
 \end{itemize}
 
 
@@ -766,7 +760,7 @@ with $\Tilde{\epsilon}_t \sim N(0,\delta t)$ to simulate a sample path of $X_{t}
 
 \chapter{Consistent estimators for Variance and AC(1)}
 
-Suppose now we are given a time series that we either simulated as described in the last chapter or collected from observations, e.g. paleoclimate records. In Chapter 3 we showed that we can expect a monotonic increase for the Variance and $AC(1)$ if $\lambda \rightarrow 0$. Our goal is now to find consistent estimators $Var_N, AC(1)_N$ for the stationary characteristics that we can then apply to our time series. Since we can treat $X_{t}^{(w)}$ as a limit case of $X_{t}$ we will focus here on the red noise case. We claim that for a time series $(X_{k})_{k\in\mathbb{N}}$ generated by a stationary red noise drive system like \ref{eq:red noise linearized SDE} it holds for $N \rightarrow \infty$:
+Suppose now we are given a time series that we either simulated as described in the last section or collected from observations, e.g. paleoclimate records. In section 3 we showed that we can expect a monotonic increase for the Variance and $AC(1)$ if $\lambda \rightarrow 0$. Our goal is now to find consistent estimators $Var_N, AC(1)_N$ for the stationary characteristics that we can then apply to our time series. Since we can treat $X_{t}^{(w)}$ as a limit case of $X_{t}$ we will focus here on the red noise case. We claim that for a time series $(X_{k})_{k\in\mathbb{N}}$ generated by a stationary red noise drive system like (\ref{eq:red noise linearized SDE}) it holds for $N \rightarrow \infty$:
 
 \begin{subequations}
         \begin{align*}
@@ -775,9 +769,9 @@ Suppose now we are given a time series that we either simulated as described in 
         \end{align*}
 \end{subequations}
 
-To prove this we use the following Lemma (SM2 \cite{Morr:2024}):
+To prove this we use the following Lemma:
 
-\begin{lemma}
+\begin{lemma}[\cite{Morr:2024SM}]
     Let $(Y_{k})_{k\in \mathbb{N}_{0}}$ be a sequence of random variables, with $\mu = E[Y_{k}] < \infty, \ k \geq 0$. Further, assume that they are stationarily correlated with
     \[
     c_{n} = Cov[Y_{k},Y_{k+n}], \ n \in \mathbb{N}
@@ -795,8 +789,8 @@ To prove this we use the following Lemma (SM2 \cite{Morr:2024}):
 
 and apply it:
 
-\begin{lemma}
-    Let X be the process defined in equation \ref{eq:red noise linearized SDE} with the appropriate initial distribution $(U_{0},X_{0})$ such that it is stationary. Then we have for every $\tau \geq 0$
+\begin{lemma}[\cite{Morr:2024SM}]
+    Let X be the process defined in equation (\ref{eq:red noise linearized SDE}) with the appropriate initial distribution $(U_{0},X_{0})$ such that it is stationary. Then we have for every $\tau \geq 0$
     \[
     R(\tau)_{N} := \frac{1}{N-\tau} \sum_{k=0}^{N-\tau -1} X_{k}X_{k+\tau} \xrightarrow{P} Cov[X_{0},X_{\tau}] = R(\tau)
     \]
@@ -807,19 +801,19 @@ and apply it:
     \label{lemma: consistent estimator proof}
 \end{lemma}
 
-The proof relies on using $Y_{k} := X_{k}X_{k+\tau}$ and showing that $\lvert Cov[Y_{k},Y_{k+n}] \rvert$ decays exponentially with n for every $\tau \geq 0$. Then Lemma \ref{lemma:summable covariance} yields the statement. Since both $R(\tau)_{N}$ and $Var_{N}$ converge to a non-zero constant and $Var_N \neq 0, \ P-a.s$ the result for $AC(1)_{N}$ follows by:
+The proof relies on using $Y_{k} := X_{k}X_{k+\tau}$ and showing that $\lvert Cov[Y_{k},Y_{k+n}] \rvert$ decays exponentially with n for every $\tau \geq 0$. Then Lemma \ref{lemma:summable covariance} yields the statement. Since both $R(\tau)_{N}$ and $Var_{N}$ converge to a non-zero constant and $Var_N \neq 0, \ P-a.s, \ \forall N > 0$ the result for $AC(1)_{N}$ follows by:
 \[
 AC(\tau)_N = \frac{R(\tau)_{N}}{Var_{N}} \xrightarrow{P} AC(\tau), \ \ \forall \tau \geq 0
 \]
-for $\tau = 1$.
+for $\tau = 1$ on the suitable set with probability 1.
 
 
 
 \chapter{Theory behind the ROSA method}
 
-In the last section we introduced consistent estimators for the Variance and $AC(1)$. The risk of false signals was already mentioned, when discussing the stationary characteristics of $X_{t}$. We will also see examples of this in chapter 8. In this section we want to explain some theory behind the more robust ROSA method. The higher reliability of the ROSA method comes at the cost that we need more information about the process, namely about the noise. 
+In the last section we introduced consistent estimators for the Variance and $AC(1)$. The risk of false signals was already mentioned, when discussing the stationary characteristics of $X_{t}$. We will also see examples of this in section 8. In this section we want to explain some theory behind the more robust ROSA method. The higher reliability of the ROSA method comes at the cost that we need more information about the process, namely about the noise. 
 
-Our new indicator is based on fitting the ratio of the PSD of the process $X_{t}$ and the PSD of the noise process $\xi_{t}$ against a continuous time limit target. That is why it is called: the 'ratio of spectra method' or ROSA. While motivating the use of the OU-process as a continuous time red noise equivalent via its spectral characteristics, we already considered the concept of power spectral density. With the Wiener-Khintchin theorem we derived the PSD of the linearized red noise driven $X_{t}$-process to be:
+Our new indicator is based on fitting the ratio of the PSD of the process $X_{t}$ and the PSD of the noise process $\xi_{t}$ against a limit target derived from the continuous-time model. That is why it is called: the 'ratio of spectra method' or ROSA. While motivating the use of the OU-process as a continuous time red noise equivalent via its spectral characteristics, we already considered the concept of power spectral density. With the Wiener-Khintchin theorem we derived the PSD of the linearized red noise driven $X_{t}$-process to be:
 
 \[
 S_{X}(\omega) = \mathcal{F}[R_{X}(\tau)](\omega) = \frac{\kappa^{2}}{(\theta^{2} + \omega^{2})(\lambda^{2} + \omega^{2})}
@@ -851,21 +845,21 @@ When we want to approximate this PSD by using a single sample path we have to dr
 \]
 
 
-We assume that our data is generated by the red noise driven linearized SDE and that we sample at discrete time steps $\Delta t = T/N$, with T the time of observation and N the number of equally spaced samples between 0 and T. Hence we can write for the discretized version of the red noise driven system:
+We assume that our data is generated by the red noise driven linearized SDE and that we sample at discrete time steps $\Delta t = T/N$, with T the time of observation and N the number of equally spaced samples between 0 and T. Hence we can write for the discretized version obtained from the Euler scheme of the continuous-time SDE:
 
         \begin{equation}  
         \frac{X_{\frac{(n+1)T}{N}}-X_{\frac{nT}{N}}}{T/N} = -\lambda X_{\frac{nT}{N}} + \kappa U_{\frac{nT}{N}}, n = 0, \dots, N-1 \label{eq: 6}
         \end{equation}
 
 
-We approximate $G^{T}[X]_{\omega}$ with the following discrete fourier integral:
+We approximate $G^{T}[X]_{\omega}$ with the following discrete-time Fourier integral:
 
     \[
     G_{N}^{T}[X]_{\omega}:= \frac{1}{\sqrt{T}}\frac{T}{N}\sum_{n=0}^{N-1}exp(-i\omega\frac{nT}{N})X_{\frac{nT}{N}}
     \]
 
 
-We apply $G_{N}^{T}[\cdot]_{\omega}$ to both sides of equation \ref{eq: 6}. Before doing so, we mention the following time shift property of the Fourier transform, which we will use in the next step:
+We apply $G_{N}^{T}[\cdot]_{\omega}$ to both sides of equation (\ref{eq: 6}). Before doing so, we mention the following time shift property of the discrete-time Fourier transform, which we will use in the next step:
 
 \[
 f(t-t_{0}) \xleftrightarrow{\mathcal{F}} e^{-i2\pi t_{0}\xi}\Tilde{f}(\xi), \ \ \ t_{0},\xi \in \mathbb{R}
@@ -874,10 +868,10 @@ f(t-t_{0}) \xleftrightarrow{\mathcal{F}} e^{-i2\pi t_{0}\xi}\Tilde{f}(\xi), \ \ 
 By applying this shifting argument to the discrete case and accounting for the boundary terms we get: 
         
     \[
-    \frac{N}{T}(exp(i\omega\frac{T}{N})-1)G_{N}^{T}[X]_{\omega} + exp(i\omega\frac{T}{N})(X_{T}-X_{0})/\sqrt{T} = 
+    \frac{N}{T}(exp(i\omega\frac{T}{N})-1)G_{N}^{T}[X]_{\omega} + exp(i\omega\frac{T}{N})(X_{T}-X_{0})/\sqrt{T} 
     \]
     \[
-     -\lambda G_{N}^{T}[X]\omega + \kappa G_{N}^{T}[U]_{\omega}
+    = -\lambda G_{N}^{T}[X]\omega + \kappa G_{N}^{T}[U]_{\omega}
     \]
 
 
@@ -890,22 +884,22 @@ For $(U_{\frac{nT}{N}})_{n \in \{0,...,N-1\}}$ define $\hat{U}:[0,T]\rightarrow\
 \[
 G_{N}^{T}[U]_{\omega} = G^{T}[\hat{U}^{N}]_{\omega}
 \]
-$U_{t}$ is pathwise continuous on [0,T] (proof ?) and hence bounded by $M := max_{t\in [0,T]} \lvert U_{t} \rvert$. Since $\hat{U}_{t}^{N}$ converges pointwise to $U_{t}$ for every realization, the dominated convergence theorem implies:
+$U_{t}$ is pathwise continuous on [0,T] and hence bounded by $M := max_{t\in [0,T]} \lvert U_{t} \rvert$. Since $\hat{U}_{t}^{N}$ converges pointwise to $U_{t}$ for every realization, the dominated convergence theorem implies:
 \[
 lim_{N\rightarrow\infty}G^{T}[\hat{U}^{N}]_{\omega} = G^{T}[U]_{\omega}
 \]
 
 Thus for $N \rightarrow \infty$ we get:
 \[
-    \lvert G^{T}[X]_{\omega} \rvert^2 = \frac{\lvert\kappa G^{T}[U]_{\omega} - exp(i\omega\frac{T}{N})(X_{T}-X_{0})/\sqrt{T}\rvert ^2}{\lambda^2 + \omega^2}
+    \lvert G^{T}[X]_{\omega} \rvert^2 = \frac{\lvert\kappa G^{T}[U]_{\omega} - (X_{T}-X_{0})/\sqrt{T}\rvert ^2}{\lambda^2 + \omega^2}
 \]
 
 Letting $T \rightarrow \infty$ and dividing by $\lvert\kappa G[U]_{\omega}\rvert^2$ finally yields:
 \[
-    \frac{\lvert G[X]_{\omega} \rvert^2}{\lvert\kappa G[U]_{\omega}\rvert^2} = \frac{1}{\lambda^2 + \omega^2}
+    \frac{\Tilde{S}_{X}(\omega)}{\kappa^2\Tilde{S}_{U}(\omega)} = \frac{1}{\lambda^2 + \omega^2}
 \]
 
-However, it is important to keep in mind that in practice we are not able to achieve these exact limits. For estimating the PSD of a process $X_{t}$ we will always rely on the discrete Fourier integral and since we sample at unit step $\Delta t = 1$ we will use $G_{T}^{T}[X]_{\omega}$, hence T = N. Further, we can only choose T as large as possible to get closer to the continuous target. In practice we will than approximate $\lambda$ by fitting $\frac{\lvert G_{T}^{T}[X]_{\omega} \rvert ^2}{\lvert \kappa G_{T}^{T}[U]_{\omega} \rvert ^2}$ to the right hand side $\frac{1}{\lambda^2 + \omega^2}$. The next chapter will also provide an example of a fit of an observed PSD versus the theoretical PSD.
+However, it is important to keep in mind that in practice we are not able to achieve these exact limits. For estimating the PSD of a process $X_{t}$ we will always rely on the discrete Fourier integral and since we sample at unit step $\Delta t = 1$ we will use $G_{T}^{T}[X]_{\omega}$, hence T = N. Further, we can only choose T as large as possible to get closer to the continuous target. In practice we will than approximate $\lambda$ by fitting $\frac{\lvert G_{T}^{T}[X]_{\omega} \rvert ^2}{\lvert \kappa G_{T}^{T}[U]_{\omega} \rvert ^2}$ to the right hand side $\frac{1}{\lambda^2 + \omega^2}$. The next section will also provide an example of a fit of an observed PSD versus the theoretical PSD.
 
 
 
@@ -937,30 +931,26 @@ and the red noise case
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.55\textwidth]{bachelor-thesis/figures/19_8_clarke_fig_1_reimp.png}
-    \caption{Modified from \cite{Clarke:2023} Figure 1; AC: ---, Var: - - -}
+    \includegraphics[width=0.55\textwidth]{bachelor-thesis/figures/9_9_clarke_fig_1_reimp.png}
+    \caption{Similar to \cite{Clarke:2023} Figure 1; AC: ---, Var: - - -}
     \label{success_of_trad_ews_and_rosa}
 \end{figure}
 
-We want to simulate a time series on a time span of [0,T] that starts at the equilibrium point corresponding to $\mu(0) = -1$. Then we slowly change the underlying deterministic part of the system by increasing $\mu(t)$ and thereby eventually drive the system over the edge of a tipping point. A more explicit explanation of the implementation of the code underlying Figure \ref{success_of_trad_ews_and_rosa} follows now. To get the bifurcation plot in Panel A we first compute the paths of equilibria $X^{*}(t)$. There is an upper and lower stable branch plus an unstable middle branch for $\mu \in [-2/3,2/3]$. The evolution of the true recovery rate following the upper branch is computed by: $\lambda(t) = -f'(x^{*}(t),\mu(t))$. We then simulate the time series for both scenarios as explained in chapter 4. In this case we use an observation time of T = 10000, a sample step of $\Delta t = 1$, and a simulation step of $\delta t = 1/10$. We use a linear ramp for $\mu:  [-1,1] \rightarrow \mathbb{R}$:
+We want to simulate a time series on a time span of [0,T] that starts at the equilibrium point corresponding to $\mu(0) = -1$. Then we slowly change the underlying deterministic part of the system by increasing $\mu(t)$ and thereby eventually drive the system over the edge of a tipping point. A more explicit explanation of the implementation of the code underlying Figure \ref{success_of_trad_ews_and_rosa} follows now. To get the bifurcation plot in Panel A we first compute the paths of equilibria $x^{*}(t)$. There is an upper and lower stable branch plus an unstable middle branch for $\mu \in [-2/3,2/3]$. The evolution of the true recovery rate following the upper branch is computed by: $\lambda(t) = -f'(x^{*}(t),\mu(t))$. We then simulate the time series for both scenarios as explained in section 4. In this case we use an observation time of T = 10000, a sample step of $\Delta t = 1$, and a simulation step of $\delta t = 1/10$. We use a linear ramp for $\mu:  [-1,1] \rightarrow \mathbb{R}$:
 \[
 \mu(t) := \frac{2}{T}t-1
 \]
 
 For simulating both time series we used $(\sigma,\kappa,\theta) = (0.01,0.05,1)$. 
-Then we compute the three indicator series on windows of length W = 200. Hence we have 1000/200=50 windows. In each window we first detrend the filtered time series with a second-order polynomial to take away the trend induced by the equilibrium path. For the computation of the variance python uses the biased estimator as introduced in Chapter 5. The lag-1 autocorrelation is computed as $r_{1} := \frac{N-1}{N}AC(1)_{N}$, hence without the fraction $\frac{N}{N-1}$. Since this fraction converges to zero, $r_{1}$ is still a consistent estimator. For the computation of the ROSA method we need both the filtered time series $X_{t}$ as well as the filtered noise series $\widehat{\xi}_{t}$ (we denote the respective filtered noise series with a hat). For the white noise case $\xi_{t} = dW_{t}$ we sum up the increments for each unit time interval:
+Then we compute the three indicator series on windows of length WL = 200. Hence we have 1000/200=50 windows. In each window we first detrend the subsampled time series with a second-order polynomial to take away the trend induced by the equilibrium path. For the computation of the variance python uses the biased estimator as introduced in section 5. The lag-1 autocorrelation is computed as $r_{1} := \frac{N-1}{N}AC(1)_{N}$, hence without the fraction $\frac{N}{N-1}$. Since this fraction converges to zero, $r_{1}$ is still a consistent estimator. For the computation of the ROSA method we need both the subsampled time series $\widehat{X}_{t}$ as well as the subsampled noise series $\widehat{\xi}_{t}$ (we denote the respective subsampled noise series with a hat). We have $\xi_{t} = \sigma W_{\delta t}$ in the white noise case and $\xi_{t} = \kappa U_{t} \delta t$ in the red noise case. In both cases we sum up the increments for each unit time interval:
 \[
-\widehat{\xi}_{i} = \sum_{j = 0}^{9}\xi_{10i+j}, \ i \in \{0,...,T-1\}
-\]
-For the red noise case we have to include the factor $\delta t$:
-\[
-\widehat{\xi}_{i} = (\sum_{j = 0}^{9}\xi_{10i+j})\delta t, \ i \in \{0,...,T-1\}
+\widehat{\xi}_{i} = \sum_{j = 0}^{9}\xi_{i+j\delta t}, \ i \in \{0,...,T-1\}
 \]
 
 We then take:
 
 \[
-(G_{W}^{W}[Y]_{\omega})_{j} = \lvert \frac{1}{\sqrt{W}}\sum_{k=0}^{W-1}\exp(i\omega k)Y_{jW + k} \rvert ^2, \ \ j \in \{0,...,49\}, \ Y \in \{X, \widehat{\xi}\}
+(G_{WL}^{WL}[Y]_{\omega})_{j} = \lvert \frac{1}{\sqrt{WL}}\sum_{k=0}^{WL-1}\exp(i\omega k)Y_{jWL + k} \rvert ^2, \ \ j \in \{0,...,49\}, \ Y \in \{\widehat{X}, \widehat{\xi}\}
 \]
 as an approximation of the PSD of both the time series $X_{t}$ and the noise series $\widehat{\xi}_{t}$ in the respective time window. We then compute an approximation of $\lambda(t)$ via a least square fit:
 \[
@@ -969,8 +959,8 @@ as an approximation of the PSD of both the time series $X_{t}$ and the noise ser
 
 As a frequency domain we use $F_{N}:=\{2\pi l/N | l = 1,...,N/2 - 1\}$ if N is even and $F_{N} := \{2\pi l/N | l = 1,...,(N-1)/2 \}$ if N is odd. So in this case N = W. We take the logarithm inside the least square fitting problem to weight the frequencies more evenly. 
 
-In Figure \ref{observed_vs_continuous_PSD} we want to give an example of the goodness of fit of the observed PSD ratio versus the theoretical fraction $\frac{1}{\lambda^2 + \omega^2}$. To create this plot we first computed a mean recovery rate $\Bar{\lambda} = \frac{1}{500}\sum_{t=0}^{999}\lambda(t) = -\frac{1}{500}\sum_{t=0}^{999}f'(X^{*}(t),\mu(t)) = -\frac{1}{500}\sum_{t=0}^{999}(1-X^{*}(t)^2)$ on the window [0,999] as an approximation of the recovery rate in this time frame. We then loglog-plot the ratio $\frac{1}{\Bar{\lambda}^2 + \omega^2}$ and the observed PSD ratio on the frequency domain $F_{1000}$, where we used a white noise driven time series. We see that the observed PSD ratio fluctuates fairly well around the true trend, although we had to use a finite window length of one thousand.
-In Chapter 9 we will see, that the ROSA method works even better for longer windows.
+In Figure \ref{observed_vs_continuous_PSD} we want to give an example of the goodness of fit of the observed PSD ratio versus the theoretical fraction $\frac{1}{\lambda^2 + \omega^2}$. To create this plot we first computed a mean recovery rate $\Bar{\lambda} = \frac{1}{1000}\sum_{t=0}^{999}\lambda(t) = -\frac{1}{1000}\sum_{t=0}^{999}f'(X^{*}(t),\mu(t)) = -\frac{1}{1000}\sum_{t=0}^{999}(1-X^{*}(t)^2)$ on the window [0,999] as an approximation of the recovery rate in this time frame. We then loglog-plot the ratio $\frac{1}{\Bar{\lambda}^2 + \omega^2}$ and the observed PSD ratio on the frequency domain $F_{1000}$, where we used a white noise driven time series. We see that the observed PSD ratio fluctuates fairly well around the true trend, although we had to use a finite window length of one thousand.
+In section 9 we will see, that the ROSA method works even better for longer windows.
 
 In Figure \ref{success_of_trad_ews_and_rosa} we see that in our case of constant $\kappa$ and $\theta$ all three indicators show a true EWS.
 
@@ -983,7 +973,7 @@ In Figure \ref{success_of_trad_ews_and_rosa} we see that in our case of constant
 \end{figure}
 
 
-We want to briefly discuss differences in our implementation to the one of Clarke in \cite{Clarke:2023} Figure 1. This Figure has the same structure as \ref{success_of_trad_ews_and_rosa}. Clarke argues that the presence of autocorrelated noise can mask the changes in the AC of the system. Indeed the AC shown in the red noise case (Panel C) of Clarke's Figure 1 doesn't give an early warning signal. However, as we have derived theoretically an increase in Variance and AC(1) would be expected in both the white and red noise case. Our example in the plot confirms this. 
+We want to briefly discuss differences in our implementation to the one of Clarke in \cite{Clarke:2023} Figure 1. This Figure has the same structure as \ref{success_of_trad_ews_and_rosa}. Clarke argues that the presence of autocorrelated noise can mask the changes in the AC of the system. Indeed the AC shown in the red noise case (Panel C) of Clarke's Figure 1 doesn't give an early warning signal. However, as we have derived theoretically an increase in the TEWSs would be expected in both the white and red noise case. Our example in the plot confirms this. 
 In Clarke's implementation there is no differentiation between the bifurcation parameter $\mu$ and time $t$. This has several disadvantages: Firstly due to $\mu = t$, t loses its interpretation as time, since $\mu \in [-1,1]$. Additionally, now the bifurcation process is on the same time scale as the progression of time. Hence the assumption that the process is approximately stationary in each window is not valid anymore. Clarke tries to fix the issue of equal time scales by introducing a factor $\epsilon = 0.01$
 \[
 \epsilon\frac{dx}{dt} = x - \frac{1}{3}x^3-\mu(t) + \eta(t)
@@ -995,9 +985,9 @@ We argue that our approach with a linear ramp for $\mu(t)$, a separation of simu
 
 \chapter{Failure of traditional EWS: false signals  under changing parameters}
 
-In the last chapter we saw an example of a successful application of the three indicators on a simple bifurcation model. While $\lambda(t)$ changed in time due to the bifurcation process, the parameters $\sigma$ and $\kappa$ were fixed. 
+In the last section we saw an example of a successful application of the three indicators on a simple bifurcation model. While $\lambda(t)$ changed in time due to the bifurcation process, the parameters $\sigma$ and $\kappa$ were fixed. 
 
-We want to illustrate the risk of false positive and false negative signals when using the Variance and AC(1) as EWS with examples in an abstract fold bifurcation setting. As discussed previously we can focus on the red noise case.
+We want to illustrate the risk of false positive and false negative signals when using TEWS methods with examples in an abstract fold bifurcation setting. As discussed previously we can focus on the red noise case.
 
 Compared to before we now allow also for $\kappa$ and $\theta$ to change in time:
     \begin{subequations}
@@ -1007,14 +997,13 @@ Compared to before we now allow also for $\kappa$ and $\theta$ to change in time
     \end{align*}
     \end{subequations}
 
-The linearization is assumed to be a good enough approximation to a real fold bifurcation. Due to the fact that the parameters now change in time, the process isn't stationary anymore. However, if the parameters change slowly enough, the process is nearly stationary in each window. Hence our methods can still be applied.
-
+The linearization is assumed to be a good enough approximation to a real fold bifurcation. Due to the fact that the parameters now change in time, the process isn't stationary anymore. As argued before in section 3, we can however still apply our methods if the parameters (now including $\kappa$ and $\theta$) change slowly enough.
 We assume a decline of $\lambda$ that is typical for a fold bifurcation: 
     \[
     \lambda(t) := \lambda_{0}\sqrt{1-t/T}
     \]
 
-Recall the stationary characteristics of $X_{t}$ as described by the SDE \ref{eq:red noise linearized SDE}: 
+Recall the stationary characteristics of $X_{t}$ as described by the SDE (\ref{eq:red noise linearized SDE}): 
 
 \begin{table}[h!]
 \centering
@@ -1027,7 +1016,7 @@ AC($\tau$) & $(\lambda\exp(-\theta\lvert\tau\rvert)-\theta\exp(-\lambda\lvert\ta
 c.t PSD $S(\omega)$ & $\kappa^2/((\theta^2 + \omega^2)(\lambda^2 + \omega^2))$\\
 \hline
 \end{tabular}
-\caption{stationary characteristics $X_{t}$}
+\caption{stationary characteristics of $X_{t}$, following (\ref{eq:red noise linearized SDE})}
 \label{tab:simple_table}
 \end{table}
 
@@ -1052,7 +1041,7 @@ Var(t) = \frac{\kappa(t)^2}{2\lambda(t)\theta(t)(\lambda(t) + \theta(t))} \nearr
 AC(1) = \frac{(\lambda(t)\exp(-\theta(t))-\theta(t)\exp(-\lambda(t)))}{(\lambda(t)-\theta(t))} \nearrow, \ t \rightarrow T
 \]
 
-We expect the traditional indicators to follow the same trend. This is indeed the case as we see in \ref{false positive example}. In the third row of the plot we see that the ROSA method follows the true evolution of $\lambda(t)$ quite closely in the left column and shows a roughly constant trend in the right column, thus avoiding a false positive.
+We expect the traditional indicators to follow the same trend. This is indeed the case as we see in Figure \ref{false positive example}. In the third row of the plot we see that the ROSA method follows the true evolution of $\lambda(t)$ quite closely in the left column and shows a roughly constant trend in the right column, thus avoiding a false positive.
 
 \begin{figure}
     \begin{minipage}{0.49\textwidth}
@@ -1072,7 +1061,7 @@ We expect the traditional indicators to follow the same trend. This is indeed th
 \end{figure}
 
 
-Now we turn to a false negative example. For the simulation of both time series we choose: $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (3.2,2.3,1,3.7)$. In this case we have for decreasing $\lambda$ a decline in the variance beside the increase close to T and an increase in AC(1). Hence the variance gives a false negative signal. For fix $\lambda(t) \equiv \lambda_{0}$ both indicators a decreasing. This is again matched by the results from the simulation as seen in \ref{false negative example}. The ROSA method again matches $\lambda(t)$ well and doesn't show false signals.
+Now we turn to a false negative example. For the simulation of both time series we choose: $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (3.2,2.3,1,3.7)$. In this case we have for decreasing $\lambda$ a decline in the variance beside the increase close to T and an increase in AC(1). Hence the variance gives a false negative signal. For fix $\lambda(t) \equiv \lambda_{0}$ both indicators a decreasing. This is again matched by the results from the simulation as seen in Figure \ref{false negative example}. The ROSA method again matches $\lambda(t)$ well and doesn't show false signals.
 
 \begin{figure}
     \begin{minipage}{0.49\textwidth}
@@ -1092,7 +1081,7 @@ Now we turn to a false negative example. For the simulation of both time series 
 \end{figure}
 
 
-These were however only two examples. We want to provide more evidence for the robustness of the ROSA method, by comparing it to the old indicators on a wider ranch of parameter settings. This will be done in the next chapter.
+These were however only two examples. We want to provide more evidence for the robustness of the ROSA method, by comparing it to the old indicators on a wider ranch of parameter settings. This will be done in the next section.
     
 
 
@@ -1100,7 +1089,7 @@ These were however only two examples. We want to provide more evidence for the r
 
 We showed the risk of false signals with the traditional EWS under changing parameters.
 The ROSA method showed no wrong signals.
-In this chapter we want to carry out a more thorough comparison in terms of false positives vs. true positives of the traditional EWS versus the ROSA method. We do this by plotting the ROC curve and computing the AUC values. First, we will do this for 100\% of observed CSD and then for 60\%.
+In this section we want to carry out a more thorough comparison in terms of false positives vs. true positives of the traditional EWS versus the ROSA method. We do this by plotting the ROC curve and computing the AUC values. First, we will do this for 100\% of observed CSD and then for 60\%.
 
 We remind us of the test setting: 
 
@@ -1161,7 +1150,7 @@ For fold bifurcations a stark decline in the recovery rate shortly before the bi
 \end{figure}
 
 In \cite{Morr:2024} Morr described three additional indicators $\phi,\lambda^{(ACS)},\lambda^{(PSD)}$. In the case of 100\% observed data the AUC values were 0.99,1.0,1.0 (for $\phi,\lambda^{(ACS)},\lambda^{(PSD)}$ respectively) and in the case of 60\% of observed data it was 0.85,0.94,0.94 (for $\phi,\lambda^{(ACS)},\lambda^{(PSD)}$ respectively). We see that the ROSA indicator was at least as good as all of these in both cases.
-The worse performance of the variance and $AC(1)$ in the case of 60\% observed data is due to the fact, that changes in $\theta$ and $\kappa$ are now often relatively larger than the change in $\lambda(t)$, since the part of the sharp decline is missing now. This can mask the true evolution of $\lambda(t)$, as we have seen also in the previous chapter. The ROSA method performs worse because for cases of true CSD the Kendall $\tau$ value is smaller when only observing 60\% of the data since the sharp decline is not present. Hence the method detects fewer cases of true positives for a fixed threshold.
+The worse performance of the TEWS methods in the case of 60\% observed data is due to the fact, that changes in $\theta$ and $\kappa$ are now often relatively larger than the change in $\lambda(t)$, since the part of the sharp decline is missing now. This can mask the true evolution of $\lambda(t)$, as we have seen also in the previous section. The ROSA method performs worse because for cases of true CSD the Kendall $\tau$ value is smaller when only observing 60\% of the data since the sharp decline is not present. Hence the method detects fewer cases of true positives for a fixed threshold.
 
 We want to further illustrate the dependence of quality of the indicators on the fraction of observed data and the length of the time series. For the dependence on the percentage of observed data we fix the time series length at T = 14000 and let the fractions vary in [0.2,0.4,0.6,0.8,1]. To analyze the dependence on the length of the time series, we fix the fraction of observed data at 60\% and let the time length vary in the range [5000,10000,15000,20000,25000,30000]. Figure \ref{fig:time_length_and_fraction_of_observed_data_dependence} shows that the quality of the traditional EWS methods mainly depend on the fraction of observed data, while the length of the time series is almost negligible. In contrast to that the power of the ROSA method increases both with a higher fraction of observed data as well as with a longer time series. The newly proposed method is again better than the old ones in all cases. 
 
@@ -1277,7 +1266,7 @@ We have to keep in mind that the time scale of an EBM covers millions of years. 
 Now we want to understand how the equilibrium states develop when we change the solar constant $S_{0}$. To do this we plot the bifurcation diagram in Figure \ref{fig:se_bif}. We have a fold bifurcation model with bifurcation points at $Q_{-}$ and $Q_{+}$. Here $q := Q/Q_{0}$ is the bifurcation parameter, where $Q_{0} = 342 Wm^{-2}$. When we let $q$ cross $Q_{-}$ from above, then $T_{1}^*$ and $T_{2}^*$ merge and disappear, leading to the snowball earth state $T_{3}^*$ (lower branch). If we cross $Q_{+}$ from below, then we only have the state $T_{1}^*$ (upper branch) free of ice. 
 
 In the next step we want to apply the traditional EWS and the ROSA method to our simple EBM.
-The simulation works the same as described in earlier chapters only now with a different function used for the SDE. We let our time series start in the lower branch and linearly increase $q$ until the time series tips over into the upper branch. In the upper panel of fig \ref{fig:ROSA tes} we see the full picture, where $q$ ranges from 0.7 to 1.4. We observe that the rate $\lambda(t)$ first increases before going to zero. In the previous sections we always had the case that we computed our EWS methods only on the already decreasing part of $\lambda$. As we see here this doesn't have to be the case in general. To better compare our methods we simulate the time series again in the more crucial region of $q \in [1.1,1.3]$ as illustrated in the lower row of Figure \ref{fig:ROSA test}. In the left panel the system is driven by white noise and all methods show an increase as expected. The Kendall $\tau$ coefficients are given by 0.47 (AC(1)), 0.73 (Variance), 0.86 $(-\widehat{\lambda})$. In the right panel we provoke a false negative for the traditional EWS by linearly decreasing $\kappa$ (from 3.2 to 2.3) and linearly increasing $\theta$ (from 1 to 3.7). The ROSA method also works in the red noise case.
+The simulation works the same as described in earlier sections only now with a different function used for the SDE. We let our time series start in the lower branch and linearly increase $q$ until the time series tips over into the upper branch. In the upper panel of fig \ref{fig:ROSA tes} we see the full picture, where $q$ ranges from 0.7 to 1.4. We observe that the rate $\lambda(t)$ first increases before going to zero. In the previous sections we always had the case that we computed our EWS methods only on the already decreasing part of $\lambda$. As we see here this doesn't have to be the case in general. To better compare our methods we simulate the time series again in the more crucial region of $q \in [1.1,1.3]$ as illustrated in the lower row of Figure \ref{fig:ROSA test}. In the left panel the system is driven by white noise and all methods show an increase as expected. The Kendall $\tau$ coefficients are given by 0.47 (AC(1)), 0.73 (Variance), 0.86 $(-\widehat{\lambda})$. In the right panel we provoke a false negative for the traditional EWS by linearly decreasing $\kappa$ (from 3.2 to 2.3) and linearly increasing $\theta$ (from 1 to 3.7). The ROSA method also works in the red noise case.
 
 \begin{figure}[t]
     \centering
