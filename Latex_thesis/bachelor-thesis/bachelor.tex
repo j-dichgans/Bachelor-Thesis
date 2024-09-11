@@ -48,7 +48,7 @@ coverBCOR=11mm% binding correction for the cover - adapt accordingly
 \usepackage[autostyle=true]{csquotes}
 
 
-\title{The ratio of spectra method (ROSA) for more reliable early warning signals}
+\title{The ratio of spectra method (ROSA) as a more reliable early warning signal method for climate tipping points}
 
 
 \author{Jakob Dichgans}
@@ -99,7 +99,7 @@ In Figure \ref{fig:Critical transitions in the fold catastrophe mode} we show di
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.8\textwidth]{bachelor-thesis/figures/scheffer_box_1.jpg}
-    \caption{Modified from \cite{Scheffer:2009} Box 1: Critical transitions in the fold catastrophe model. Different ways of how a dynamical system can abruptly change its system state are illustrated. In panel a the change is due to a large external forcing. Panel b shows a situation, where a small change in the conditions in a sensitive area of the system can lead to a large shift. Only in the bottom row a real bifurcation is present. The change is caused either by a small change in conditions (Panel c) or by an external forcing (Panel d).}
+    \caption{Based on \cite{Scheffer:2009} Box 1: Critical transitions in the fold catastrophe model. Different ways of how a dynamical system can abruptly change its system state are illustrated. In panel a the change is due to a large external forcing. Panel b shows a situation, where a small change in the conditions in a sensitive area of the system can lead to a large shift. Only in the bottom row a real bifurcation is present. The change is caused either by a small change in conditions (Panel c) or by an external forcing (Panel d).}
     \label{fig:Critical transitions in the fold catastrophe mode}
 \end{figure}
 
@@ -146,10 +146,11 @@ We will prove these properties of the TEWS methods later more formally. To do so
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.95\textwidth]{bachelor-thesis/figures/scheffer_figure1.jpg}
-    \caption{Modified from \cite{Scheffer:2009}, Figure 1:
+    \caption{Based on \cite{Scheffer:2009}, Figure 1:
     Two time series are simulated by the SDE: $dX_{t}=X(1-X/K)-c(X^2/(X^2+1))dt + dW_{t}$ modelling a harvested population with carrying capacity $K = 10$ and maximum harvest rate c (0.5 for high resilience and 2.3 for low resilience). In Panels a,b, and c the system is farther away from the TP and the recovery rate is higher. This leads to a smaller variance in the fluctuations around the equilibrium and a smaller autocorrelation. Panels d,e, and f show the system being closer to the TP with a lower recovery rate. There is a larger variance and autocorrelation.}
     \label{fig:scheffer_fig_1_reimp}
 \end{figure}
+
 
 \section{Structure of the Bachelor Thesis}
 Following this introduction section, we will start with some theoretical prerequisites from the areas of probability theory and stochastic analysis which we will need later on. With the help of SDEs we can then define a model for stochastically forced dynamical systems and derive their stationary characteristics. This will enable us to show the potentials and shortcomings of the TEWS methods more rigorously. In the subsequent two sections we will show how to numerically integrate the SDEs for simulations of time series and provide consistent estimators for the TEWSs. Afterwards we will give the theoretical background of the ROSA indicator. Having the three EWS methods introduced we will see an example of a successful application of all indicators in a fold bifurcation setting and also the failure of the TEWS methods. A more thorough comparison of the old methods against ROSA method in terms of false positive and false negative signals follows afterwards. Finally we will apply the ROSA method to a very simple climate model.
@@ -561,7 +562,7 @@ AC($\tau$) & $\exp(-\lambda |\tau|)$\\
 c.t PSD $S(\omega)$ & $\sigma^2$/($\lambda^2 + \omega^2$)\\
 \hline
 \end{tabular}
-\caption{stationary characteristics for $X_{t}^{(w)}$}
+\caption{stationary characteristics of $X_{t}^{(w)}$}
 \label{tab:white_noise_stat_char}
 \end{table}
 
@@ -597,7 +598,7 @@ AC($\tau$) & $(\lambda\exp(-\theta\lvert\tau\rvert)-\theta\exp(-\lambda\lvert\ta
 c.t PSD $S(\omega)$ & $\kappa^2/((\theta^2 + \omega^2)(\lambda^2 + \omega^2))$\\
 \hline
 \end{tabular}
-\caption{stationary characteristics for $X_{t}$. The case $\lambda = \theta$ coincides with the limit $\theta \rightarrow \lambda$ for the case $\lambda \neq \theta$.}
+\caption{stationary characteristics of $X_{t}$ with $\lambda \neq \theta$. The case $\lambda = \theta$ coincides with the limit $\theta \rightarrow \lambda$ for the case $\lambda \neq \theta$.}
 \label{tab:red_noise_stat_char}
 \end{table}
 
@@ -838,7 +839,7 @@ Recall the definition of the PSD for a stochastic process $X_{t}$:
 S_{X}(\omega) := lim_{T\rightarrow\infty}E[\frac{1}{T}\lvert\int_{0}^{T}X_{t}e^{(-i\omega t)}dt \rvert^{2}]
 \]
 
-When we want to approximate this PSD by using a single sample path we have to drop the expectation or assume this realization to be the expected value. Hence we will also use the following definition of the PSD:
+When we want to approximate this PSD by using a single sample path we have to drop the expectation and this is equivalent to integration over long times due to ergodicity properties. Hence we will also use the following definition of the PSD:
 
 \[
     \Tilde{S}_{X}(\omega) := \lim_{T\rightarrow\infty} \lvert G^{T}[X]_{\omega}\rvert ^2
@@ -917,32 +918,41 @@ where $\mu(t) \in [-1,1]$. Bifurcations happen at the critical thresholds $\mu_{
 
 Specifically, we will consider the following two scenarios: \\
     the white noise case
-    \[
+    
+    \begin{equation}  
     dX_{t} = f(X_{t},\mu(t))dt + \sigma dW_{t}
-    \]
+    \label{successful application white noise}
+    \end{equation}
+
 
 and the red noise case
-    
-    \begin{align*}   
-    dX_{t} & = f(X_{t},\mu(t))dt + \kappa U_{t}dt \\
-    dU_{t} & = -\theta U_{t} dt + dW_{t}
-    \end{align*}
+
+    \begin{equation}
+        \begin{aligned}
+            dX_{t} & = f(X_{t},\mu(t))dt + \kappa U_{t}dt \\
+            dU_{t} & = -\theta U_{t} dt + dW_{t}
+        \end{aligned}
+        \label{successful application red noise}
+    \end{equation}
+
 
 
 \begin{figure}
     \centering
     \includegraphics[width=0.55\textwidth]{bachelor-thesis/figures/9_9_clarke_fig_1_reimp.png}
-    \caption{Similar to \cite{Clarke:2023} Figure 1; AC: ---, Var: - - -}
+    \caption{Similar to \cite{Clarke:2023} Figure 1; AC: ---, Var: - - -
+    In the upper panel we plot the bifurcation diagram and the two time series. The blue time series corresponds to the white noise case (\ref{successful application white noise}) and the red one to the red noise case (\ref{successful application red noise}). The two panels below show the indicator series of the TEWS methods for both scenarios. In the lowest panel we see the evolution of the true recovery rate and its approximation as computed by the ROSA method also for both scenarios. We see that all three methods give an EWS before the TP is reached. More details on the implementation of the methods are included in the main text.
+    }
     \label{success_of_trad_ews_and_rosa}
 \end{figure}
 
-We want to simulate a time series on a time span of [0,T] that starts at the equilibrium point corresponding to $\mu(0) = -1$. Then we slowly change the underlying deterministic part of the system by increasing $\mu(t)$ and thereby eventually drive the system over the edge of a tipping point. A more explicit explanation of the implementation of the code underlying Figure \ref{success_of_trad_ews_and_rosa} follows now. To get the bifurcation plot in Panel A we first compute the paths of equilibria $x^{*}(t)$. There is an upper and lower stable branch plus an unstable middle branch for $\mu \in [-2/3,2/3]$. The evolution of the true recovery rate following the upper branch is computed by: $\lambda(t) = -f'(x^{*}(t),\mu(t))$. We then simulate the time series for both scenarios as explained in section 4. In this case we use an observation time of T = 10000, a sample step of $\Delta t = 1$, and a simulation step of $\delta t = 1/10$. We use a linear ramp for $\mu:  [-1,1] \rightarrow \mathbb{R}$:
+We want to simulate a time series on a time span of [0,T] that starts at the equilibrium point corresponding to $\mu(0) = -1$. Then we slowly change the underlying deterministic part of the system by increasing $\mu(t)$ and thereby eventually drive the system over the edge of a tipping point. A more explicit explanation of the implementation of the code underlying Figure \ref{success_of_trad_ews_and_rosa} follows now. To get the bifurcation plot in Panel A we first compute the paths of equilibria $x^{*}(t)$. There is an upper and lower stable branch plus an unstable middle branch for $\mu \in [-2/3,2/3]$. The evolution of the true recovery rate following the upper branch is computed by: $\lambda(t) = -f'(x^{*}(t),\mu(t))$. We then simulate the time series for both scenarios (\ref{successful application white noise}) and (\ref{successful application red noise}) as explained in section 4. In this case we use an observation time of T = 10000, a sample step of $\Delta t = 1$, and a simulation step of $\delta t = 1/10$. We use a linear ramp for $\mu:  [-1,1] \rightarrow \mathbb{R}$:
 \[
 \mu(t) := \frac{2}{T}t-1
 \]
 
 For simulating both time series we used $(\sigma,\kappa,\theta) = (0.01,0.05,1)$. 
-Then we compute the three indicator series on windows of length WL = 200. Hence we have 1000/200=50 windows. In each window we first detrend the subsampled time series with a second-order polynomial to take away the trend induced by the equilibrium path. For the computation of the variance python uses the biased estimator as introduced in section 5. The lag-1 autocorrelation is computed as $r_{1} := \frac{N-1}{N}AC(1)_{N}$, hence without the fraction $\frac{N}{N-1}$. Since this fraction converges to zero, $r_{1}$ is still a consistent estimator. For the computation of the ROSA method we need both the subsampled time series $\widehat{X}_{t}$ as well as the subsampled noise series $\widehat{\xi}_{t}$ (we denote the respective subsampled noise series with a hat). We have $\xi_{t} = \sigma W_{\delta t}$ in the white noise case and $\xi_{t} = \kappa U_{t} \delta t$ in the red noise case. In both cases we sum up the increments for each unit time interval:
+Then we compute the three indicator series on windows of length L = 200. Hence we have 1000/200=50 windows. In each window we first detrend the subsampled time series with a second-order polynomial to take away the trend induced by the equilibrium path. For the computation of the variance python uses the biased estimator as introduced in section 5. The lag-1 autocorrelation is computed as $r_{1} := \frac{N-1}{N}AC(1)_{N}$, hence without the fraction $\frac{N}{N-1}$. Since this fraction converges to zero, $r_{1}$ is still a consistent estimator. For the computation of the ROSA method we need both the subsampled time series $\widehat{X}_{t}$ as well as the subsampled noise series $\widehat{\xi}_{t}$ (we denote the respective subsampled noise series with a hat). We have $\xi_{t} = \sigma W_{\delta t}$ in the white noise case and $\xi_{t} = \kappa U_{t} \delta t$ in the red noise case. In both cases we sum up the increments for each unit time interval:
 \[
 \widehat{\xi}_{i} = \sum_{j = 0}^{9}\xi_{i+j\delta t}, \ i \in \{0,...,T-1\}
 \]
@@ -950,11 +960,11 @@ Then we compute the three indicator series on windows of length WL = 200. Hence 
 We then take:
 
 \[
-(G_{WL}^{WL}[Y]_{\omega})_{j} = \lvert \frac{1}{\sqrt{WL}}\sum_{k=0}^{WL-1}\exp(i\omega k)Y_{jWL + k} \rvert ^2, \ \ j \in \{0,...,49\}, \ Y \in \{\widehat{X}, \widehat{\xi}\}
+(G_{L}^{L}[Y]_{\omega})_{j} = \lvert \frac{1}{\sqrt{L}}\sum_{k=0}^{L-1}\exp(i\omega k)Y_{jL + k} \rvert ^2, \ \ j \in \{0,...,49\}, \ Y \in \{\widehat{X}, \widehat{\xi}\}
 \]
 as an approximation of the PSD of both the time series $X_{t}$ and the noise series $\widehat{\xi}_{t}$ in the respective time window. We then compute an approximation of $\lambda(t)$ via a least square fit:
 \[
-\widehat{\lambda}_{j} = argmin_{\lambda > 0} \sum_{\omega \in F_{W}} (log(\frac{\lvert G_{W}^{W}[X_{t}]_{\omega}\rvert^2}{\lvert \kappa G_{W}^{W}[\widehat{\xi}_{t}]_{\omega} \rvert^2}) - log(\frac{1}{\lambda^2 + \omega^2}))^2, j \in \{0,...,49\}
+\widehat{\lambda}_{j} = argmin_{\lambda > 0} \sum_{\omega \in F_{L}} (log(\frac{\lvert G_{L}^{L}[X_{t}]_{\omega}\rvert^2}{\lvert \kappa G_{L}^{L}[\widehat{\xi}_{t}]_{\omega} \rvert^2}) - log(\frac{1}{\lambda^2 + \omega^2}))^2, j \in \{0,...,49\}
 \]
 
 As a frequency domain we use $F_{N}:=\{2\pi l/N | l = 1,...,N/2 - 1\}$ if N is even and $F_{N} := \{2\pi l/N | l = 1,...,(N-1)/2 \}$ if N is odd. So in this case N = W. We take the logarithm inside the least square fitting problem to weight the frequencies more evenly. 
@@ -968,7 +978,7 @@ In Figure \ref{success_of_trad_ews_and_rosa} we see that in our case of constant
 \begin{figure}
     \centering
     \includegraphics[width=0.66\textwidth]{bachelor-thesis/figures/13_8_observed_vs_continuous_PSD.png}
-    \caption{Observed vs. theoretical PSD}
+    \caption{Illustration of the goodness of fit between the theoretical and the observed PSD.  First a mean recovery rate $\Bar{\lambda}$ is computed on [0,999]. Then we loglog-plot the observed PSD ratio $\frac{(G_{1000}^{1000}[\widehat{X}]_{\omega})_{0}}{(G_{1000}^{1000}[\widehat{\xi}]_{\omega})_{0}}$ and $\frac{1}{\Bar{\lambda}^2 + \omega^2}$ on the frequency domain $F_{1000}$.}
     \label{observed_vs_continuous_PSD}
 \end{figure}
 
@@ -990,19 +1000,21 @@ In the last section we saw an example of a successful application of the three i
 We want to illustrate the risk of false positive and false negative signals when using TEWS methods with examples in an abstract fold bifurcation setting. As discussed previously we can focus on the red noise case.
 
 Compared to before we now allow also for $\kappa$ and $\theta$ to change in time:
-    \begin{subequations}
-    \begin{align*}
-        dX_{t} &= -\lambda(t) X_{t}dt + \kappa(t) U_{t}dt, X_{0} = 0 \\
-        dU_{t} &= -\theta(t) U_{t}dt + dW_{t}, U_{0} = 0
-    \end{align*}
-    \end{subequations}
+
+    \begin{equation}
+    \begin{aligned}
+        dX_{t} &= -\lambda(t) X_{t}dt + \kappa(t) U_{t}dt, \quad X_{0} = 0 \\
+        dU_{t} &= -\theta(t) U_{t}dt + dW_{t}, \quad U_{0} = 0
+    \end{aligned}
+    \label{failure of TEWS SDE}
+    \end{equation}
 
 The linearization is assumed to be a good enough approximation to a real fold bifurcation. Due to the fact that the parameters now change in time, the process isn't stationary anymore. As argued before in section 3, we can however still apply our methods if the parameters (now including $\kappa$ and $\theta$) change slowly enough.
 We assume a decline of $\lambda$ that is typical for a fold bifurcation: 
     \[
     \lambda(t) := \lambda_{0}\sqrt{1-t/T}
     \]
-
+The theory of normal forms gives us that it suffices to study such a simple linearized model as a placeholder for more complicated fold bifurcation systems, which really exhibit a TP. A dynamical system 
 Recall the stationary characteristics of $X_{t}$ as described by the SDE (\ref{eq:red noise linearized SDE}): 
 
 \begin{table}[h!]
@@ -1031,7 +1043,7 @@ We further define linear ramps for the parameters $\kappa$ and $\theta$:
 
 where $\kappa_{0},\kappa_{T},\theta_{0},\theta_{T} \in \mathbb{R}$. 
 
-In the following we describe the setup of the examples for a false positive and a false negative signal. For both cases we will simulate two time series each on a time span of [0,14000], with a simulation step $dt = 1/10$ and with a window length of 700 for the computation of the indicator series. In both cases one time series undergoes a true CSD, while the other time series uses a fixed $\lambda(t) \equiv \lambda_{0}$. We again use the Euler-Mayurama method for integration only now also respecting the time dependence of $\kappa$ and $\theta$.
+In the following we describe the setup of the examples for a false positive and a false negative signal. For both cases we will simulate two time series each on a time span of [0,14000], with a simulation step $\delta t = 1/10$ and with a window length of 700 for the computation of the indicator series. In both cases one time series undergoes a true CSD, while the other time series uses a fixed $\lambda(t) \equiv \lambda_{0}$. We again use the Euler-Mayurama method for integration only now also respecting the time dependence of $\kappa$ and $\theta$.
 
 We first give an example of a false positive signals by the traditional EWS. To do so we choose: $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (1.2,3.3,3,1)$. Hence a linear increase in $\kappa$ and a linear decrease in $\theta$. Assuming instantaneous alignment of the stationary characteristics with the changing parameters we get for both decreasing and fixed $\lambda$: 
 \[
@@ -1055,7 +1067,9 @@ We expect the traditional indicators to follow the same trend. This is indeed th
     \end{minipage}
     \begin{minipage}{\textwidth}
     \centering
-    \caption{Modified from \cite{Morr:2024} Figure 1, AC: ---, Var: - - -}
+    \caption{Based on \cite{Morr:2024} Figure 1; AC: ---, Var: - - - \\
+    We simulate two time series based on (\ref{failure of TEWS SDE}), where $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (1.2,3.3,3,1)$. In the left column there is CSD, which is captured by all indicators. The right column shows a false positive example for the TEWS methods, since $\lambda(t)$ is constant in this case. 
+    }
     \label{false positive example}
     \end{minipage}
 \end{figure}
@@ -1075,7 +1089,9 @@ Now we turn to a false negative example. For the simulation of both time series 
     \end{minipage}
     \begin{minipage}{\textwidth}
     \centering
-    \caption{Modified from \cite{Morr:2024} Figure 3, AC: ---, Var: - - -}
+    \caption{Based on \cite{Morr:2024} Figure 3; AC: ---, Var: - - - \\
+    We simulate two time series based on (\ref{failure of TEWS SDE}), where $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (3.2,2.3,1,3.7)$. In the left column, where $\lambda(t)$ is decreasing, the variance gives a false negative signal, while the ROSA method gives an EWS. In the right column, where $\lambda(t)$ is constant, no indicator gives an EWS. 
+    }
     \label{false negative example}
     \end{minipage}    
 \end{figure}
@@ -1118,13 +1134,13 @@ The procedure to benchmark our indicators quantitatively is the following:
 We generate n = 1000 parameter settings $(\lambda_{0},\kappa_{0},\kappa_{T},\theta_{0},\theta_{T})$ where $\lambda_{0} \sim \text{Unif}(0.3,0.5)$ and $\kappa_{0},\kappa_{T},\theta_{0},\theta_{T} \sim \text{Unif}(0.5,4)$. For each parameter setting we generate one time series where $\lambda(t)$ is decreasing and one where it is not, with a time span of T = 14000, window length of W = 700, $\delta t = 1/10$ and $\Delta t = 1$.
 
 
- We do this using the Euler Method. Then we compute the Variance, $AC(1)$, and ROSA indicators for both time series. Afterwards, we calculate the Kendall's $\tau$ value for the indicator series from the three EWS for decreasing and fixed evolution of $\lambda(t)$. We create an array of 1001 threshold values equally spaced between -1 and 1. To compute the true positive rate for all indicators we take the mean of the corresponding Kendall's $\tau$ values of the 1000 settings with a decreasing $\lambda(t)$ that are greater than the threshold. We get the false positive rate in the same way, now only with the corresponding Kendall's $\tau$ values of the settings with a fixed $\lambda(t)$. This is repeated for all 1001 threshold values. We get the ROC curves by plotting the true positive rates against the false positive rates for the three indicators.
+ We do this using the Euler Method. Then we compute the Variance, $AC(1)$, and ROSA indicators for both time series. Afterwards, we calculate the Kendall's $\tau$ value for the indicator series from the three EWS for decreasing and fixed evolution of $\lambda(t)$. We create an array of 1001 threshold values equally spaced between -1 and 1. To compute the true positive rate for all indicators we take the fraction of the corresponding Kendall's $\tau$ values of the 1000 settings with a decreasing $\lambda(t)$ that are greater than the threshold. We get the false positive rate in the same way, now only with the corresponding Kendall's $\tau$ values of the settings with a fixed $\lambda(t)$. This is repeated for all 1001 threshold values. We get the ROC curves by plotting the true positive rates against the false positive rates for the three indicators.
 The AUC value is defined as the area under the ROC curve and can be computed from the false and true positive vectors. 
 
-For a high threshold there is a high proportion of false negative signals for a decreasing $\lambda(t)$. When lowering the threshold for Kendall's $\tau$ from 1 to -1 (advancing from the bottom left corner to the top right in Figure \ref{fig:ROC_curves}) we would like to have a fast increase in the true positive rate and a slow increase in the false positive rate. Hence a higher AUC value is better. In Figure \ref{fig:ROC_curves} we see that the ROSA method drastically outperforms the two traditional indicators. The $AC(1)$ method is better at detecting CSD than the variance.  
-In the ROC curve plot we don't see the spacing of the threshold values. To gain the complete picture we allow for the whole range of Kendall's $\tau$ down to -1, hence counting negative trends as positive signals, which would be odd in practice. We mark the location of the threshold value 0 on the ROC curves. This is the lowest threshold for a reasonable indication of a true positive signal. Due to the symmetry of the trends for the null model, the corresponding false positive rate to this point is 50\%. In practice we would choose a rather high threshold to increase the significance of positive results and to decrease the false positive rate.
+For a high threshold there is a high proportion of false negative signals for a decreasing $\lambda(t)$. When lowering the threshold for Kendall's $\tau$ from 1 to -1 (advancing from the bottom left corner to the top right in Figure (\ref{fig:ROC_curves})) we would like to have a fast increase in the true positive rate and a slow increase in the false positive rate. Hence a higher AUC value is better. In Figure (\ref{fig:ROC_curves}) we see that the ROSA method drastically outperforms the two traditional indicators. The $AC(1)$ method is better at detecting CSD than the variance.  
+In the ROC curve plot we don't see the spacing of the threshold values. To gain the complete picture we allow for the whole range of Kendall's $\tau$ down to -1, hence counting negative trends as positive signals, which would be odd in practice. We mark the location of the threshold value 0 on the ROC curves. This is the lowest threshold for a reasonable indication of a true positive signal. Due to the symmetry of the trends for the null model, the corresponding false positive rate to this point is roughly 50\%. In practice we would choose a rather high threshold to increase the significance of positive results and to decrease the false positive rate.
 
-For fold bifurcations a stark decline in the recovery rate shortly before the bifurcation is typical. However allowing the indicators in our test setup to observe the time series up until the time of tipping is problematic in two ways: it overestimates the usefulness of the indicator since in practice we want an indicator that warns us sufficiently early before tipping; also when approaching the tipping point noise-induced tipping, as described in \ref{fig:Critical transitions in the fold catastrophe mode}, can't be excluded \cite{Ashwin:2012,Meng:2020}. To assess the capability of the indicators to detect the approaching of a TP early enough, we perform the same analysis, but now only on 60\% of the data. The procedure stays the same, despite now calculating the indicators on only the first $12 = 20 \cdot 0.6$ windows. The ROC curve plots for both scenarios (100\% and 60\% of observed Data) are provided in Figure \ref{Figure 9.1}
+For fold bifurcations a stark decline in the recovery rate shortly before the bifurcation is typical. However allowing the indicators in our test setup to observe the time series up until the time of tipping is problematic in two ways: it overestimates the usefulness of the indicator since in practice we want an indicator that warns us sufficiently early before tipping; also when approaching the tipping point noise-induced tipping, as described in Figure (\ref{fig:Critical transitions in the fold catastrophe mode}), can't be excluded \cite{Ashwin:2012,Meng:2020}. To assess the capability of the indicators to detect the approaching of a TP early enough, we perform the same analysis, but now only on 60\% of the data. The procedure stays the same, despite now calculating the indicators on only the first $12 = 20 \cdot 0.6$ windows. The ROC curve plots for both scenarios (100\% and 60\% of observed Data) are provided in Figure (\ref{fig:ROC_curves})
 
 
 \begin{figure}[h!]
@@ -1140,14 +1156,11 @@ For fold bifurcations a stark decline in the recovery rate shortly before the bi
     \end{minipage}
     \vspace{0.5cm}
     
-    % Text below the figures
-    \centering
-    \begin{minipage}[b]{0.9\textwidth}
-        \centering     
-        Figure 9.1: Modified from \cite{Morr:2024}, Figure 2. In the left panel the analysis is conducted on the full evolution of $\lambda(t)$. For the AUC values, view the legend. The ROSA method shows perfect differentiation between false positives and true positives. The $AC(1)$ indicator is also significantly better than the variance. The location, where Kendall's $\tau$ is 0, is denoted by the symbols. In the right panel only 60\% of the data was observed. As expected all indicators performed in this case because the sharp decline of the recovery rate is not present in the data and hence the signs of CSD are more subtle. Again the ROSA method outperformed the traditional EWS with the $AC(1)$ being better than the variance.
-    \end{minipage}
+    % Add caption and label
+    \caption{Based on \cite{Morr:2024}, Figure 2. In the left panel the analysis is conducted on the full evolution of $\lambda(t)$. For the AUC values, view the legend. The ROSA method shows perfect differentiation between false positives and true positives. The $AC(1)$ indicator is also significantly better than the variance. The location, where Kendall's $\tau$ is 0, is denoted by the symbols. In the right panel only 60\% of the data was observed. As expected all indicators performed in this case because the sharp decline of the recovery rate is not present in the data and hence the signs of CSD are more subtle. Again the ROSA method outperformed the traditional EWS with the $AC(1)$ being better than the variance.}
     \label{fig:ROC_curves}
 \end{figure}
+ 
 
 In \cite{Morr:2024} Morr described three additional indicators $\phi,\lambda^{(ACS)},\lambda^{(PSD)}$. In the case of 100\% observed data the AUC values were 0.99,1.0,1.0 (for $\phi,\lambda^{(ACS)},\lambda^{(PSD)}$ respectively) and in the case of 60\% of observed data it was 0.85,0.94,0.94 (for $\phi,\lambda^{(ACS)},\lambda^{(PSD)}$ respectively). We see that the ROSA indicator was at least as good as all of these in both cases.
 The worse performance of the TEWS methods in the case of 60\% observed data is due to the fact, that changes in $\theta$ and $\kappa$ are now often relatively larger than the change in $\lambda(t)$, since the part of the sharp decline is missing now. This can mask the true evolution of $\lambda(t)$, as we have seen also in the previous section. The ROSA method performs worse because for cases of true CSD the Kendall $\tau$ value is smaller when only observing 60\% of the data since the sharp decline is not present. Hence the method detects fewer cases of true positives for a fixed threshold.
@@ -1174,7 +1187,7 @@ We want to further illustrate the dependence of quality of the indicators on the
         \centering     
         Figure 9.2: 
     \end{minipage}
-    \caption{Modified from \cite{Morr:2024}, Figure 5. The left panel shows how the AUC values depend on the fraction of observed data for a fixed time series length of T = 14000. In the right panel the dependency of the AUC values on the time series length is displayed for a constant fraction of 60\% of observed data. }
+    \caption{Based on\cite{Morr:2024}, Figure 5. The left panel shows how the AUC values depend on the fraction of observed data for a fixed time series length of T = 14000. In the right panel the dependency of the AUC values on the time series length is displayed for a constant fraction of 60\% of observed data. }
     \label{fig:time_length_and_fraction_of_observed_data_dependence}
 \end{figure}
 
@@ -1190,7 +1203,7 @@ The flux of solar radiation through a unit area of a sphere at a distance of one
 The incident solar radiation (insolation) is more precise. It refers to the energy per unit area at a particular point in time and space. In contrast to the solar constant, the insolation varies significantly with time of day, season, latitude etc. To keep our model simple we stay with the solar constant.
 
 When we neglect the differences among continents and oceans, in the composition of the atmosphere, topography, and other local features, we can characterize the state of the entire earth system by the single variable global mean surface temperature T. We want to know how T evolves over time. Though there are many complicated processes involved in determining T, we know that T will increase if the energy from the sun reaching Earth's surface exceeds the amount of energy emitted by Earth and vice versa.
-The heat capacity of a system is the amount of energy needed to raise the temperature by one degree Celsius/Kelvin and is measured in watt years per square meter [$W yr m^{-2}$]. For simplicity, we don't differentiate the heat capacity for different mediums and just consider it as the constant average value $C$ for the whole globe. If $A$ is the surface area of the earth and we have $T(t+\Delta t) = T(t) + \Delta T$, then we need $AC\Delta T$ energy to reach this new temperature.  Let $E_{in}$  ($E_{out}$) be the mean level of energy reaching (leaving) one square meter of the Earth's surface per unit time. Then we get: 
+The heat capacity of a system is the amount of energy needed to raise the temperature by one degree Celsius/Kelvin and is measured in Watt years per square meter [$W yr m^{-2}$]. For simplicity, we don't differentiate the heat capacity for different mediums and just consider it as the constant average value $C$ for the whole globe. If $A$ is the surface area of the earth and we have $T(t+\Delta t) = T(t) + \Delta T$, then we need $AC\Delta T$ energy to reach this new temperature.  Let $E_{in}$  ($E_{out}$) be the mean level of energy reaching (leaving) one square meter of the Earth's surface per unit time. Then we get: 
 \begin{equation}
 AC\Delta T = A(E_{in} - E_{out})\Delta t
 \end{equation}
@@ -1212,6 +1225,7 @@ Now we consider $E_{out}$. The Earth also emits electromagnetic radiation, but m
 per unit area and per unit time, where $\sigma = 5.67 \cdot 10^{-8}Wm^{-2}K^{-4}$ is the Stefan's constant. In total we get: 
 \begin{equation}
     C\frac{dT}{dt} = (1-\alpha)Q - \sigma T^4
+    \label{temperature independent albedo EBM}
 \end{equation}
 Setting the right-hand side to zero we get the energy balance equation: 
 \begin{equation}
@@ -1234,7 +1248,7 @@ has the solution:
 We can get T* = 287.7K when we artificially choose $\epsilon = 0.62$, keeping $\alpha = 0.3$ and $S_{0} = 1,368 Wm^{-2}$. 
 Now we want to improve our model further. 
 
-A temperature-independent albedo does not account for the fact that snow and ice reflect sunlight much better than open water. We will include this observation in our simple model from (5) by setting 
+A temperature-independent albedo does not account for the fact that snow and ice reflect sunlight much better than open water. We will include this observation in our simple model from (\ref{temperature independent albedo EBM}) by setting 
 \begin{equation}
     \alpha (T) = 0.5 - 0.2 \cdot tanh(\frac{T - 265}{10})
 \end{equation}
@@ -1257,7 +1271,7 @@ Below we plot $(1-\alpha(T))Q$ and $\epsilon\sigma T^4$ against $T$. We see that
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{bachelor-thesis/figures/se_multiple_equilibria.png}
-    \caption{Modified from \cite{Kaper:2013}, Figure 2.5}
+    \caption{Based on \cite{Kaper:2013}, Figure 2.5. We plot $E_{in} = (1-\alpha(T))Q$ and $E_{out} = \epsilon\sigma T^4$ against T. There are three equilibria at $T_{1}^* = 288K$, $T_{2}^* = 265K$ and $T_{3}^* = 233K$.}
     \label{fig:enter-label}
 \end{figure}
 
@@ -1271,7 +1285,7 @@ The simulation works the same as described in earlier sections only now with a d
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.6\textwidth]{bachelor-thesis/figures/se_bif_plot.png}
-    \caption{Modified from \cite{Kaper:2013}, Figure 2.6}
+    \caption{Based on \cite{Kaper:2013}, Figure 2.6. Here we show the dependency of the equilibrium states on the bifurcation parameter $q = Q/Q_{0}$. We observe that the system (\ref{simple EBM}) exhibits a fold bifurcation.   }
     \label{fig:se_bif}
 \end{figure}
 
@@ -1279,8 +1293,8 @@ The simulation works the same as described in earlier sections only now with a d
 
 \begin{figure}[b]
     \centering
-    \includegraphics[width=0.9\textwidth]{bachelor-thesis/figures/19_8_se_ROSA.jpg}
-    \caption{We apply our three indicators to the simple EBM as defined in \ref{simple EBM}. In the upper row the bifurcation parameter ranges from 0.7 to 1.4 and in the lower row from 1.1 to 1.3. }
+    \includegraphics[width=0.9\textwidth]{bachelor-thesis/figures/11_9_se_ROSA.png}
+    \caption{We apply our three indicators to the simple EBM as defined in (\ref{simple EBM}) driven by red noise. In the upper row the bifurcation parameter ranges from 0.7 to 1.4  and in the lower row from 1.1 to 1.3. We use $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (1,1,1,1)$ in the upper and lower left panel and $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (3.2,2.3,1,3.7)$ in the lower right panel, where we observe a false negative signal by the Variance method.}
     \label{fig:ROSA test}
 \end{figure}
 
