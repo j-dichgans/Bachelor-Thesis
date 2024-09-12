@@ -66,10 +66,17 @@ coverBCOR=11mm% binding correction for the cover - adapt accordingly
 \maketitle
 
 \section*{Zusammenfassung}
-Eine kurze Zusammenfassung der Arbeit auf Deutsch.
+
+
+Ein Phänomen namens 'Kritische Verlangsamung' (KV) bildet die Grundlage für die meisten Frühwarnsignal (FWS) Methoden für Kipppunkte (KP). Dieses Konzept wird in der Einleitung erläutert und die trationellen FWS-Methoden Varianz und AC(1) werden motiviert. Allerdings sind diese Methode anfällig für fehlerhaft Signale, wenn sich die zugrunde liegenden Rauscheigenschaften im Laufe der Zeit ändern. Das erklärt die Notwendigkeit einer zuverlässigeren Methode wie der ROSA-Methode (Ratio of Spectra). Nach der Einführung einiger notwendiger Theorie aus den Bereichen Wahrscheinlichkeitstheorie und stochastischer Analysis , werden wir in der Lage sein die weitere Analyse der Methoden im Rahmen von stochastischen Differentialgleichungen (SDEs) durchzuführen. Wir werden erkennen, dass die ROSA-Methode im Gegensatz zu den traditionellen Methoden gut zwischen KV und Änderungen der Rauscheigenschaften unterscheiden kann. Dafür benötigt die neue Methode allerdings auch mehr Informationen über den Prozess, nämlich über das Rauschen. Der Vergleich der ROSA-Methode mit den alten Methoden wird weitere Vorteile des neuen FWS-Indikators zeigen. Es ist wichtig, dass eine FWS-Methode früh genug vor Erreichen eines KPs ein Warnsignal gibt. Wir werden feststellen, dass im Gegensatz zu den traditionellen Methoden die Genauigkeit der Unterscheidung zwischen echten positiven und falschen positiven Signalen bei der ROSA-Methode nicht nur mit dem Anteil der beobachteten Daten zunimmt, sondern auch mit der Länge der verfügbaren Zeitreihe. Abschließend werden wir die ROSA-Methode auch auf ein sehr einfaches Klima-Modell anwenden.
+
 
 \section*{Abstract}
-A brief abstract of this thesis in English.
+
+Most Early Warning Signal (EWS) methods for tipping points (TPs) build on a phenomenon called 'Critical Slowing Down' (CSD). In the introduction we explain this concept and motivate the most common indicators, namely the Variance and the lag-1-autocorrelation $AC(1)$. However these methods are prone to false signals, whenever the underlying noise characteristics change over time. This explains the need for a more reliable method, such as the ratio of spectra (ROSA) method. After we have explained some necessary theory from the areas of probability theory and stochastic analysis, we will be able to conduct further analysis of the methods with the help of stochastic differential equations (SDEs).
+We will see that in contrast to the conventional methods, the ROSA method can discriminate well between CSD and changes in the noise properties. This however comes at the cost of additionally required information about the process, namely about the noise. When benchmarking the old methods against the ROSA method we will see further advantages of the new method. For an EWS method it is important to give a warning early enough before a tipping point (TP) is reached. We will see that the accuracy of discrimination between true positive and false positive signals doesn't only increase with the fraction of observed data (as it is mainly the case for the traditional methods) but also with the length of the available time series. In the end we will apply the ROSA method also to a simple EBM model.
+
+
 
 \cleardoublepage{}
 
@@ -584,7 +591,7 @@ and
 \[
 \text{Cov}(X_{t}^{(w)},X_{t+\tau}^{(w)}) = \frac{\sigma^2}{2\lambda}(e^{-\lambda\lvert \tau \rvert} - e^{-\lambda(2t + \tau)}) \rightarrow \frac{\sigma ^2}{2\lambda}\exp(-\lambda\lvert \tau \rvert) = R_{X^{(w)}}(\tau)
 \]
-Hence we see that in the limit $t\rightarrow \infty$, $X_{t}^{(w)}$ converges to the same stationary distribution as for the case $X_{0}^{(w)} \sim N(0,\frac{1}{2\lambda})$. 
+Hence we see that in the limit $t\rightarrow \infty$, $X_{t}^{(w)}$ converges to the same stationary distribution as for the case $X_{0}^{(w)} \sim N(0,\frac{\sigma^2}{2\lambda})$. 
 In applications, we take the stationary characteristics as good approximations also for finite times.
 
 Now we turn to the red noise case. We can again either have $X_{0} = 0, U_{0} = 0$ and get a stationary distribution in the limit or we use a certain initial distribution $(X_{0},U_{0})$ such that $X_{t}$ is stationary for all $t \geq 0$. The stationary characteristics of the red noise case are provided in table \ref{tab:red_noise_stat_char}.
@@ -609,39 +616,48 @@ We derive these properties. As we have seen already the OU process is a Gaussian
 dY_{t} = AY_{t}dt + BdW_{t}
 \]
 where:
-\[
-Y_{t} = 
-\begin{pmatrix}
-   X_{t} \\
-   U_{t}
-\end{pmatrix}
-,\ A = 
-\begin{pmatrix}
-    -\lambda &  \kappa \\
-    0        & -\theta
-\end{pmatrix}
-,\ B = 
-\begin{pmatrix}
-    0 & 0 \\
-    0 & 1
-\end{pmatrix}
-\]
+\begin{equation}
+        Y_{t} = 
+    \begin{pmatrix}
+       X_{t} \\
+       U_{t}
+    \end{pmatrix}
+    ,\ A = 
+    \begin{pmatrix}
+        -\lambda &  \kappa \\
+        0        & -\theta
+    \end{pmatrix}
+    ,\ B = 
+    \begin{pmatrix}
+        0 & 0 \\
+        0 & 1
+    \end{pmatrix}
+    ,\ dW_{t} = 
+    \begin{pmatrix}
+        dW_{t}^{(1)} \\
+        dW_{t}^{(2)}
+    \end{pmatrix}
+    \label{summarized 2D SDE}
+\end{equation}
 
+
+Since $X_{t}$ and $U_{t}$ are zero-mean Gaussian processes it holds: $Y_{t} \sim N(0,\Sigma(t)),\ \Sigma(t) \in \mathbb{R}^{2x2}, \ \forall t\geq 0$. We want to find a $\Sigma_{0} \in \mathbb{R}^{2x2}$ for $(X_{0},U_{0}) \sim N(0,\Sigma_{0})$ such that $\Sigma(t) \equiv \Sigma_{0}$. To do so we demand $0 = \dot{\Sigma}(t)$. With the initial condition $(X_{0},U_{0})^\top = (0,0)^\top$ the system (\ref{summarized 2D SDE}) has the solution: 
+\[
+Y_{t} = \int_{0}^{t}\exp((t-s)A)B\begin{pmatrix} dW_{s}^{(1)} \\ dW_{s}^{(2)} \end{pmatrix}
+\]
+and the covariance matrix is given by:
 \begin{align*}
-V:&=\Exp{\left(X_t,Y_t\right)^\top\left(X_t,Y_t\right)}\\&=\Exp{\int_0^t\int_0^t\exp((t-s_1)A)\Sigma\begin{pmatrix}\dint W_{s_1}^{(1)}\\\dint W_{s_1}^{(2)}\end{pmatrix}\left(\dint W_{s_2}^{(1)},\dint W_{s_2}^{(2)}\right)\Sigma^\top\exp((t-s_2)A)^\top}\\
-&=\int_0^t\exp((t-s)A)\Sigma\Sigma^\top\exp((t-s)A)^\top\dint s
+\Sigma(t)&=\mathbb{E}[\left(X_t,Y_t\right)^\top\left(X_t,Y_t\right)]\\
+ &=\mathbb{E}[\int_0^t\int_0^t\exp((t-s_1)A)\Sigma\begin{pmatrix}\mathrm{d} W_{s_1}^{(1)}\\\mathrm{d} W_{s_1}^{(2)}\end{pmatrix}\left(\mathrm{d} W_{s_2}^{(1)},\mathrm{d} W_{s_2}^{(2)}\right)\Sigma^\top\exp((t-s_2)A)^\top]\\
+ &=\int_0^t\exp((t-s)A)\Sigma\Sigma^\top\exp((t-s)A)^\top \mathrm{d} s
 \end{align*}
 
-\begin{equation*}
-R(\tau):=\Exp{\left(X_t,Y_t\right)^\top\left(X_{t+\tau},Y_{t+\tau}\right)}=\exp(\tau A)V.
-\end{equation*}
-
-
-Given that $X_{t}$ and $U_{t}$ are Gaussian processes it holds: $Y_{t} \sim N(\mu(t),\Sigma(t)),\ \mu(t) \in \mathbb{R}^{2}, \ \Sigma(t) \in \mathbb{R}^{2x2}, \ \forall t\geq 0$. We want to find a $\Sigma_{0} \in \mathbb{R}^{2x2}$ for $(X_{0},U_{0}) \sim N(0,\Sigma_{0})$ such that $\Sigma(t) \equiv \Sigma_{0}$. We can do this by solving the following Lyapunov equation corresponding to the linear system of SDEs above \cite{gardiner:2009}: 
+In the last step we used a generalised Ito isometry. Deriving both sides with respect to time and considering the stationary limit gives us:
 \[
 0 = \dot{\Sigma}(t) = A\Sigma(t) + \Sigma(t) A^{T} + BB^{T} 
 \]
-The solution is given by: 
+
+The solution to this equation is given by: 
 \[
 \Sigma_{0} = 
 \begin{pmatrix}
@@ -649,11 +665,18 @@ The solution is given by:
     \frac{\kappa}{2\theta(\lambda + \theta)} & \frac{1}{2\theta}
 \end{pmatrix}
 \]
-We get the autocovariance function $R_{X}(\tau)$ by computing the first entry of: 
+
+Hence with this choice of a initial covariance matrix the process $Y_{t}$ is stationary and we can define for $\tau \geq 0$:
 \[
-E[(X_{t+\tau},U_{t+\tau})^{T}(X_{t},U_{t})] = \kappa^{2}\frac{\lambda\exp(-\theta\lvert\tau\rvert)-\theta\exp(-\lambda\lvert\tau\rvert)}{2\lambda\tau(\lambda^{2}-\theta^{2})} = R_{X}(\tau)
+A(\tau):=\mathbb{E}[(X_{t},Y_{t})^\top(X_{t+\tau},Y_{t+\tau})] = \exp(\tau A)\Sigma_{0}
 \]
-and the PSD by an application of the Wiener-Khinchin theorem:
+where the last step is similarly deduced as for $\Sigma$. 
+
+We get the autocovariance function $R_{X}(\tau)$ by computing the the entry $(A(\tau))_{1,1}$. This can be done for example by a computer algebra system: 
+\[
+R_{X}(\tau) = \kappa^{2}\frac{\lambda\exp(-\theta\lvert\tau\rvert)-\theta\exp(-\lambda\lvert\tau\rvert)}{2\lambda\tau(\lambda^{2}-\theta^{2})} 
+\]
+Now we can also compute the PSD by an application of the Wiener-Khinchin theorem:
 \[
 S_{X}(\omega) = \mathcal{F}[R_{X}(\tau)](\omega) = \frac{\kappa^{2}}{(\theta^{2} + \omega^{2})(\lambda^{2} + \omega^{2})}
 \]
