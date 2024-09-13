@@ -652,7 +652,7 @@ and the covariance matrix is given by:
  &=\int_0^t\exp((t-s)A)\Sigma\Sigma^\top\exp((t-s)A)^\top \mathrm{d} s
 \end{align*}
 
-In the last step we used a generalised Ito isometry. Deriving both sides with respect to time and considering the stationary limit gives us:
+In the last step we used a generalised Ito isometry. Differentiating both sides with respect to time and considering the stationary limit gives us:
 \[
 0 = \dot{\Sigma}(t) = A\Sigma(t) + \Sigma(t) A^{T} + BB^{T} 
 \]
@@ -670,7 +670,7 @@ Hence with this choice of a initial covariance matrix the process $Y_{t}$ is sta
 \[
 A(\tau):=\mathbb{E}[(X_{t},Y_{t})^\top(X_{t+\tau},Y_{t+\tau})] = \exp(\tau A)\Sigma_{0}
 \]
-where the last step is similarly deduced as for $\Sigma$. 
+where the last step is deduced from an integral representation similar as for $\Sigma$.
 
 We get the autocovariance function $R_{X}(\tau)$ by computing the the entry $(A(\tau))_{1,1}$. This can be done for example by a computer algebra system: 
 \[
@@ -699,7 +699,7 @@ $\kappa \rightarrow \infty$ & $\nearrow \infty$ & - \\
 \label{tab:danger_of_false_signals}
 \end{table}
 
-The equations (\ref{eq:red noise linearized SDE}) describe a setting of linearized dynamics around a fixed equilibrium point. Since we want to study early warning signal methods for tipping points we are interested in bifurcation systems, where the equilibrium point $x^{*}$ depends on $\mu(t)$ - the bifurcation parameter that changes over time. Alongside $\mu(t)$ the recovery rate $\lambda(\mu(t))$ also depends on time. Since we assume that $\mu$ changes on a very slow time scale, the process $X_{t}$ can still be regarded as stationary for not too large time windows, with the respective underlying rate $\lambda(\mu)$ treated as being constant for that time span. 
+The equations (\ref{eq:red noise linearized SDE}) describe a setting of linearized dynamics around a fixed equilibrium point. Since we want to study early warning signal methods for tipping points we are interested in bifurcation systems, where the equilibrium point $x^{*}$ depends on $\mu(t)$ - the bifurcation parameter that changes over time. Alongside $\mu(t)$ the recovery rate $\lambda(\mu(t))$ also depends on time. Since we assume that $\mu$ changes on a very slow time scale, the process $X_{t}$ can still be regarded as stationary for not too large time windows, with the respective underlying rate $\lambda(\mu)$ treated as being constant for that time span. We will refer to this later as the quasi-stationarity argument.
 
 In table \ref{tab:danger_of_false_signals} we show the influence of the parameters $\lambda, \kappa$ and $\theta$ on the quantities Variance, $AC(1)$. The risk of false positives is obviuous when considering the second row, where $\theta \rightarrow 0$. However false negatives are also possible. This could happen when the true trend of $\lambda \rightarrow 0$ is masked by simultaneous evolutions of the parameters that keep the observed indicators constant.
 
@@ -1234,7 +1234,7 @@ We want to further illustrate the dependence of quality of the indicators on the
 \end{figure}
 
 
-\chapter{ROSA applied to the Snowball earth modell}
+\chapter{Application of ROSA to the 0-dimensional EBM}
 
 In this section we would like to apply the ROSA method to a climate model, where tipping occurs due to a fold-bifurcation: the Snowball Earth model, which is a simple Energy Balance Model (EBM). First, we shortly discuss the theory behind these simple models, taken from \cite{Kaper:2013}. The key quantity of Earth's climate system is temperature. In an EBM the state of Earth's climate is summarized in the variable temperature averaged over the entire globe. The simplest EBM doesn't cover any spatial dimensions and is thus sometimes referred to as zero-dimensional EBM. It is governed by an ODE. To derive this ODE we have to consider the energy budget of the Earth.
 
@@ -1339,6 +1339,26 @@ The simulation works the same as described in earlier sections only now with a d
     \caption{We apply our three indicators to the simple EBM as defined in (\ref{simple EBM}) driven by red noise. In the upper row the bifurcation parameter ranges from 0.7 to 1.4  and in the lower row from 1.1 to 1.3. We use $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (1,1,1,1)$ in the upper and lower left panel and $(\kappa_{0},\kappa_{T},\theta_{0},\theta_{T}) = (3.2,2.3,1,3.7)$ in the lower right panel, where we observe a false negative signal by the Variance method.}
     \label{fig:ROSA test}
 \end{figure}
+
+
+
+\chapter{Discussion}
+
+We have seen that the TEWS methods can easily give false signals when the underlying noise characteristics change. This was shown with examples in chapter 8 and with a broader comparison of the TEWS methods versus the ROSA method over several parameter configurations via the use of ROC curves and AUC values in chaper 9. In Figure (\ref{fig:time_length_and_fraction_of_observed_data_dependence}) we saw that the new method had an AUC value of already 95\%, when only 60\% of the Data was observed. This gives hope for an early enough warning before reaching a TP. 
+In chapter 10 we saw a simple climate model where a fold bifurcation appears and where the ROSA method gave an EWS before the TP was reached. The ROSA method has also been tested with much more complex models by Clarke \cite{Clarke:2023}. With the help of Coupled Model Intercomparison Project - Phase 6 (CMIP6) ESMs he examined abrupt local Amazon rainforest dieback shifts. For most CMIP6 models the ROSA method gave more robust EWSs for these shifts \cite{Clarke:2023}.
+Despite these successes of the ROSA method there remain open challenges and uncertainties. One difficulty in an application context is for example the choice of an appropriate window length. When we tested the EWS methods with simulated time series, we knew how the restoring rate of the system evolves over time. Then we could choose a suitable window length, where the quasi-stationarity argument (as explained in Chapter 3) was still valid. We also wanted to make the windows larger to get a better approximation of the correct limit value. However when we want to find out whether a system is approaching a TP and we apply our methods, we usually don't know the evolution of the recovery rate. Otherwise our indicators, which are based on the concept of CSD would be useless. 
+Another challenge remains the risk of noise induced tipping. In our test settings we always chose a constellation for $\kappa$ and $\theta$ that avoided such tipping. However in practice this can't be excluded and the ROSA method might not give an EWS before the tipping if there hasn't been enough observed CSD up to this point. 
+
+andreas fragen
+
+Red noise doesn't have to be a good fit for all cases. Prior physical analysis of underyling dynamics is necessary. 
+
+Bei fitting to target: vlt exaktes target?
+
+
+EWS only as one tool to detect critical thresholds. For example with lakes might detect by empirical work. Harder for singular systems like ocean circulation. Also too complex to specify exact threshold. Advantage of EWS is its generality across different systems.
+
+Outlook: ROSA auf 2d-modell anwenden, cyclic hopf bifurcation, kompliziert climate model
 
 
 
