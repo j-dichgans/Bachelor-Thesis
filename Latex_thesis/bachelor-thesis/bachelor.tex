@@ -89,10 +89,10 @@ We will see that in contrast to the conventional methods, the ROSA method can di
 \label{sec:General  Motivation for EWS}
 
 Paleoclimate records suggest that critical thresholds of major earth system components were crossed in the past \cite{Brovkin:2021}, where such components abruptly shifted from one state to another. Relatively small changes in the external forcing, such as a change in greenhouse gas concentrations or incoming solar radiation, can cause these rapid shifts. In this section we want to motivate the use of methods, which could warn us before such shifts are reached. To do so, we take inspiration mainly from \cite{Clarke:2023}.
-Since the rise of global temperatures, primarily due to burned fossil fuels, there is a growing concern \cite{Lenton:2019,Steffen:2018,Ritchie:2021} that key Earth System components (called "Tipping Elements") will cross Tipping points (TP) in the future and will undergo fast irreversible transitions \cite{Lenton:2008}. In some cases like the Greenland ice sheet, there is concern that a TP might have already been crossed.
-Crossing a tipping point and transitioning to a qualitatively different state can be mathematically understood as a bifurcation. The critical thresholds are often crossed due to a small change in a parameter describing the forcing of the system. Although different types of bifurcation exist \cite{Ashwin:2012}, we will focus on bifurcation-induced tipping (B-tipping) and especially fold bifurcations. Today different elements of the Earth system like the Atlantic Meridional Overturning Circulation (AMOC) \cite{Stommel:1961}, the Amazon Rain forest \cite{Cox:2000}, the permafrost \cite{Steffen:2018} or the Greenland ice sheet \cite{Feldmann:2015} are considered to be potential tipping elements. Several abrupt shifts were observed in the Coupled Model Intercomparison Project - Phase 5 \cite{Taylor:2012} and other earth system models (ESMs) \cite{Drijfhout:2015}, providing evidence that tipping points might occur. \\
+Since the rise of global temperatures, primarily due to burned fossil fuels, there is a growing concern \cite{Lenton:2019,Steffen:2018,Ritchie:2021} that key Earth System components (called "Tipping Elements") will cross Tipping points (TP) in the future and will undergo fast irreversible transitions \cite{Lenton:2008}. 
+Crossing a tipping point and transitioning to a qualitatively different state can be mathematically understood as a bifurcation. The critical thresholds are often crossed due to a small change in a parameter describing the forcing of the system. Though different types of bifurcation exist \cite{Ashwin:2012}, we will focus on bifurcation-induced tipping (B-tipping) and especially fold bifurcations. Today different elements of the Earth system like the Atlantic Meridional Overturning Circulation (AMOC) \cite{Stommel:1961}, the Amazon Rain forest \cite{Cox:2000}, the permafrost \cite{Steffen:2018} or the Greenland ice sheet \cite{Feldmann:2015} are considered to be potential tipping elements. Several abrupt shifts were observed in the Coupled Model Intercomparison Project - Phase 5 \cite{Taylor:2012} and other earth system models (ESMs) \cite{Drijfhout:2015}, providing evidence that tipping points might occur. \\
 Knowing the exact thresholds for TPs would be useful but is out of reach \cite{Steffen:2018,Drijfhout:2015}. Nevertheless, there are common characteristics for systems approaching a B-tipping, due to the theory of Normal Forms \cite{Strogatz:2015,Guckenheimer:1983}. The most important one is \emph{Critical Slowing Down} (CSD). In general, systems return to equilibrium after a small perturbation. As the system approaches a TP this return-time increases \cite{Scheffer:2012}, the variance will increase and its autocorrelation tends to unity \cite{Scheffer:2009,Held:2004}. The latter two statistical indicators are considered traditional Early Warning Signals (EWSs). We will discuss CSD and the theory behind these EWSs more in detail in the following sections. \\
-The traditional early warning signals (TEWSs) were applied to paleoclimate data and detected TPs \cite{Boers:2018}. They were applied to a 5-year resolution time series obtained from the raw North Greenland Ice Core Project (NGRIP) record to indicate the arrival of the Dansgaard–Oeschger (DO) events. Despite the successful applications of the TEWSs they also have a flaw. They depend on a stationarity assumption of the process, something that is often violated in nature, yielding the risk of false positive or false negative signals. We will give examples of this later. 
+The traditional early warning signals (TEWSs) were applied to paleoclimate data and detected TPs \cite{Boers:2018}. Despite the successful applications of the TEWSs they also have a flaw. They depend on a stationarity assumption of the process, something that is often violated in nature, yielding the risk of false positive or false negative signals. We will give examples of this later. 
 
 Although we are interested here mainly in climate science as an application, the theory of EWSs for TPs can be applied in many other contexts of complex dynamical systems as well. Systemic failures like asthma attacks \cite{Venegas:2005} or epileptic seizures in medicine \cite{Litt:2001, McSharry:2003}, market crashes in finance \cite{Kambhu:2007,May:2008} or catastrophic shifts in wildlife or fish populations for ecosystem services \cite{Scheffer:2001, MillenniumEcosystemAssessment:2005}. 
 
@@ -111,8 +111,7 @@ In Figure \ref{fig:Critical transitions in the fold catastrophe mode} we show di
 \section{Motivation for the traditional EWS (TEWS): Variance and $AC(1)$}
 \label{sec: Motivation for the traditional EWS: Variance and $AC(1)$}
 
-This section mostly builds on \cite{Scheffer:2009}(paragraph: Theory).\\
-The goal of early warning signals is to indicate the approaching of a tipping point in our system. Most indicators make use of the CSD phenomenon, which we want to illustrate with a simple example. The main idea behind CSD is the following: Assume we have a stochastically forced dynamical system of the form 
+The goal of early warning signals is to indicate the approaching of a tipping point in our system. In this section we want to motivate the use of the traditional EWSs Variance and AC(1), where we mostly build on \cite{Scheffer:2009}(paragraph: Theory).  Most indicators make use of the CSD phenomenon, which we want to illustrate with a simple example. The main idea behind CSD is the following: Assume we have a stochastically forced dynamical system of the form 
 \begin{equation}
     \frac{dx}{dt} = f(x(t),\mu(t)) + \xi (t) 
     \label{stochastically forced system}
@@ -140,9 +139,9 @@ We will now study how the system evolves if we add a small perturbation to the s
 \]
 The solution is $\epsilon(t) = \epsilon_{0}\exp(-\lambda(a)t) = \epsilon_{0}\exp(-t/T_{R}(a))$, where $T_{R}(a) := 1/ \lambda(a)$ is the characteristic return time \cite{Wissel:1984}.
 We see that for $a \nearrow b$ it holds that $\lambda(a) \searrow 0$ and $T_{R}(a)\nearrow \infty$. 
-From CSD we know that the recovery rate after a small disturbance of a system is an indicator of proximity to a bifurcation point \cite{VanNes:2007}. In natural systems, it is mostly not possible to test recovery rates directly. Still, since most systems are under constant natural perturbation we can use statistics and try to deduce information about the linear recovery rate. An increase in the autocorrelation of a time series generated by equation \ref{stochastically forced system} is one important predictor for slowing down \cite{Ives:1995}. This is easy to understand intuitively: Due to the decrease in recovery rate of the system, the states get more and more similar to each other. The lag-1 autocorrelation measures how closely the current state is correlated to the past state. Hence we expect an increase in this measure.
+From CSD we know that the recovery rate after a small disturbance of a system is an indicator of proximity to a bifurcation point \cite{VanNes:2007}. In natural systems, it is mostly not possible to test recovery rates directly. Still, since most systems are under constant natural perturbation we can use statistics and try to deduce information about the linear recovery rate. An increase in the autocorrelation of a time series generated by equation (\ref{stochastically forced system}) is one important predictor for slowing down \cite{Ives:1995}. This is easy to understand intuitively: Due to the decrease in recovery rate of the system, the states get more and more similar to each other. The lag-1 autocorrelation measures how closely the current state is correlated to the past state. Hence we expect an increase in this measure.
 
-Another indicator for an approaching TP is an increase in the variance of the fluctuations of a stochastically forced system. The intuitive explanation is again simple: When the linear recovery rate goes to zero, the reverting back to the equilibrium gets very slow and the perturbations can accumulate leading to an increase in the variance. 
+Another indicator for an approaching TP is an increase in the variance of the fluctuations of a stochastically forced system \cite{Carpenter:2006}. The intuitive explanation is again simple: When the linear recovery rate goes to zero, the reverting back to the equilibrium gets very slow and the perturbations can accumulate leading to an increase in the variance. 
 We will prove these properties of the TEWS methods later more formally. To do so we first introduce some concepts in the following section Prerequisites. In Figure \ref{fig:scheffer_fig_1_reimp} we give more intuition for the TEWS methods. \\
 
 
@@ -170,19 +169,19 @@ The areas of probability theory and stochastic analysis provide the possibility 
 \section{Probability theory}
 
 \begin{definition}[Stochastic process \cite{rolles:2023}]
-Let I $\subseteq \mathbb{R}$. Let $X_{t}:\Omega \rightarrow \mathbb{R}, t \in I$ be a random variable on the same probability space $(\Omega,\mathcal{F},P)$. Then, $X = (X_{t})_{t \in I} $ is called a real-valued stochastic/random process. If $I = \mathbb{N}_{0}$ it is a discrete time process, if  $I = \mathbb{R}_{+}$ it is a continuous process.
+Let I $\subseteq \mathbb{R}$ and $X_{t}:\Omega \rightarrow \mathbb{R}, t \in I$ be a random variable on the same probability space $(\Omega,\mathcal{F},P)$. Then, $X = (X_{t})_{t \in I} $ is called a real-valued random process. If $I = \mathbb{N}_{0}$ it is a discrete time process, if  $I = \mathbb{R}_{+}$ it is a continuous process.
 \end{definition}
 
 
-\begin{definition}[Gaussian process]
-    A stochastic process $(X_{t})_{t\geq 0}$ is a Gaussian process if for all $t_{1} < t_{2} < ... < t_{n} \ n \in \mathbb{N}$, the vector $(X_{t_{1}},...,X_{t_{n}})$ is a Gaussian process.
+\begin{definition}[Gaussian process \cite{gantert:2024}]
+    A random process $(X_{t})_{t\geq 0}$ is a Gaussian process if $(X_{t_{1}},...,X_{t_{n}})$ is a Gaussian random vector for all $t_{1} < t_{2} < ... < t_{n}$  and $n \in \mathbb{N}$.
 \end{definition}
 
 
 \begin{definition}[Autocovariance function]
 Be $(X_{t})_{t \in I \subseteq \mathbb{R}}$ a random process. We define the autocovariance function: 
 \[
-R_{X}(t_{1},t_{2}) := Cov(X_{t_{1}},X_{t_{2}})
+R_{X}(t_{1},t_{2}) := Cov(X_{t_{1}},X_{t_{2}}), \ \ t_{1},t_{2} \in I
 \]    
 \end{definition}
 
@@ -191,13 +190,13 @@ It is called the 'auto'-covariance function because the covariance is taken with
 
 %stanf_stat_proc
 \begin{definition}[Weak sense stationarity]
-A stochastic process $(X_{t})_{t\geq 0})$ is weak-sense stationary (WSS), if:
+A stochastic process $(X_{t})_{t\geq 0}$ is weak-sense stationary (WSS), if:
 
 \begin{subequations}
     \begin{align}
-        E[X(t)] &= \mu \ \ \forall t \geq 0 \\
+        E[X_{t}] &= \mu \ \ \forall t \geq 0 \\
         R_{X}(t_{1},t_{1} + \tau) &= R_{X}(t_{2},t_{2} + \tau) \ \ \forall t_{1},t_{2},\tau \in \mathbb{R}_{+} \\
-        E[X(t)^2]&<\infty
+        E[X_{t}^2]&<\infty \ \ \forall t \geq 0
     \end{align}
 \end{subequations}   
 \end{definition}
@@ -207,12 +206,12 @@ Since $R_{X}(t_{1},t_{2}) = R_{X}(t_{2},t_{1})$, $R_{X}$ is a function of $\lver
 R_{X}(\tau) := R_{X}(t,t + \tau), \ \tau \geq 0
 \]
 
-As the name suggests there is also a stronger concept of stationarity called \textit{Strong Sense Stationarity} (SSS). The latter always implies WSS, while the reverse direction isn't true in general. However, it holds for Gaussian processes (?). We will only need WSS.
+As the name suggests there is also a stronger concept of stationarity called \textit{Strong Sense Stationarity} (SSS). The latter always implies WSS, while the reverse direction isn't true in general. However, it holds for Gaussian processes \cite{Gallager:2014}. We will only need WSS.
 
 Now we can also define the autocorrelation function for WSS processes:
 
 \[
-\text{AC}(\tau) := \frac{R_{X}(\tau)}{(\text{Var}(X_{t})\text{Var}(X_{t+\tau}))^{\frac{1}{2}}}, \ \tau \geq 0
+\text{AC}(\tau) := \frac{R_{X}(\tau)}{\text{Var}(X_{0})}, \ \tau \geq 0
 \]
 
 Later we want to compare our EWS indicators. Then we need to quantify how monotone increasing a series of values is. For this, we will use the Kendall's $\tau$ coefficient. 
@@ -239,7 +238,7 @@ where sgn is the signum function.
 A Wiener process is a stochastic process $(W_{t})_{t\geq 0}$ on some probability space $(\Omega,\mathcal{F},P)$ with the following properties: 
 \begin{itemize}
     \item $W_{0} = 0$ P-a.s
-    \item For $0 = t_{0} < t_{1} < ... < t_{n}$, the increments $W_{t_{i}} - W_{t_{i-1}}, 1 \leq i \leq n$, are independent with law $N(0,t_{i}-t_{i-1})$
+    \item For \ $0 = t_{0} < t_{1} < ... < t_{n}$, the increments $W_{t_{i}} - W_{t_{i-1}}, 1 \leq i \leq n$, are independent with law $N(0,t_{i}-t_{i-1})$
     \item $t \mapsto W_{t}(\omega)$ is continuous for P-a.a $\omega \in \Omega$
 \end{itemize}
 \end{definition}
@@ -283,8 +282,8 @@ $t^{\alpha} = Var[\xi_{n}^{t}] = Var\left[\sum_{j=1}^{2^{n}}\left(W_{\frac{tj}{2
 
 Consider the process:
 
-\begin{definition}[Ornstein-Uhlenbeck process (SA script Example 10.7)] 
-For $\alpha > 0$, $(W_{t})_{t\geq 0}$ a Wiener process, $x_{0} \in \mathbb{R}$. Consider the following SDE:
+\begin{definition}[Ornstein-Uhlenbeck process \cite{gantert:2024}] 
+For $\lambda > 0$, $(W_{t})_{t\geq 0}$ a Wiener process, $u_{0} \in \mathbb{R}$ consider the following SDE:
 \[
 dU_{t} = -\lambda U_{t} dt + \sigma dW_{t}, U_{0} = u_{0}
 \]
@@ -319,7 +318,7 @@ From stochastic analysis, we use a weaker form of Ito's isometry:
 
 The following Lemma shows that $\int_{0}^{t}e^{\alpha s}dW_{s}$ is a martingale.   \textit{(I)}
 
-\begin{lemma}
+\begin{lemma}[Follows from Theorem 6.11 \cite{gantert:2024}]
     Let $g \in L^2[0,t]$ for every $t \geq 0$. Then $(\int_{0}^{t}g(s)dW_{s})_{t\geq 0}$ is a martingale and hence:
     \[
     E[\int_{0}^{t}g(s)dB_{s}] = 0, \ \forall t \geq 0
@@ -328,14 +327,14 @@ The following Lemma shows that $\int_{0}^{t}e^{\alpha s}dW_{s}$ is a martingale.
 
 From probability theory, we use the following two results about conditional expectations:
 
-\begin{lemma}
+\begin{lemma}[\cite{rolles:2023}]
     Let $X: \Omega \rightarrow \mathbb{R}$ be an $(\mathcal{F}_{0},\mathcal{B}(\mathbb{R}))$- measurable random variable with $E[\lvert X \rvert] < \infty$ or $X \geq 0$ and $\mathcal{F} \subseteq \mathcal{F}_{0}$ a $\sigma$-algebra. Then it holds:
     \[
     E[E[X|\mathcal{F}]] = E[X]
     \]
 \end{lemma}
 
-\begin{lemma}
+\begin{lemma}[\cite{rolles:2023}]
     If X is $\mathcal{F}$-measurable, $E[\lvert XY \rvert] < \infty$ and $E[\lvert Y \rvert]< \infty$ then:
     \[
     E[XY|\mathcal{F}] = XE[Y|\mathcal{F}], \ P-a.s
@@ -510,8 +509,8 @@ We already motivated the use of stochastically forced dynamical systems describe
     \label{eq:SDE for stochastically forced dynamical systems}
 \end{equation}
 With this, we want to capture the dynamics of a fold bifurcation system (in our case e.g. an earth system component that exhibits a TP) driven by a bifurcation parameter $\mu(t)$ with unresolved dynamics being included in the noise term. Our main interest is in the linearized dynamics of the system around an equilibrium path $X^{*}(\mu)$ and we would like to gain information about the evolution of the linear recovery rate $\lambda(\mu)$. In the case of CSD, we have $\lambda(\mu) \searrow 0$ and this gives us the possibility of an EWS before reaching a tipping point. The use of the traditional EWS $AC(1)$ and Variance has been motivated intuitively. Shortly we mentioned that these two indicators lack reliability in terms of false positives or false negative signals due to their stationarity assumption on the system. This motivates the introduction of the more robust ROSA method. 
-In the following, we will introduce two SDE settings for the linearized dynamics of equation \ref{eq:SDE for stochastically forced dynamical systems}. 
-After deriving the stationary characteristics of these SDEs we can justify the use of the old EWS more rigorously. Both settings will also be used to test and compare the old methods against the new one.
+In the following, we will introduce two SDE settings for the linearized dynamics of equation (\ref{eq:SDE for stochastically forced dynamical systems}). 
+After deriving the stationary characteristics of these SDEs we can justify the use of the TEWS methods more rigorously. Both settings will also be used to test and compare the old methods against the new one.
 One way to model the linearized dynamics around an equilibrium $X^{*}(\mu)$ is via white noise $W_{t}$:
 \begin{equation}
         dX_{t}^{(w)} = -\lambda X_{t}^{(w)}dt + \sigma dW_{t}, X_{0}^{(w)} = 0, \ \ \lambda,\sigma \in \mathbb{R}
@@ -529,20 +528,20 @@ The increments $dW_{t}$ are independent. However, as explained in the last secti
 \end{subequations}
 
 Here the term $\kappa U_{t}dt$ is itself described by an OU-process and the parameter $\theta$ controls the memory of the noise. There also exist other positive correlated continuous models, but the frequency properties of red noise are the best suited for many applications in Physics including the climate system \cite{Hasselmann:1976, Hanggi:1993, Liao:2022}. 
-Now we want to explicitly solve the SDEs for $X_{t}^{(w)}$ and $X_{t}$. We already solved \eqref{eq: white noise linearized SDE} in the section prerequisites. To solve \eqref{eq:red noise linearized SDE} we can treat $U_{t}$ and $X_{t}$ for a moment as deterministic functions of time and use the variations of constants formula for ODE's (Appendix Math Bio): \\
+Now we want to explicitly solve the SDEs for $X_{t}^{(w)}$ and $X_{t}$. We already solved \eqref{eq: white noise linearized SDE} in the section prerequisites. To solve \eqref{eq:red noise linearized SDE} we can treat $U_{t}$ and $X_{t}$ for a moment as deterministic functions of time and use the variations of constants formula for ODEs: \\
 
-\begin{lemma}[Variations of constants]
+\begin{lemma}[\cite{Kuttler:2023}]
     Let $I \subset \mathbb{R}$ be an open interval. The initial value problem
         
     \begin{subequations}
         \begin{align}
-            \dot{y}(t) &= a(t)y(t) + b(t)  \\
-            y(t_{0}) &= y_{0}
+            \dot{x}(t) &= a(t)x(t) + b(t)  \\
+            x(t_{0}) &= x_{0}
         \end{align}
     \end{subequations}
     with $a,b : I \mapsto \mathbb{R}$ continuous has a unique solution on $I$ given by:
     \[
-    y(t) = y_{0}e^{A(t)} + \int_{t_{0}}^{t}e^{A(t)-A(s)}b(s)ds, \ \ \ \ \ where \ A(t) = \int_{t_{0}}^{t}a(s)ds
+    x(t) = x_{0}e^{A(t)} + \int_{t_{0}}^{t}e^{A(t)-A(s)}b(s)ds, \ \ \ \ \ where \ A(t) = \int_{t_{0}}^{t}a(s)ds
     \]
 \end{lemma}
 In our case we have $a(t) \equiv -\lambda$ and $b(t) = \kappa U_{t}$. Hence the solution for $X_{t}$ is given by:
@@ -806,17 +805,17 @@ Suppose now we are given a time series that we either simulated as described in 
 To prove this we use the following Lemma:
 
 \begin{lemma}[\cite{Morr:2024SM}]
-    Let $(Y_{k})_{k\in \mathbb{N}_{0}}$ be a sequence of random variables, with $\mu = E[Y_{k}] < \infty, \ k \geq 0$. Further, assume that they are stationarily correlated with
+    Let $(X_{k})_{k\in \mathbb{N}_{0}}$ be a sequence of random variables, with $\mu = E[X_{k}] < \infty, \ k \geq 0$. Further, assume that: 
     \[
-    c_{n} = Cov[Y_{k},Y_{k+n}], \ n \in \mathbb{N}
+    c_{n} = Cov[X_{k},X_{k+n}], \ n, k \in \mathbb{N}
     \]
-    so that the $c_{n}$ are summable:
+    so that:
     \[
     \sum_{n=0}^{\infty}\lvert c_{n} \rvert = C < \infty
     \]
-    Then we have the convergence
+    Then it holds:
     \[
-    Q_{N} := \frac{1}{N}\sum_{k=0}^{N-1}Y_{k} \xrightarrow{P} \mu, \ N \rightarrow \infty
+    Q_{N} := \frac{1}{N}\sum_{k=0}^{N-1}X_{k} \xrightarrow{P} \mu, \ N \rightarrow \infty
     \]
     \label{lemma:summable covariance}
 \end{lemma}
@@ -824,11 +823,11 @@ To prove this we use the following Lemma:
 and apply it:
 
 \begin{lemma}[\cite{Morr:2024SM}]
-    Let X be the process defined in equation (\ref{eq:red noise linearized SDE}) with the appropriate initial distribution $(U_{0},X_{0})$ such that it is stationary. Then we have for every $\tau \geq 0$
+    Let X be defined by (\ref{eq:red noise linearized SDE}) with the distribution $(U_{0},X_{0})$ such that X is stationary. Then we have:
     \[
-    R(\tau)_{N} := \frac{1}{N-\tau} \sum_{k=0}^{N-\tau -1} X_{k}X_{k+\tau} \xrightarrow{P} Cov[X_{0},X_{\tau}] = R(\tau)
+    R(\tau)_{N} := \frac{1}{N-\tau} \sum_{k=0}^{N-\tau -1} X_{k}X_{k+\tau} \xrightarrow{P} Cov[X_{0},X_{\tau}] = R(\tau) \ \ \forall \tau \geq 0
     \]
-    and in particular
+    and as a special case
     \[
     Var_{N} := R(0)_{N} = \frac{1}{N} \sum_{k=0}^{N-1} X_{k}^{2} \xrightarrow{P}Var[X_{0}]
     \]
@@ -845,7 +844,7 @@ for $\tau = 1$ on the suitable set with probability 1.
 
 \chapter{Theory behind the ROSA method}
 
-In the last section, we introduced consistent estimators for the Variance and $AC(1)$. The risk of false signals was already mentioned when discussing the stationary characteristics of $X_{t}$. We will also see examples of this in section 8. In this section, we want to explain some theory behind the more robust ROSA method. The higher reliability of the ROSA method comes at the cost that we need more information about the process, namely about the noise. 
+In the last section, we introduced consistent estimators for the Variance and $AC(1)$. The risk of false signals was already mentioned when discussing the stationary characteristics of $X_{t}$. We will also see examples of this in section 8. In this section, we want to explain some theory behind the more robust ROSA method, taking inspiration from (?). The higher reliability of the ROSA method comes at the cost that we need more information about the process, namely about the noise. 
 
 Our new indicator is based on fitting the ratio of the PSD of the process $X_{t}$ and the PSD of the noise process $\xi_{t}$ against a limit target derived from the continuous-time model. That is why it is called: the 'ratio of spectra method' or ROSA. While motivating the use of the OU-process as a continuous time red noise equivalent via its spectral characteristics, we already considered the concept of power spectral density. With the Wiener-Khintchin theorem, we derived the PSD of the linearized red noise driven $X_{t}$-process to be:
 
@@ -1015,17 +1014,6 @@ In Figure \ref{success_of_trad_ews_and_rosa} we see that in our case of constant
     \label{observed_vs_continuous_PSD}
 \end{figure}
 
-
-We want to briefly discuss differences in our implementation to the one of Clarke in \cite{Clarke:2023} Figure 1. This Figure has the same structure as \ref{success_of_trad_ews_and_rosa}. Clarke argues that the presence of autocorrelated noise can mask the changes in the AC of the system. Indeed the AC shown in the red noise case (Panel C) of Clarke's Figure 1 doesn't give an early warning signal. However, as we have derived theoretically an increase in the TEWSs would be expected in both the white and red noise case. Our example in the plot confirms this. 
-In Clarke's implementation, there is no differentiation between the bifurcation parameter $\mu$ and time $t$. This has several disadvantages: Firstly due to $\mu = t$, t loses its interpretation as time, since $\mu \in [-1,1]$. Additionally, now the bifurcation process is on the same time scale as the progression of time. Hence the assumption that the process is approximately stationary in each window is not valid anymore. Clarke tries to fix the issue of equal time scales by introducing a factor $\epsilon = 0.01$
-\[
-\epsilon\frac{dx}{dt} = x - \frac{1}{3}x^3-\mu(t) + \eta(t)
-\]
-thus making the process faster and ensuring that x reverts to equilibrium quickly. However, the use of $\Delta t = \delta t$ instead of 1 as a sampling rate and the introduction of the extra parameter $\epsilon$ makes the rest of the calculations more complicated and prone to errors. Further, Clarke doesn't use distinct time windows but a sliding window approach. The PSD is calculated with the scipy.signal.welch method, which divides the time series into overlapping sections, computes a modified periodogram for each section and then averages these periodograms. This introduces another layer of complexity into the computation. 
-We argue that our approach with a linear ramp for $\mu(t)$, a separation of simulation step $\delta t = 1/10$ and sample step $\Delta t = 1$ as well as our simpler estimator of the PSD make the implementation more understandable and rigorous.
-
-
-
 \chapter{Failure of TEWS: false signals  under changing parameters}
 
 In the last section, we saw an example of a successful application of the three indicators on a simple bifurcation model. While $\lambda(t)$ changed in time due to the bifurcation process, the parameters $\sigma$ and $\kappa$ were fixed. 
@@ -1042,7 +1030,7 @@ Compared to before we now allow also for $\kappa$ and $\theta$ to change in time
     \label{failure of TEWS SDE}
     \end{equation}
 
-The linearization is assumed to be a good enough approximation to a real fold bifurcation. Since the parameters change in time, the process isn't stationary anymore. Due to the quasi-stationarity argument (see Chapter 3) we can however still apply our methods if the parameters (now including $\kappa$ and $\theta$) change slowly enough.
+The linearization is assumed to be a good enough approximation to a real fold bifurcation. Since the parameters change in time, the process isn't stationary anymore. Due to the quasi-stationarity argument (see section 3) we can however still apply our methods if the parameters (now including $\kappa$ and $\theta$) change slowly enough.
 We assume a decline of $\lambda$ that is typical for a fold bifurcation: 
 
 \begin{equation}
@@ -1144,7 +1132,7 @@ These were however only two examples. We want to provide more evidence for the r
 
 We showed the risk of false signals with the traditional EWS under changing parameters.
 The ROSA method showed no wrong signals.
-In this section, we want to carry out a more thorough comparison in terms of false positives vs. true positives of the traditional EWS versus the ROSA method. We do this by plotting the ROC curve and computing the AUC values. First, we will do this for 100\% of observed CSD and then for 60\%.
+In this section, we want to carry out a more thorough comparison in terms of false positives vs. true positives of the TEWS methods versus the ROSA method, as done similarly for other indicators in \cite{Morr:2024}. We do this by plotting the receiver-operating characteristic (ROC) curve and computing the area under the ROC curves (AUC) values. First, we will do this for 100\% of observed CSD and then for 60\%.
 
 We remind us of the test setting: 
 
@@ -1319,7 +1307,7 @@ We have to keep in mind that the time scale of an EBM covers millions of years. 
 Now we want to understand how the equilibrium states develop when we change the solar constant $S_{0}$. To do this we plot the bifurcation diagram in Figure \ref{fig:se_bif}. We have a fold bifurcation model with bifurcation points at $Q_{-}$ and $Q_{+}$. Here $q := Q/Q_{0}$ is the bifurcation parameter, where $Q_{0} = 342 Wm^{-2}$. When we let $q$ cross $Q_{-}$ from above, then $T_{1}^*$ and $T_{2}^*$ merge and disappear, leading to the snowball earth state $T_{3}^*$ (lower branch). If we cross $Q_{+}$ from below, then we only have the state $T_{1}^*$ (upper branch) free of ice. 
 
 In the next step, we want to apply the traditional EWS and the ROSA method to our simple EBM.
-The simulation works the same as described in earlier sections only now with a different function used for the SDE. We let our time series start in the lower branch and linearly increase $q$ until the time series tips over into the upper branch. In the upper panel of fig \ref{fig:ROSA tes} we see the full picture, where $q$ ranges from 0.7 to 1.4. We observe that the rate $\lambda(t)$ first increases before going to zero. In the previous sections, we always had the case that we computed our EWS methods only on the already decreasing part of $\lambda$. As we see here this doesn't have to be the case in general. To better compare our methods we simulate the time series again in the more crucial region of $q \in [1.1,1.3]$ as illustrated in the lower row of Figure \ref{fig:ROSA test}. In the left panel the system is driven by white noise and all methods show an increase as expected. The Kendall $\tau$ coefficients are given by 0.47 (AC(1)), 0.73 (Variance), 0.86 $(-\widehat{\lambda})$. In the right panel, we provoke a false negative for the traditional EWS by linearly decreasing $\kappa$ (from 3.2 to 2.3) and linearly increasing $\theta$ (from 1 to 3.7). The ROSA method also works in the red noise case.
+The simulation works the same as described in earlier sections only now with a different function used for the SDE. We let our time series start in the lower branch and linearly increase $q$ until the time series tips over into the upper branch. In the upper panel of Figure \ref{fig:ROSA test} we see the full picture, where $q$ ranges from 0.7 to 1.4. We observe that the rate $\lambda(t)$ first increases before going to zero. In the previous sections, we always had the case that we computed our EWS methods only on the already decreasing part of $\lambda$. As we see here this doesn't have to be the case in general. To better compare our methods we simulate the time series again in the more crucial region of $q \in [1.1,1.3]$ as illustrated in the lower row of Figure \ref{fig:ROSA test}. In the left panel the system is driven by white noise and all methods show an increase as expected. The Kendall $\tau$ coefficients are given by 0.47 (AC(1)), 0.73 (Variance), 0.86 $(-\widehat{\lambda})$. In the right panel, we provoke a false negative for the traditional EWS by linearly decreasing $\kappa$ (from 3.2 to 2.3) and linearly increasing $\theta$ (from 1 to 3.7). The ROSA method also works in the red noise case.
 
 \begin{figure}[t]
     \centering
@@ -1341,17 +1329,17 @@ The simulation works the same as described in earlier sections only now with a d
 
 \chapter{Discussion}
 
-We have seen that the TEWS methods can easily give false signals when the underlying noise characteristics change. This was shown with examples in Chapter 8 and with a broader comparison of the TEWS methods versus the ROSA method over several parameter configurations via the use of ROC curves and AUC values in Chapter 9. In Figure (\ref{fig:time_length_and_fraction_of_observed_data_dependence}) we saw that the new method had an AUC value of already 95\% when only 60\% of the Data was observed. This gives hope for an early enough warning before reaching a TP. 
-In Chapter 10 we saw a simple climate model where a fold bifurcation appears and where the ROSA method gave an EWS. The ROSA method has also been tested with much more complex models by Clarke \cite{Clarke:2023}. With the help of Coupled Model Intercomparison Project - Phase 6 (CMIP6) ESMs he examined abrupt local Amazon rainforest dieback shifts. For most CMIP6 models the ROSA method gave more robust EWSs for these shifts \cite{Clarke:2023}.
-Despite these successes of the ROSA method, there remain open challenges and uncertainties. One difficulty in an application context is for example the choice of an appropriate window length. When we tested the EWS methods with simulated time series, we knew how the restoring rate of the system evolved over time. Then we could choose a suitable window length, where the quasi-stationarity argument (as explained in Chapter 3) was still valid. We also wanted to make the windows large enough to get a good approximation of the correct limit value. However, when we want to find out whether a system is approaching a TP and we apply our methods, we usually don't know the evolution of the recovery rate. Otherwise, our indicators, which are based on the concept of CSD would be useless. 
+We have seen that the TEWS methods can easily give false signals when the underlying noise characteristics change. This was shown through theoretical computation of the relevant statistical quantities. We have subsequently demonstrated this effect with examples in section 8 and with a broader comparison of the TEWS methods versus the ROSA method over several parameter configurations using ROC curves and AUC values in section 9. In Figure (\ref{fig:time_length_and_fraction_of_observed_data_dependence}) we saw that the new method already had an AUC value of already 95\% when only 60\% % of the Data was observed. This gives hope for an early enough warning before reaching a TP. 
+In section 10 we saw a simple climate model where a fold bifurcation appears and where the ROSA method gave an EWS. The ROSA method has also been tested with much more complex models by Clarke et al. \cite{Clarke:2023}. With the help of Coupled Model Intercomparison Project - Phase 6 (CMIP6) ESMs they examined abrupt local Amazon rainforest dieback shifts. For most CMIP6 models the ROSA method gave more robust EWSs for these shifts \cite{Clarke:2023}.
+Despite these successes of the ROSA method, there remain open challenges and uncertainties. One difficulty in an application context is for example the choice of an appropriate window length. When we tested the EWS methods with simulated time series, we knew how the restoring rate of the system evolved over time. Then we could choose a suitable window length, where the quasi-stationarity argument (as explained in section 3) was still valid. We also wanted to make the windows large enough to get a good approximation of the correct limit value. However, when we want to find out whether a system is approaching a TP and we apply our methods, we usually don't know the evolution of the recovery rate. Otherwise, our indicators, which are based on the concept of CSD would be useless. 
 
 Another challenge remains the risk of noise-induced tipping. In our test settings, we always chose a constellation for $\kappa$ and $\theta$ that avoided such tipping. However, in practice, this can't be excluded and the ROSA method might not give an EWS before the tipping if there hasn't been enough observed CSD up to this point. \\
-An important drawback of the ROSA method is that we need explicit information about the noise process. Optimally we have the exact noise time series. At least we should know which form of noise we have (e.g. red noise) and which parameters (e.g. $\theta$ as in 
-equation (\ref{failure of TEWS SDE})). These are high requirements and they are rarely fulfilled. If we don't have the necessary information and still want to apply the ROSA method a suitable choice of the noise will rely on a sufficient physical understanding of the system \cite{Morr:2024}. We note that there are other methods, which only need information about the type of noise (e.g. red noise) and are still much more reliable than the TEWS methods. The $\lambda^{(PSD)}$ method, as proposed in \cite{Morr:2024}, is one example for such a method.
+An important drawback of the ROSA method is that we need explicit information about the noise process. Optimally we have the exact noise time series. At least we should know which form of noise is driving the dynamics (e.g. red noise) and what the approximate values of the parameters are (e.g. $\theta$ as in 
+equation (\ref{failure of TEWS SDE})). These are high requirements and they are rarely fulfilled. If we don't have the necessary information and still want to apply the ROSA method a suitable choice of the noise will rely on a sufficient physical understanding of the system \cite{Morr:2024}. We note that there are other methods, which only need information about the type of noise (e.g. red noise) and are still much more reliable than the TEWS methods. The $\lambda^{(PSD)}$ method, as proposed in \cite{Morr:2024}, is one example of such a method.
 
-A scenario with which both the TEWS methods and the ROSA method struggle is when the system is much slower than the bifurcation process. Then the tipping doesn't happen abruptly but is delayed and the system only gradually changes to another equilibrium. An example of this is given in Figure (\ref{hysteresis_discussion}). How to improve the performance of an EWS method like ROSA for such situations is still open to further research (korrekt ?).
+A scenario with which both the TEWS methods and the ROSA method struggle is when the system is much slower than the bifurcation process. Then the tipping doesn't happen abruptly but is delayed and the system only gradually changes to another equilibrium. An example of this is given in Figure (\ref{hysteresis_discussion}). How to improve the performance of an EWS method like ROSA for such situations of poor time scale separation is still open to further research.
 
-In the end, we want to remind us that EWS methods are only one way to detect the approaching of a TP. Empirical work can e.g. also lead us to understand where a critical threshold is located. This can hold for systems like lakes that repeatedly show transitioning from one state to another. However, for crucial systems like the AMOC, this is not possible and too many relevant mechanisms are not understood to predict a threshold in such a complex model. Thankfully, many EWS methods like ROSA don't rely on the understanding of the exact underlying mechanisms of the system to predict an EWS.
+In the end, we want to remind us that EWS methods are only one way to detect the approaching of a TP. Empirical work can e.g. also lead us to understand where a critical threshold is located. This can hold for systems like lakes that repeatedly show transitioning from one state to another. However, for crucial systems like the AMOC, such a repeated observation of tipping is not possible and too many relevant mechanisms are not understood to predict a threshold in such a complex model. Thankfully, many EWS methods like ROSA don't rely on the understanding of the exact underlying mechanisms of the system to predict an EWS.
 
 
 
@@ -1359,7 +1347,7 @@ In the end, we want to remind us that EWS methods are only one way to detect the
     \centering
     \includegraphics[width=0.9\textwidth]{bachelor-thesis/figures/Hysteresis_discussion.png}
     \caption{AC: ---, Var: - - - \\
-    We simulate a red noise driven time series and compute the EWS indicators as described in Chapter 7, only that we know multiplied the deterministic part (the function f) with an $\epsilon = 0.005$, used $\kappa = 0.01$ and observed the time series for a longer time after the TP at $\mu = 2/3$ was reached. It is obvious that all three methods fail in this example.
+    We simulate a red noise driven time series and compute the EWS indicators as described in section 7, only that we now multiplied the deterministic part (the function f) with an $\epsilon = 0.005$, used $\kappa = 0.01$ and observed the time series for a longer time after the TP at $\mu = 2/3$ was reached. It is obvious that all three methods fail in this example, where the system exhibits a poor separation of time scales in the parameter change and the speed of the system dynamics.
     }
     \label{hysteresis_discussion}
 \end{figure}
