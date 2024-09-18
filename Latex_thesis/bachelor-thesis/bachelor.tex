@@ -312,7 +312,7 @@ From stochastic analysis, we use a weaker form of Ito's isometry:
 \begin{lemma}[Ito's isometry]
  Let $t \geq 0$ and $g \in L^2[0,t]$. Then:
  \[
- E[(\int_{0}^{t}g(s)dW_{s})^{2}] = \int_{0}^{t}g(s)^2ds
+ E[\lvert\int_{0}^{t}g(s)dW_{s}\rvert^{2}] = \int_{0}^{t}\lvert g(s) \rvert ^2ds
  \]
 \end{lemma}
 
@@ -389,13 +389,12 @@ R_{X}(\tau) =  \frac{\sigma^2}{2\lambda}\exp(-\lambda\tau)
 
 \section{Continuous time stochastic modeling}
 \label{Continuous time stochastic modeling}
-From \cite{Morr:2022}.
 
-We want to motivate the use of certain stochastic differential equations, which we will use later. 
+We want to motivate the use of certain SDEs, which we will use later. This section is mostly based on \cite{Morr:2022}.
 In dynamical modeling, it is common to describe the system of interest with a deterministic forcing plus a noise term to capture the unresolved dynamics. We can construct a discrete-time stochastic process following this approach:
 
 \begin{equation}
-    X_{k+1}-X_{k} = f(X_{k},k) + \sigma\epsilon_{k}, X_{0} = x_{0} \in \mathbb{R}
+    X_{k+1}-X_{k} = f(X_{k},k) + \sigma\epsilon_{k}, \ X_{0} = x_{0} \in \mathbb{R}
     \label{eq:discrete-time modelling}
 \end{equation}
 
@@ -404,7 +403,7 @@ Yet in some applications, the assumption of independence of the stochastic incre
 
 One common way to model correlated noise is via an AR(1)-process:
 \[
-\epsilon_{k+1} = \phi\epsilon_{k} + z_{k}, \epsilon_{0} \sim \mathcal{N}(0,(1-\phi^2)^{-1})
+\epsilon_{k+1} = \phi\epsilon_{k} + z_{k}, \ \epsilon_{0} \sim \mathcal{N}(0,(1-\phi^2)^{-1})
 \]
 with $0<\phi<1$ and $(z_{k})_{k}\in\mathbb{N}$ i.i.d standard Normal random variables. This type of noise is also called \textit{red noise}. With the specific choice of the distribution of $\epsilon_{0}$ the process is weakly stationary. We prove this only considering $\tau = 1$ for the autocorrelation function, since later we are only interested in $R_{X}(1)$. First we show by induction that: $\epsilon_{k} \sim \mathcal{N}(0,(1-\phi^2)^{-1}), \forall k \in \mathbb{N}_{0}$. Since $\epsilon_{k}$ is a normal random variable $\forall \ k \in \mathbb{N}_{0}$ it is enough to prove the statements for the expectation and variance. The statements hold for $\epsilon_{0}$ by definition. Suppose the statements hold for $k \in \mathbb{N}$. Then:
 
@@ -439,14 +438,14 @@ R_{\epsilon}(\tau) = \phi^{\tau}R_{\epsilon}(0)=\frac{\phi^{\tau}}{1-\phi^{2}}
 \]
 \qed
 
-The use of continuous models is often advantageous when describing systems in nature. With the help of stochastic analysis, we can include randomness in these models. In a similar way to equation \ref{eq:discrete-time modelling} we can use: 
+The use of continuous models is often advantageous when describing systems in nature. With the help of stochastic analysis, we can include randomness in these models. In a similar way to equation (\ref{eq:discrete-time modelling}) we can use: 
 
 \begin{equation}
-    dX_{t} = f(X_{t},t)dt + \sigma dY_{t}, X_{0} = x_{0} \in \mathbb{R}
+    dX_{t} = f(X_{t},t)dt + \sigma dY_{t}, \ X_{0} = x_{0} \in \mathbb{R}
     \label{eq:continuous time modelling}
 \end{equation}
 
-Traditionally the Wiener process $Y = W = (W_{t})_{t\in \mathbb{R}_{+}}$ is used for uncorrelated noise. The notation in \ref{eq:continuous time modelling} is just a shorthand for the following integral equation:
+Traditionally the Wiener process $Y = W = (W_{t})_{t\in \mathbb{R}_{+}}$ is used for uncorrelated noise. The notation in (\ref{eq:continuous time modelling}) is just a shorthand for the following integral equation:
 \[
 X_{t} = X_{0} + \int_{0}^{t}f(X_{s},s)ds + \sigma Y_{t}
 \]
@@ -457,16 +456,16 @@ where $Y_{t}$ is in the class of Ito-processes that have the following form:
     \label{eq:Ito process}
 \end{equation}
 
-with $\alpha = (\alpha_{t})_{t\in\mathbb{R}_{+}}$ and $\beta = (\beta{t})_{t\in\mathbb{R}_{+}}$ being suitable processes.
-In \cite{Morr:2022} Morr et al. want to translate the concept of correlated noise from discrete-time models to the continuous case. As we will see, when discussing how to simulate SDEs, the Euler-Mayurama method enables us to translate the continuous case into a discrete one. The opposite task is not uniquely determined. However under certain assumptions the number of possible processes for $Y_{t}$ can be reduced. First, we assume that $Y_{t}$ has the form $\alpha_{t}dt$. Since $(\epsilon_{k})_{k\in\mathbb{N}_{0}}$ is a discrete-time stationary Gaussian Markov process, we also require $\alpha = (\alpha_{t})_{t\in\mathbb{R}_{+}}$ to have these properties in continuous time. According to \cite{doob:1942} all measurable, stationary, Gaussian, Markov processes are of the Ornstein-Uhlenbeck type. (argument to narrow, scaling autocov?).
+with $\alpha = (\alpha_{t})_{t\in\mathbb{R}_{+}}$ and $\beta = (\beta_{t})_{t\in\mathbb{R}_{+}}$ being suitable processes.
+In \cite{Morr:2022} Morr et al. want to translate the concept of correlated noise from discrete-time models to the continuous case. As we will see, when discussing how to simulate SDEs, the Euler-Mayurama method enables us to translate the continuous case into a discrete one. The opposite task is not uniquely determined. However under certain assumptions the number of possible processes for $Y_{t}$ can be reduced. First, we assume that $Y_{t}$ has the form $\alpha_{t}dt$. Since $(\epsilon_{k})_{k\in\mathbb{N}_{0}}$ is a discrete-time stationary Gaussian Markov process, we also require $\alpha = (\alpha_{t})_{t\in\mathbb{R}_{+}}$ to have these properties in continuous time. According to \cite{doob:1942} all measurable, stationary, Gaussian, Markov processes are of the Ornstein-Uhlenbeck type. 
 
-However, we didn't justify the prehand restriction to $dY_{t} = \alpha dt$. We will now turn to spectral characteristics of the $(\epsilon_{k})_{k\in\mathbb{N}_{0}}$ process to motivate this constraint. One important characteristic of a stochastic process is its Power Spectral Density:
+However, we didn't justify the prehand restriction to $dY_{t} = \alpha_{t} dt$. We will now turn to spectral characteristics of the $(\epsilon_{k})_{k\in\mathbb{N}_{0}}$ process to motivate this constraint. One important characteristic of a stochastic process is its Power Spectral Density:
 
 
 \begin{definition}[Power Spectral Density (PSD)]
-The PSD of a stochastic process $(X_{t})_{t \geq 0}$ is given by:
+The PSD of dY is given by:
 \[
-S_{X}(\omega) := lim_{T\rightarrow\infty}E[\lvert \frac{1}{\sqrt{T}}\int_{0}^{T}\exp(-i\omega t)X_{t}dt\rvert^{2}], \ \omega \in \mathbb{R}
+S_{dY}(\omega) := lim_{T\rightarrow\infty}E[\lvert \frac{1}{\sqrt{T}}\int_{0}^{T}\exp(-i\omega t)dY_{t}\rvert^{2}], \ \omega \in \mathbb{R}
 \]
 if the limit exists.
 \end{definition}
@@ -486,7 +485,7 @@ S_{\epsilon} = \mathcal{F}[R_{\epsilon}(\tau)](\omega) = \frac{-2log(\phi)}{(1-\
 \]
 
 In many applied areas the decay rate of $\mathcal{O}(\omega^{-2})$ is the defining property of red noise. Indeed the term \textit{red noise} is due to the fact that low frequencies have the highest amplitude in red light and the PSD. 
-Under appropriate technical assumptions on $\alpha$ and $\beta$ used in \ref{eq:Ito process}, demanding a vanishing PSD of $Y_{t}$ in the high-frequency domain implies $\beta_{t} = 0$ P-a.s $\forall t \geq 0$, justifying the previous restriction. Together with the reasoning about Gaussian Markov processes from above, we get that the Ornstein-Uhlenbeck process $U_{t}$, with initial distribution $X_{0} \sim \mathcal{N}(0,(1-\phi)^2)$ is a unique way to model continuous time red noise. Hence we choose $dY_{t} = \alpha_{t}dt = U_{t}dt$. 
+Under appropriate technical assumptions on $\alpha$ and $\beta$ used in (\ref{eq:Ito process}), demanding a vanishing PSD of $Y_{t}$ in the high-frequency domain implies $\beta_{t} = 0$ P-a.s $\forall \ t \geq 0$, justifying the previous restriction. Together with the reasoning about Gaussian Markov processes from above, we get that the Ornstein-Uhlenbeck process $U_{t}$, with initial distribution $X_{0} \sim \mathcal{N}(0,(1-\phi)^2)$ is a unique way to model continuous time red noise. Hence we choose $dY_{t} = \alpha_{t}dt = U_{t}dt$. 
 
 Both the exponential decay of the autocovariance function and the characteristic decay rate of $\mathcal{O}(\omega^{-2})$ for the PSD is shown by the Ornstein-Uhlenbeck process $U_{t}$, as we have seen for the discrete-time red noise process $(\epsilon_{k})_{k\in\mathbb{N}_{0}}$. We already calculated $R_{U}(\tau)$. 
 An application of the Wiener-Khinchin theorem gives us: 
@@ -495,7 +494,7 @@ An application of the Wiener-Khinchin theorem gives us:
 \]
 We complete the Prerequisites section by motivating the term 'white' noise for Wiener noise. The PSD of $W_{t}$ is constant:
 \[
-S_{W}(\omega) =  lim_{T\rightarrow\infty}E[\frac{1}{T}\lvert\int_{0}^{T}\exp(-i\omega t)dW_{t}\rvert^{2}] = lim_{T\rightarrow \infty}E[\frac{1}{T}\int_{0}^{T}1dt] = 1
+S_{dW}(\omega) =  lim_{T\rightarrow\infty}E[\frac{1}{T}\lvert\int_{0}^{T}\exp(-i\omega t)dW_{t}\rvert^{2}] = lim_{T\rightarrow \infty}E[\frac{1}{T}\int_{0}^{T}1dt] = 1
 \]
 where Ito's isometry was used in the second equality.
 
@@ -1312,7 +1311,7 @@ The simulation works the same as described in earlier sections only now with a d
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.6\textwidth]{bachelor-thesis/figures/se_bif_plot.png}
-    \caption{Based on \cite{Kaper:2013}, Figure 2.6. Here we show the dependency of the equilibrium states on the bifurcation parameter $q = Q/Q_{0}$. We observe that the system (\ref{simple EBM}) exhibits a fold bifurcation.   }
+    \caption{Based on \cite{Kaper:2013}, Figure 2.6. Here we show the dependency of the equilibrium states on the bifurcation parameter $q = Q/Q_{0}$. We observe that the system (\ref{simple EBM}) exhibits a fold bifurcation.}
     \label{fig:se_bif}
 \end{figure}
 
